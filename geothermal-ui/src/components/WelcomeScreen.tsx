@@ -43,7 +43,7 @@ export default function WelcomeScreen({ parameters, onParametersChange, onRunSim
             <div className="flex items-center space-x-2 md:flex-shrink-0">
               <span className="text-sm text-gray-500 hidden sm:inline">Electricity Price Assumption:</span>
               <span className="text-sm text-gray-500 sm:hidden">Price:</span>
-              <span className="text-sm text-gray-500">$</span>
+              <span className="text-sm text-gray-500">€</span>
               <input
                 type="number"
                 step="0.001"
