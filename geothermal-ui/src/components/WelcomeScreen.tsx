@@ -7,7 +7,7 @@ import { Label } from "@/components/ui/label";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { useIsMobile } from "@/hooks/use-mobile";
-import { Zap, Calculator, Info, ExternalLink } from 'lucide-react';
+import { Calculator, Info, ExternalLink } from 'lucide-react';
 
 interface WelcomeScreenProps {
   parameters: GeothermalInput;
@@ -92,7 +92,7 @@ export default function WelcomeScreen({ parameters, onParametersChange, onRunSim
           <div className="flex flex-col space-y-3 md:space-y-0 md:flex-row md:items-center md:justify-between max-w-7xl mx-auto">
             <div className="flex-1 min-w-0">
               <h1 className="text-2xl md:text-3xl font-bold text-gray-900">Geothermal Power Assessment</h1>
-              <p className="text-base md:text-lg text-gray-600">Professional Investment Analysis Platform</p>
+              <p className="text-base md:text-lg text-gray-600">Analysis with Monte Carlo Simulation</p>
             </div>
             
             {/* Price input */}
@@ -119,19 +119,7 @@ export default function WelcomeScreen({ parameters, onParametersChange, onRunSim
         {/* Main content */}
         <div className="flex-1 p-6">
           <div className="max-w-4xl mx-auto space-y-8">
-            {/* Welcome section */}
-            <div className="text-center space-y-4">
-              <div className="flex justify-center">
-                <div className="bg-blue-100 p-4 rounded-full">
-                  <Zap className="h-8 w-8 text-blue-600" />
-                </div>
-              </div>
-              <h2 className="text-2xl font-bold text-gray-900">Evaluate Your Geothermal Project</h2>
-              <p className="text-gray-600 max-w-2xl mx-auto text-lg leading-relaxed">
-                Professional geothermal power potential assessment using the volumetric method. 
-                Get comprehensive analysis with Monte Carlo simulation, risk assessment, and investment recommendations.
-              </p>
-            </div>
+
 
             {/* Input sections */}
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
@@ -335,14 +323,14 @@ export default function WelcomeScreen({ parameters, onParametersChange, onRunSim
             {/* Academic reference */}
             <div className="text-center pt-8 border-t border-gray-200">
               <p className="text-gray-600">
-                Based on peer-reviewed methodology by Pocasangre & Fujimitsu (2018) • {' '}
+                Based on peer-reviewed methodology by {' '}
                 <a 
                   href="https://doi.org/10.1016/J.GEOTHERMICS.2018.07.009" 
                   target="_blank" 
                   rel="noopener noreferrer"
                   className="text-blue-600 hover:text-blue-800 font-medium inline-flex items-center space-x-1 hover:underline"
                 >
-                  <span>View Research Paper</span>
+                  <span>Pocasangre & Fujimitsu (2018)</span>
                   <ExternalLink className="h-3 w-3" />
                 </a>
               </p>

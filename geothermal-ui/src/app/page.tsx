@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useCallback } from 'react';
 import { defaultParameters, type GeothermalInput, type GeothermalResults } from '@/lib/geothermal-calculations';
 import { runScientificSimulationWithBasicInput } from '@/lib/scientific-adapter';
 import ParameterForm from '@/components/ParameterForm';
@@ -18,7 +18,7 @@ export default function Home() {
   const [results, setResults] = useState<GeothermalResults | null>(null);
   const [lastSimulationParams, setLastSimulationParams] = useState<GeothermalInput | null>(null);
   const [isCalculating, setIsCalculating] = useState(false);
-  const [hasRun, setHasRun] = useState(false);
+
 
   const runSimulation = useCallback(async () => {
     setIsCalculating(true);
@@ -31,7 +31,6 @@ export default function Home() {
       
       const simulationResults = runScientificSimulationWithBasicInput(parameters);
       setResults(simulationResults);
-      setHasRun(true);
     } catch (error) {
       console.error('Simulation failed:', error);
     } finally {
@@ -39,11 +38,7 @@ export default function Home() {
     }
   }, [parameters]);
 
-  useEffect(() => {
-    if (!hasRun) {
-      runSimulation();
-    }
-  }, [hasRun, runSimulation]);
+
 
   const getRecommendationIcon = (color: string) => {
     switch (color) {
@@ -95,8 +90,8 @@ export default function Home() {
               Enterprise
             </Badge>
             
-            {/* BUTTONS - In Header, Always Visible */}
-            <div className="mt-4 pt-4 border-t border-gray-200 space-y-2">
+            {/* RUN SIMULATION BUTTON - In Header, Always Visible */}
+            <div className="mt-4 pt-4 border-t border-gray-200">
               <Button
                 onClick={runSimulation}
                 disabled={isCalculating}
@@ -116,18 +111,7 @@ export default function Home() {
                 )}
               </Button>
               
-              <Button
-                onClick={() => {
-                  setResults(null);
-                  setLastSimulationParams(null);
-                }}
-                variant="outline"
-                className="w-full py-2 text-xs"
-                size="sm"
-              >
-                <Building2 className="h-3 w-3 mr-2" />
-                New Assessment
-              </Button>
+
             </div>
           </SidebarHeader>
           
@@ -159,7 +143,7 @@ export default function Home() {
                 <SidebarTrigger />
                 <div className="flex-1 min-w-0">
                   <h1 className="text-xl md:text-2xl font-bold text-gray-900 truncate">Geothermal Power Assessment</h1>
-                  <p className="text-sm md:text-base text-gray-600">Professional Investment Analysis Platform</p>
+                  <p className="text-sm md:text-base text-gray-600">Analysis with Monte Carlo Simulation</p>
                 </div>
               </div>
               
