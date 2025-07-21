@@ -1,9 +1,7 @@
 import { type GeothermalInput } from '@/lib/geothermal-calculations';
-import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Separator } from "@/components/ui/separator";
-import { Play, Calculator } from 'lucide-react';
 
 interface ParameterFormProps {
   parameters: GeothermalInput;
