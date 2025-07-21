@@ -638,34 +638,34 @@ export default function ScientificTables({ results }: ScientificTablesProps) {
       </div>
 
       {/* Project Information Table */}
-      <div className="bg-white/10 backdrop-blur-sm rounded-xl border border-white/20 p-6">
-        <h3 className="text-xl font-semibold text-white mb-4">📋 Project Information</h3>
+      <div className="bg-white rounded-xl border border-gray-200 shadow-sm p-6">
+        <h3 className="text-xl font-semibold text-gray-900 mb-4">📋 Project Information</h3>
         <div className="overflow-x-auto">
           <table className="w-full text-sm">
             <thead>
-              <tr className="border-b border-white/20">
-                <th className="text-blue-300 text-left p-2 font-mono">Parameter</th>
-                <th className="text-blue-300 text-left p-2 font-mono">Value</th>
-                <th className="text-blue-300 text-left p-2 font-mono">Units</th>
+              <tr className="border-b border-gray-200">
+                <th className="text-gray-700 text-left p-2 font-mono font-semibold">Parameter</th>
+                <th className="text-gray-700 text-left p-2 font-mono font-semibold">Value</th>
+                <th className="text-gray-700 text-left p-2 font-mono font-semibold">Units</th>
               </tr>
             </thead>
-            <tbody className="text-white font-mono">
-                             <tr className="border-b border-white/10">
+            <tbody className="text-gray-900 font-mono">
+                             <tr className="border-b border-gray-100">
                  <td className="p-2">Project Name</td>
                  <td className="p-2">{results.input.project.name || 'Feasibility Study 1'}</td>
                  <td className="p-2">-</td>
                </tr>
-               <tr className="border-b border-white/10">
+               <tr className="border-b border-gray-100">
                  <td className="p-2">Location</td>
                  <td className="p-2">{`${results.input.project.location.lat}°N, ${results.input.project.location.lon}°E` || 'Not specified'}</td>
                  <td className="p-2">-</td>
                </tr>
-              <tr className="border-b border-white/10">
+              <tr className="border-b border-gray-100">
                 <td className="p-2">Monte Carlo Iterations</td>
                 <td className="p-2">{results.monteCarloResults.length.toLocaleString()}</td>
                 <td className="p-2">iterations</td>
               </tr>
-              <tr className="border-b border-white/10">
+              <tr className="border-b border-gray-100">
                 <td className="p-2">Analysis Date</td>
                 <td className="p-2">{new Date().toLocaleDateString()}</td>
                 <td className="p-2">-</td>
@@ -676,22 +676,22 @@ export default function ScientificTables({ results }: ScientificTablesProps) {
       </div>
 
       {/* Input Parameters Table */}
-      <div className="bg-white/10 backdrop-blur-sm rounded-xl border border-white/20 p-6">
-        <h3 className="text-xl font-semibold text-white mb-4">⚙️ Input Parameters Summary</h3>
+      <div className="bg-white rounded-xl border border-gray-200 shadow-sm p-6">
+        <h3 className="text-xl font-semibold text-gray-900 mb-4">⚙️ Input Parameters Summary</h3>
         <div className="overflow-x-auto">
           <table className="w-full text-sm">
             <thead>
-              <tr className="border-b border-white/20">
-                <th className="text-blue-300 text-left p-2 font-mono">Item</th>
-                <th className="text-blue-300 text-left p-2 font-mono">Variable</th>
-                <th className="text-blue-300 text-left p-2 font-mono">Symbol</th>
-                <th className="text-blue-300 text-left p-2 font-mono">Units</th>
-                <th className="text-blue-300 text-left p-2 font-mono">Value</th>
-                <th className="text-blue-300 text-left p-2 font-mono">Type</th>
+              <tr className="border-b border-gray-200">
+                <th className="text-gray-700 text-left p-2 font-mono font-semibold">Item</th>
+                <th className="text-gray-700 text-left p-2 font-mono font-semibold">Variable</th>
+                <th className="text-gray-700 text-left p-2 font-mono font-semibold">Symbol</th>
+                <th className="text-gray-700 text-left p-2 font-mono font-semibold">Units</th>
+                <th className="text-gray-700 text-left p-2 font-mono font-semibold">Value</th>
+                <th className="text-gray-700 text-left p-2 font-mono font-semibold">Type</th>
               </tr>
             </thead>
-            <tbody className="text-white">
-              <tr className="border-b border-white/10">
+            <tbody className="text-gray-900">
+              <tr className="border-b border-gray-100">
                 <td className="p-2 font-mono">0</td>
                 <td className="p-2 font-mono">area</td>
                 <td className="p-2 font-mono">A</td>
@@ -699,7 +699,7 @@ export default function ScientificTables({ results }: ScientificTablesProps) {
                 <td className="p-2 font-mono">{formatNumber(results.input.reservoir.area)}</td>
                 <td className="p-2 font-mono">Triangular</td>
               </tr>
-              <tr className="border-b border-white/10">
+              <tr className="border-b border-gray-100">
                 <td className="p-2 font-mono">1</td>
                 <td className="p-2 font-mono">thickness</td>
                 <td className="p-2 font-mono">h</td>
@@ -707,7 +707,7 @@ export default function ScientificTables({ results }: ScientificTablesProps) {
                 <td className="p-2 font-mono">{formatNumber(results.input.reservoir.thickness, 0)}</td>
                 <td className="p-2 font-mono">Triangular</td>
               </tr>
-              <tr className="border-b border-white/10">
+              <tr className="border-b border-gray-100">
                 <td className="p-2 font-mono">2</td>
                 <td className="p-2 font-mono">reservoir_temp</td>
                 <td className="p-2 font-mono">Tr</td>
@@ -715,7 +715,7 @@ export default function ScientificTables({ results }: ScientificTablesProps) {
                 <td className="p-2 font-mono">{formatNumber(results.input.reservoir.reservoirTemp, 0)}</td>
                 <td className="p-2 font-mono">Triangular</td>
               </tr>
-              <tr className="border-b border-white/10">
+              <tr className="border-b border-gray-100">
                 <td className="p-2 font-mono">3</td>
                 <td className="p-2 font-mono">abandon_temp</td>
                 <td className="p-2 font-mono">Ta</td>
@@ -723,7 +723,7 @@ export default function ScientificTables({ results }: ScientificTablesProps) {
                 <td className="p-2 font-mono">{formatNumber(results.input.reservoir.abandonTemp, 0)}</td>
                 <td className="p-2 font-mono">Constant</td>
               </tr>
-              <tr className="border-b border-white/10">
+              <tr className="border-b border-gray-100">
                 <td className="p-2 font-mono">4</td>
                 <td className="p-2 font-mono">porosity</td>
                 <td className="p-2 font-mono">φ</td>
@@ -731,7 +731,7 @@ export default function ScientificTables({ results }: ScientificTablesProps) {
                 <td className="p-2 font-mono">{formatNumber(results.input.reservoir.porosity)}</td>
                 <td className="p-2 font-mono">Lognormal</td>
               </tr>
-              <tr className="border-b border-white/10">
+              <tr className="border-b border-gray-100">
                 <td className="p-2 font-mono">5</td>
                 <td className="p-2 font-mono">rock_specific_heat</td>
                 <td className="p-2 font-mono">Cr</td>
@@ -739,7 +739,7 @@ export default function ScientificTables({ results }: ScientificTablesProps) {
                 <td className="p-2 font-mono">{formatNumber(results.input.thermodynamic.rockSpecificHeat)}</td>
                 <td className="p-2 font-mono">Triangular</td>
               </tr>
-              <tr className="border-b border-white/10">
+              <tr className="border-b border-gray-100">
                 <td className="p-2 font-mono">6</td>
                 <td className="p-2 font-mono">fluid_specific_heat</td>
                 <td className="p-2 font-mono">Cf</td>
@@ -747,7 +747,7 @@ export default function ScientificTables({ results }: ScientificTablesProps) {
                 <td className="p-2 font-mono">{formatNumber(results.input.thermodynamic.fluidSpecificHeat)}</td>
                 <td className="p-2 font-mono">Constant</td>
               </tr>
-              <tr className="border-b border-white/10">
+              <tr className="border-b border-gray-100">
                 <td className="p-2 font-mono">7</td>
                 <td className="p-2 font-mono">rock_density</td>
                 <td className="p-2 font-mono">ρr</td>
@@ -755,7 +755,7 @@ export default function ScientificTables({ results }: ScientificTablesProps) {
                 <td className="p-2 font-mono">{formatNumber(results.input.thermodynamic.rockDensity, 0)}</td>
                 <td className="p-2 font-mono">Constant</td>
               </tr>
-              <tr className="border-b border-white/10">
+              <tr className="border-b border-gray-100">
                 <td className="p-2 font-mono">8</td>
                 <td className="p-2 font-mono">fluid_density</td>
                 <td className="p-2 font-mono">ρf</td>
@@ -763,7 +763,7 @@ export default function ScientificTables({ results }: ScientificTablesProps) {
                 <td className="p-2 font-mono">{formatNumber(results.input.thermodynamic.fluidDensity, 1)}</td>
                 <td className="p-2 font-mono">Constant</td>
               </tr>
-              <tr className="border-b border-white/10">
+              <tr className="border-b border-gray-100">
                 <td className="p-2 font-mono">9</td>
                 <td className="p-2 font-mono">recovery_factor</td>
                 <td className="p-2 font-mono">RF</td>
@@ -771,7 +771,7 @@ export default function ScientificTables({ results }: ScientificTablesProps) {
                 <td className="p-2 font-mono">{formatNumber(results.input.powerPlant.recoveryFactor)}</td>
                 <td className="p-2 font-mono">Triangular</td>
               </tr>
-              <tr className="border-b border-white/10">
+              <tr className="border-b border-gray-100">
                 <td className="p-2 font-mono">10</td>
                 <td className="p-2 font-mono">conversion_efficiency</td>
                 <td className="p-2 font-mono">Ce</td>
@@ -779,7 +779,7 @@ export default function ScientificTables({ results }: ScientificTablesProps) {
                 <td className="p-2 font-mono">{formatNumber(results.input.powerPlant.conversionEfficiency)}</td>
                 <td className="p-2 font-mono">Triangular</td>
               </tr>
-              <tr className="border-b border-white/10">
+              <tr className="border-b border-gray-100">
                 <td className="p-2 font-mono">11</td>
                 <td className="p-2 font-mono">plant_capacity_factor</td>
                 <td className="p-2 font-mono">Pf</td>
@@ -787,7 +787,7 @@ export default function ScientificTables({ results }: ScientificTablesProps) {
                                  <td className="p-2 font-mono">{formatNumber(results.input.powerPlant.plantCapacityFactor)}</td>
                 <td className="p-2 font-mono">Triangular</td>
               </tr>
-              <tr className="border-b border-white/10">
+              <tr className="border-b border-gray-100">
                 <td className="p-2 font-mono">12</td>
                 <td className="p-2 font-mono">lifespan</td>
                 <td className="p-2 font-mono">t</td>
@@ -801,56 +801,56 @@ export default function ScientificTables({ results }: ScientificTablesProps) {
       </div>
 
       {/* Statistical Analysis Table */}
-      <div className="bg-white/10 backdrop-blur-sm rounded-xl border border-white/20 p-6">
-        <h3 className="text-xl font-semibold text-white mb-4">📊 Statistical Analysis Results</h3>
+      <div className="bg-white rounded-xl border border-gray-200 shadow-sm p-6">
+        <h3 className="text-xl font-semibold text-gray-900 mb-4">📊 Statistical Analysis Results</h3>
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           {/* Main Statistics */}
           <div className="overflow-x-auto">
             <table className="w-full text-sm">
               <thead>
-                <tr className="border-b border-white/20">
-                  <th className="text-blue-300 text-left p-2 font-mono">Statistic</th>
-                  <th className="text-blue-300 text-left p-2 font-mono">Value</th>
-                  <th className="text-blue-300 text-left p-2 font-mono">Units</th>
+                <tr className="border-b border-gray-200">
+                  <th className="text-gray-700 text-left p-2 font-mono font-semibold">Statistic</th>
+                  <th className="text-gray-700 text-left p-2 font-mono font-semibold">Value</th>
+                  <th className="text-gray-700 text-left p-2 font-mono font-semibold">Units</th>
                 </tr>
               </thead>
-              <tbody className="text-white">
-                <tr className="border-b border-white/10">
+              <tbody className="text-gray-900">
+                <tr className="border-b border-gray-100">
                   <td className="p-2 font-mono">Iterations</td>
                   <td className="p-2 font-mono">{results.monteCarloResults.length.toLocaleString()}</td>
                   <td className="p-2 font-mono">-</td>
                 </tr>
-                <tr className="border-b border-white/10">
+                <tr className="border-b border-gray-100">
                   <td className="p-2 font-mono">Mean</td>
                   <td className="p-2 font-mono">{formatNumber(results.statistics.mean)}</td>
                   <td className="p-2 font-mono">MWe</td>
                 </tr>
-                <tr className="border-b border-white/10">
+                <tr className="border-b border-gray-100">
                   <td className="p-2 font-mono">Median</td>
                   <td className="p-2 font-mono">{formatNumber(results.statistics.percentiles.p50)}</td>
                   <td className="p-2 font-mono">MWe</td>
                 </tr>
-                <tr className="border-b border-white/10">
+                <tr className="border-b border-gray-100">
                   <td className="p-2 font-mono">Standard Deviation</td>
                   <td className="p-2 font-mono">{formatNumber(results.statistics.std)}</td>
                   <td className="p-2 font-mono">MWe</td>
                 </tr>
-                <tr className="border-b border-white/10">
+                <tr className="border-b border-gray-100">
                   <td className="p-2 font-mono">Skewness</td>
                   <td className="p-2 font-mono">{formatNumber(skewness)}</td>
                   <td className="p-2 font-mono">-</td>
                 </tr>
-                <tr className="border-b border-white/10">
+                <tr className="border-b border-gray-100">
                   <td className="p-2 font-mono">Kurtosis</td>
                   <td className="p-2 font-mono">{formatNumber(kurtosis)}</td>
                   <td className="p-2 font-mono">-</td>
                 </tr>
-                <tr className="border-b border-white/10">
+                <tr className="border-b border-gray-100">
                   <td className="p-2 font-mono">Minimum</td>
                   <td className="p-2 font-mono">{formatNumber(results.statistics.min)}</td>
                   <td className="p-2 font-mono">MWe</td>
                 </tr>
-                <tr className="border-b border-white/10">
+                <tr className="border-b border-gray-100">
                   <td className="p-2 font-mono">Maximum</td>
                   <td className="p-2 font-mono">{formatNumber(results.statistics.max)}</td>
                   <td className="p-2 font-mono">MWe</td>
@@ -863,44 +863,44 @@ export default function ScientificTables({ results }: ScientificTablesProps) {
           <div className="overflow-x-auto">
             <table className="w-full text-sm">
               <thead>
-                <tr className="border-b border-white/20">
-                  <th className="text-blue-300 text-left p-2 font-mono">Metric</th>
-                  <th className="text-blue-300 text-left p-2 font-mono">Value</th>
-                  <th className="text-blue-300 text-left p-2 font-mono">Units</th>
+                <tr className="border-b border-gray-200">
+                  <th className="text-gray-700 text-left p-2 font-mono font-semibold">Metric</th>
+                  <th className="text-gray-700 text-left p-2 font-mono font-semibold">Value</th>
+                  <th className="text-gray-700 text-left p-2 font-mono font-semibold">Units</th>
                 </tr>
               </thead>
-              <tbody className="text-white">
-                <tr className="border-b border-white/10">
+              <tbody className="text-gray-900">
+                <tr className="border-b border-gray-100">
                   <td className="p-2 font-mono">Base Case Energy</td>
                   <td className="p-2 font-mono">{(results.baseCase.energyKJ / 1e15).toFixed(3)}</td>
                   <td className="p-2 font-mono">PJ</td>
                 </tr>
-                <tr className="border-b border-white/10">
+                <tr className="border-b border-gray-100">
                   <td className="p-2 font-mono">Coefficient of Variation</td>
                   <td className="p-2 font-mono">{formatNumber((results.statistics.std / results.statistics.mean) * 100, 1)}</td>
                   <td className="p-2 font-mono">%</td>
                 </tr>
-                                 <tr className="border-b border-white/10">
+                                 <tr className="border-b border-gray-100">
                    <td className="p-2 font-mono">Annual Generation</td>
                    <td className="p-2 font-mono">{(results.statistics.mean * 8760 * results.input.powerPlant.plantCapacityFactor / 1000).toFixed(0)}</td>
                    <td className="p-2 font-mono">GWh/year</td>
                  </tr>
-                 <tr className="border-b border-white/10">
+                 <tr className="border-b border-gray-100">
                    <td className="p-2 font-mono">Lifetime Generation</td>
                    <td className="p-2 font-mono">{(results.statistics.mean * 8760 * results.input.powerPlant.plantCapacityFactor * results.input.powerPlant.lifespan / 1000).toFixed(0)}</td>
                    <td className="p-2 font-mono">GWh</td>
                  </tr>
-                 <tr className="border-b border-white/10">
+                 <tr className="border-b border-gray-100">
                    <td className="p-2 font-mono">Annual Revenue</td>
                    <td className="p-2 font-mono">{((results.statistics.mean * 8760 * results.input.powerPlant.plantCapacityFactor * 0.08) / 1e6).toFixed(1)}</td>
                    <td className="p-2 font-mono">M$/year</td>
                  </tr>
-                 <tr className="border-b border-white/10">
+                 <tr className="border-b border-gray-100">
                    <td className="p-2 font-mono">Lifetime Revenue</td>
                    <td className="p-2 font-mono">{((results.statistics.mean * 8760 * results.input.powerPlant.plantCapacityFactor * results.input.powerPlant.lifespan * 0.08) / 1e6).toFixed(0)}</td>
                    <td className="p-2 font-mono">M$</td>
                  </tr>
-                <tr className="border-b border-white/10">
+                <tr className="border-b border-gray-100">
                   <td className="p-2 font-mono">Electricity Price</td>
                   <td className="p-2 font-mono">0.08</td>
                   <td className="p-2 font-mono">$/kWh</td>
@@ -912,36 +912,36 @@ export default function ScientificTables({ results }: ScientificTablesProps) {
       </div>
 
       {/* Complete Percentile Analysis (Like Python Script) */}
-      <div className="bg-white/10 backdrop-blur-sm rounded-xl border border-white/20 p-6">
-        <h3 className="text-xl font-semibold text-white mb-4">📈 Complete Percentile Analysis</h3>
+      <div className="bg-white rounded-xl border border-gray-200 shadow-sm p-6">
+        <h3 className="text-xl font-semibold text-gray-900 mb-4">📈 Complete Percentile Analysis</h3>
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
           {/* P5-P25 */}
           <div className="overflow-x-auto">
             <table className="w-full text-sm">
               <thead>
-                <tr className="border-b border-white/20">
-                  <th className="text-red-400 text-left p-2 font-mono">Percentile</th>
-                  <th className="text-red-400 text-left p-2 font-mono">MWe</th>
+                <tr className="border-b border-gray-200">
+                  <th className="text-red-600 text-left p-2 font-mono font-semibold">Percentile</th>
+                  <th className="text-red-600 text-left p-2 font-mono font-semibold">MWe</th>
                 </tr>
               </thead>
-              <tbody className="text-white font-mono">
-                <tr className="border-b border-white/10">
+              <tbody className="text-gray-900 font-mono">
+                <tr className="border-b border-gray-100">
                   <td className="p-2">P5%</td>
                   <td className="p-2">{formatNumber(results.statistics.percentiles.p5)}</td>
                 </tr>
-                <tr className="border-b border-white/10">
+                <tr className="border-b border-gray-100">
                   <td className="p-2">P10%</td>
                   <td className="p-2">{formatNumber(results.statistics.percentiles.p10)}</td>
                 </tr>
-                <tr className="border-b border-white/10">
+                <tr className="border-b border-gray-100">
                   <td className="p-2">P15%</td>
                   <td className="p-2">{formatNumber((results.statistics.percentiles.p10 + results.statistics.percentiles.p25) / 2)}</td>
                 </tr>
-                <tr className="border-b border-white/10">
+                <tr className="border-b border-gray-100">
                   <td className="p-2">P20%</td>
                   <td className="p-2">{formatNumber((results.statistics.percentiles.p10 + results.statistics.percentiles.p25) / 1.8)}</td>
                 </tr>
-                <tr className="border-b border-white/10">
+                <tr className="border-b border-gray-100">
                   <td className="p-2">P25%</td>
                   <td className="p-2">{formatNumber(results.statistics.percentiles.p25)}</td>
                 </tr>
@@ -953,29 +953,29 @@ export default function ScientificTables({ results }: ScientificTablesProps) {
           <div className="overflow-x-auto">
             <table className="w-full text-sm">
               <thead>
-                <tr className="border-b border-white/20">
-                  <th className="text-orange-400 text-left p-2 font-mono">Percentile</th>
-                  <th className="text-orange-400 text-left p-2 font-mono">MWe</th>
+                <tr className="border-b border-gray-200">
+                  <th className="text-orange-600 text-left p-2 font-mono font-semibold">Percentile</th>
+                  <th className="text-orange-600 text-left p-2 font-mono font-semibold">MWe</th>
                 </tr>
               </thead>
-              <tbody className="text-white font-mono">
-                <tr className="border-b border-white/10">
+              <tbody className="text-gray-900 font-mono">
+                <tr className="border-b border-gray-100">
                   <td className="p-2">P30%</td>
                   <td className="p-2">{formatNumber((results.statistics.percentiles.p25 + results.statistics.percentiles.p50) / 2)}</td>
                 </tr>
-                <tr className="border-b border-white/10">
+                <tr className="border-b border-gray-100">
                   <td className="p-2">P35%</td>
                   <td className="p-2">{formatNumber((results.statistics.percentiles.p25 * 0.6 + results.statistics.percentiles.p50 * 0.4))}</td>
                 </tr>
-                <tr className="border-b border-white/10">
+                <tr className="border-b border-gray-100">
                   <td className="p-2">P40%</td>
                   <td className="p-2">{formatNumber((results.statistics.percentiles.p25 * 0.4 + results.statistics.percentiles.p50 * 0.6))}</td>
                 </tr>
-                <tr className="border-b border-white/10">
+                <tr className="border-b border-gray-100">
                   <td className="p-2">P45%</td>
                   <td className="p-2">{formatNumber((results.statistics.percentiles.p25 * 0.2 + results.statistics.percentiles.p50 * 0.8))}</td>
                 </tr>
-                <tr className="border-b border-white/10">
+                <tr className="border-b border-gray-100">
                   <td className="p-2">P50%</td>
                   <td className="p-2">{formatNumber(results.statistics.percentiles.p50)}</td>
                 </tr>
@@ -987,29 +987,29 @@ export default function ScientificTables({ results }: ScientificTablesProps) {
           <div className="overflow-x-auto">
             <table className="w-full text-sm">
               <thead>
-                <tr className="border-b border-white/20">
-                  <th className="text-green-400 text-left p-2 font-mono">Percentile</th>
-                  <th className="text-green-400 text-left p-2 font-mono">MWe</th>
+                <tr className="border-b border-gray-200">
+                  <th className="text-green-600 text-left p-2 font-mono font-semibold">Percentile</th>
+                  <th className="text-green-600 text-left p-2 font-mono font-semibold">MWe</th>
                 </tr>
               </thead>
-              <tbody className="text-white font-mono">
-                <tr className="border-b border-white/10">
+              <tbody className="text-gray-900 font-mono">
+                <tr className="border-b border-gray-100">
                   <td className="p-2">P55%</td>
                   <td className="p-2">{formatNumber((results.statistics.percentiles.p50 * 0.8 + results.statistics.percentiles.p75 * 0.2))}</td>
                 </tr>
-                <tr className="border-b border-white/10">
+                <tr className="border-b border-gray-100">
                   <td className="p-2">P60%</td>
                   <td className="p-2">{formatNumber((results.statistics.percentiles.p50 * 0.6 + results.statistics.percentiles.p75 * 0.4))}</td>
                 </tr>
-                <tr className="border-b border-white/10">
+                <tr className="border-b border-gray-100">
                   <td className="p-2">P65%</td>
                   <td className="p-2">{formatNumber((results.statistics.percentiles.p50 * 0.4 + results.statistics.percentiles.p75 * 0.6))}</td>
                 </tr>
-                <tr className="border-b border-white/10">
+                <tr className="border-b border-gray-100">
                   <td className="p-2">P70%</td>
                   <td className="p-2">{formatNumber((results.statistics.percentiles.p50 * 0.2 + results.statistics.percentiles.p75 * 0.8))}</td>
                 </tr>
-                <tr className="border-b border-white/10">
+                <tr className="border-b border-gray-100">
                   <td className="p-2">P75%</td>
                   <td className="p-2">{formatNumber(results.statistics.percentiles.p75)}</td>
                 </tr>
@@ -1021,29 +1021,29 @@ export default function ScientificTables({ results }: ScientificTablesProps) {
           <div className="overflow-x-auto">
             <table className="w-full text-sm">
               <thead>
-                <tr className="border-b border-white/20">
-                  <th className="text-blue-400 text-left p-2 font-mono">Percentile</th>
-                  <th className="text-blue-400 text-left p-2 font-mono">MWe</th>
+                <tr className="border-b border-gray-200">
+                  <th className="text-blue-600 text-left p-2 font-mono font-semibold">Percentile</th>
+                  <th className="text-blue-600 text-left p-2 font-mono font-semibold">MWe</th>
                 </tr>
               </thead>
-              <tbody className="text-white font-mono">
-                <tr className="border-b border-white/10">
+              <tbody className="text-gray-900 font-mono">
+                <tr className="border-b border-gray-100">
                   <td className="p-2">P80%</td>
                   <td className="p-2">{formatNumber((results.statistics.percentiles.p75 * 0.8 + results.statistics.percentiles.p90 * 0.2))}</td>
                 </tr>
-                <tr className="border-b border-white/10">
+                <tr className="border-b border-gray-100">
                   <td className="p-2">P85%</td>
                   <td className="p-2">{formatNumber((results.statistics.percentiles.p75 * 0.5 + results.statistics.percentiles.p90 * 0.5))}</td>
                 </tr>
-                <tr className="border-b border-white/10">
+                <tr className="border-b border-gray-100">
                   <td className="p-2">P90%</td>
                   <td className="p-2">{formatNumber(results.statistics.percentiles.p90)}</td>
                 </tr>
-                <tr className="border-b border-white/10">
+                <tr className="border-b border-gray-100">
                   <td className="p-2">P95%</td>
                   <td className="p-2">{formatNumber(results.statistics.percentiles.p95)}</td>
                 </tr>
-                <tr className="border-b border-white/10">
+                <tr className="border-b border-gray-100">
                   <td className="p-2">P100%</td>
                   <td className="p-2">{formatNumber(results.statistics.max)}</td>
                 </tr>
@@ -1054,46 +1054,46 @@ export default function ScientificTables({ results }: ScientificTablesProps) {
       </div>
 
       {/* Probability Analysis Table */}
-      <div className="bg-white/10 backdrop-blur-sm rounded-xl border border-white/20 p-6">
-        <h3 className="text-xl font-semibold text-white mb-4">🎯 Probability Analysis</h3>
+      <div className="bg-white rounded-xl border border-gray-200 shadow-sm p-6">
+        <h3 className="text-xl font-semibold text-gray-900 mb-4">🎯 Probability Analysis</h3>
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           {/* Probability of Exceeding Thresholds */}
           <div className="overflow-x-auto">
             <table className="w-full text-sm">
               <thead>
-                <tr className="border-b border-white/20">
-                  <th className="text-blue-300 text-left p-2 font-mono">Threshold</th>
-                  <th className="text-blue-300 text-left p-2 font-mono">Probability</th>
-                  <th className="text-blue-300 text-left p-2 font-mono">Assessment</th>
+                <tr className="border-b border-gray-200">
+                  <th className="text-gray-700 text-left p-2 font-mono font-semibold">Threshold</th>
+                  <th className="text-gray-700 text-left p-2 font-mono font-semibold">Probability</th>
+                  <th className="text-gray-700 text-left p-2 font-mono font-semibold">Assessment</th>
                 </tr>
               </thead>
-              <tbody className="text-white font-mono">
-                                 <tr className="border-b border-white/10">
+              <tbody className="text-gray-900 font-mono">
+                                 <tr className="border-b border-gray-100">
                    <td className="p-2">Base Case ({formatNumber(results.baseCase.powerMWe)} MW)</td>
                    <td className="p-2">{formatNumber(results.statistics.probabilities.aboveBase * 100, 1)}%</td>
                    <td className="p-2 text-green-400">Expected</td>
                  </tr>
-                 <tr className="border-b border-white/10">
+                 <tr className="border-b border-gray-100">
                    <td className="p-2">10 MW</td>
                    <td className="p-2">{formatNumber(results.statistics.probabilities.above10MW * 100, 1)}%</td>
                    <td className="p-2 text-green-400">Very Likely</td>
                  </tr>
-                 <tr className="border-b border-white/10">
+                 <tr className="border-b border-gray-100">
                    <td className="p-2">25 MW</td>
                    <td className="p-2">{formatNumber(results.statistics.probabilities.above25MW * 100, 1)}%</td>
                    <td className="p-2 text-green-400">Likely</td>
                  </tr>
-                 <tr className="border-b border-white/10">
+                 <tr className="border-b border-gray-100">
                    <td className="p-2">50 MW</td>
                    <td className="p-2">{formatNumber(results.statistics.probabilities.above50MW * 100, 1)}%</td>
                    <td className="p-2 text-yellow-400">Moderate</td>
                  </tr>
-                 <tr className="border-b border-white/10">
+                 <tr className="border-b border-gray-100">
                    <td className="p-2">75 MW</td>
                    <td className="p-2">{formatNumber((results.monteCarloResults.filter(r => r > 75).length / results.monteCarloResults.length) * 100, 1)}%</td>
                    <td className="p-2 text-orange-400">Challenging</td>
                  </tr>
-                 <tr className="border-b border-white/10">
+                 <tr className="border-b border-gray-100">
                    <td className="p-2">100 MW</td>
                    <td className="p-2">{formatNumber((results.monteCarloResults.filter(r => r > 100).length / results.monteCarloResults.length) * 100, 1)}%</td>
                    <td className="p-2 text-red-400">Unlikely</td>
@@ -1106,34 +1106,34 @@ export default function ScientificTables({ results }: ScientificTablesProps) {
           <div className="overflow-x-auto">
             <table className="w-full text-sm">
               <thead>
-                <tr className="border-b border-white/20">
-                  <th className="text-blue-300 text-left p-2 font-mono">Risk Metric</th>
-                  <th className="text-blue-300 text-left p-2 font-mono">Value</th>
-                  <th className="text-blue-300 text-left p-2 font-mono">Interpretation</th>
+                <tr className="border-b border-gray-200">
+                  <th className="text-gray-700 text-left p-2 font-mono font-semibold">Risk Metric</th>
+                  <th className="text-gray-700 text-left p-2 font-mono font-semibold">Value</th>
+                  <th className="text-gray-700 text-left p-2 font-mono font-semibold">Interpretation</th>
                 </tr>
               </thead>
-              <tbody className="text-white font-mono">
-                <tr className="border-b border-white/10">
+              <tbody className="text-gray-900 font-mono">
+                <tr className="border-b border-gray-100">
                   <td className="p-2">Investment Grade</td>
                   <td className="p-2">{results.executive.recommendation}</td>
                   <td className="p-2 text-green-400">Recommended</td>
                 </tr>
-                <tr className="border-b border-white/10">
+                <tr className="border-b border-gray-100">
                   <td className="p-2">Technical Risk</td>
                   <td className="p-2">{results.executive.riskLevel}</td>
                   <td className="p-2 text-green-400">Manageable</td>
                 </tr>
-                <tr className="border-b border-white/10">
+                <tr className="border-b border-gray-100">
                   <td className="p-2">P90/P10 Ratio</td>
                   <td className="p-2">{formatNumber(results.statistics.percentiles.p90 / results.statistics.percentiles.p10, 2)}</td>
                   <td className="p-2 text-yellow-400">Moderate Spread</td>
                 </tr>
-                <tr className="border-b border-white/10">
+                <tr className="border-b border-gray-100">
                   <td className="p-2">Confidence Interval (90%)</td>
                   <td className="p-2">{formatNumber(results.statistics.percentiles.p5)}-{formatNumber(results.statistics.percentiles.p95)} MW</td>
                   <td className="p-2 text-blue-400">Range</td>
                 </tr>
-                <tr className="border-b border-white/10">
+                <tr className="border-b border-gray-100">
                   <td className="p-2">Economic Viability</td>
                   <td className="p-2">&gt;95%</td>
                   <td className="p-2 text-green-400">Excellent</td>
