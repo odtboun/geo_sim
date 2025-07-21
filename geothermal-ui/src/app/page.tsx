@@ -122,11 +122,21 @@ export default function Home() {
         <div className="flex-1 flex flex-col">
           {/* Header */}
           <div className="bg-white border-b border-gray-200 px-6 py-4">
-            <div className="flex items-center space-x-4">
-              <SidebarTrigger />
-              <div className="flex-1">
-                <h1 className="text-2xl font-bold text-gray-900">Geothermal Power Assessment</h1>
-                <p className="text-gray-600">Professional Investment Analysis Platform</p>
+            <div className="flex items-center justify-between">
+              <div className="flex items-center space-x-4">
+                <SidebarTrigger />
+                <div className="flex-1">
+                  <h1 className="text-2xl font-bold text-gray-900">Geothermal Power Assessment</h1>
+                  <p className="text-gray-600">Professional Investment Analysis Platform</p>
+                </div>
+              </div>
+              
+              {/* Price Assumption Display - Top Right */}
+              <div className="text-right">
+                <div className="text-sm text-gray-500">Price Assumption:</div>
+                <div className="text-lg font-semibold text-gray-900">
+                  ${parameters.powerPlant.electricityPrice.toFixed(3)}/kWh
+                </div>
               </div>
             </div>
           </div>
