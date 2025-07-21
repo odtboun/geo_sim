@@ -42,6 +42,28 @@ export default function ParameterForm({
 
   return (
     <div className="space-y-4">
+      {/* PRIMARY ACTION - RUN BUTTON AT TOP */}
+      <div className="pb-2 border-b border-gray-200">
+        <Button
+          onClick={onRunSimulation}
+          disabled={isCalculating}
+          className="w-full py-3 text-sm font-semibold bg-slate-900 hover:bg-slate-800 text-white shadow-lg"
+          size="sm"
+        >
+          {isCalculating ? (
+            <>
+              <Calculator className="h-4 w-4 mr-2 animate-spin" />
+              Running Analysis...
+            </>
+          ) : (
+            <>
+              <Play className="h-4 w-4 mr-2" />
+              Run Evaluation
+            </>
+          )}
+        </Button>
+      </div>
+
       {/* Project Information */}
       <div className="space-y-3">
         <h3 className="text-sm font-semibold text-gray-900 border-b border-gray-200 pb-1">Project Information</h3>
@@ -308,7 +330,6 @@ export default function ParameterForm({
             </div>
           </div>
 
-
         </div>
       </div>
 
@@ -331,28 +352,6 @@ export default function ParameterForm({
             placeholder="10000"
           />
         </div>
-      </div>
-
-      {/* Professional Run Button */}
-      <div className="pt-2">
-        <Button
-          onClick={onRunSimulation}
-          disabled={isCalculating}
-          className="w-full py-4 text-sm font-semibold bg-slate-900 hover:bg-slate-800 text-white"
-          size="sm"
-        >
-          {isCalculating ? (
-            <>
-              <Calculator className="h-4 w-4 mr-2 animate-spin" />
-              Running Analysis...
-            </>
-          ) : (
-            <>
-              <Play className="h-4 w-4 mr-2" />
-              Run Evaluation
-            </>
-          )}
-        </Button>
       </div>
     </div>
   );

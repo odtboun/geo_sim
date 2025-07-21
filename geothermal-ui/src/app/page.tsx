@@ -40,10 +40,10 @@ export default function Home() {
 
   const getRecommendationIcon = (color: string) => {
     switch (color) {
-      case 'green': return <CheckCircle className="h-5 w-5 text-emerald-600" />;
-      case 'yellow': return <AlertTriangle className="h-5 w-5 text-amber-600" />;
-      case 'orange': return <AlertTriangle className="h-5 w-5 text-orange-600" />;
-      default: return <AlertTriangle className="h-5 w-5 text-red-600" />;
+      case 'green': return <CheckCircle className="h-4 w-4 text-emerald-600" />;
+      case 'yellow': return <AlertTriangle className="h-4 w-4 text-amber-600" />;
+      case 'orange': return <AlertTriangle className="h-4 w-4 text-orange-600" />;
+      default: return <AlertTriangle className="h-4 w-4 text-red-600" />;
     }
   };
 
@@ -111,98 +111,98 @@ export default function Home() {
           </div>
 
           <div className="flex-1 p-6 space-y-6 overflow-auto">
-            {/* Executive Summary - TOP PRIORITY */}
+            {/* COMPACT Executive Summary - TOP PRIORITY */}
             {results && (
               <Card className="border-l-4 border-l-slate-900">
-                <CardHeader className="pb-4">
+                <CardHeader className="pb-3">
                   <div className="flex items-center justify-between">
                     <div>
-                      <CardTitle className="text-2xl text-gray-900 flex items-center space-x-2">
-                        <TrendingUp className="h-6 w-6 text-slate-700" />
+                      <CardTitle className="text-xl text-gray-900 flex items-center space-x-2">
+                        <TrendingUp className="h-5 w-5 text-slate-700" />
                         <span>Executive Summary</span>
                       </CardTitle>
-                      <CardDescription className="text-gray-600 mt-1">
-                        Critical investment metrics for executive decision making
+                      <CardDescription className="text-gray-600 text-sm">
+                        Critical investment metrics for decision making
                       </CardDescription>
                     </div>
-                    <Badge variant={results.executive.color === 'green' ? 'default' : 'secondary'} className="px-3 py-1">
+                    <Badge variant={results.executive.color === 'green' ? 'default' : 'secondary'} className="px-2 py-1 text-xs">
                       {results.executive.riskLevel.replace('_', ' ')}
                     </Badge>
                   </div>
                 </CardHeader>
                 
-                <CardContent className="space-y-6">
-                  {/* Key Investment Metrics */}
-                  <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+                <CardContent className="space-y-4">
+                  {/* COMPACT Key Investment Metrics */}
+                  <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
                     <Card className="bg-slate-50 border-slate-200">
-                      <CardContent className="p-4 text-center">
-                        <div className="flex items-center justify-center mb-2">
-                          <Zap className="h-5 w-5 text-slate-700" />
+                      <CardContent className="p-3 text-center">
+                        <div className="flex items-center justify-center mb-1">
+                          <Zap className="h-4 w-4 text-slate-700" />
                         </div>
-                        <div className="text-2xl font-bold text-slate-900 mb-1">
+                        <div className="text-lg font-bold text-slate-900 mb-1">
                           {results.statistics.percentiles.p50.toFixed(1)} MW
                         </div>
-                        <div className="text-sm text-slate-600">Expected Capacity</div>
-                        <div className="text-xs text-slate-500 mt-1">P50 Most Likely</div>
+                        <div className="text-xs text-slate-600">Expected Capacity</div>
+                        <div className="text-xs text-slate-500">P50 Most Likely</div>
                       </CardContent>
                     </Card>
 
                     <Card className="bg-emerald-50 border-emerald-200">
-                      <CardContent className="p-4 text-center">
-                        <div className="flex items-center justify-center mb-2">
-                          <DollarSign className="h-5 w-5 text-emerald-700" />
+                      <CardContent className="p-3 text-center">
+                        <div className="flex items-center justify-center mb-1">
+                          <DollarSign className="h-4 w-4 text-emerald-700" />
                         </div>
-                        <div className="text-2xl font-bold text-emerald-900 mb-1">
+                        <div className="text-lg font-bold text-emerald-900 mb-1">
                           ${(results.economics.lifetimeRevenue / 1e6).toFixed(0)}M
                         </div>
-                        <div className="text-sm text-emerald-700">Lifetime Revenue</div>
-                        <div className="text-xs text-emerald-600 mt-1">{results.input.powerPlant.lifespan} Year Project</div>
+                        <div className="text-xs text-emerald-700">Lifetime Revenue</div>
+                        <div className="text-xs text-emerald-600">{results.input.powerPlant.lifespan} Year Project</div>
                       </CardContent>
                     </Card>
 
                     <Card className="bg-blue-50 border-blue-200">
-                      <CardContent className="p-4 text-center">
-                        <div className="flex items-center justify-center mb-2">
-                          <BarChart3 className="h-5 w-5 text-blue-700" />
+                      <CardContent className="p-3 text-center">
+                        <div className="flex items-center justify-center mb-1">
+                          <BarChart3 className="h-4 w-4 text-blue-700" />
                         </div>
-                        <div className="text-2xl font-bold text-blue-900 mb-1">
+                        <div className="text-lg font-bold text-blue-900 mb-1">
                           {results.statistics.percentiles.p10.toFixed(1)} MW
                         </div>
-                        <div className="text-sm text-blue-700">Conservative Est.</div>
-                        <div className="text-xs text-blue-600 mt-1">P10 Risk-Adjusted</div>
+                        <div className="text-xs text-blue-700">Conservative Est.</div>
+                        <div className="text-xs text-blue-600">P10 Risk-Adjusted</div>
                       </CardContent>
                     </Card>
 
                     <Card className="bg-amber-50 border-amber-200">
-                      <CardContent className="p-4 text-center">
-                        <div className="flex items-center justify-center mb-2">
-                          <TrendingUp className="h-5 w-5 text-amber-700" />
+                      <CardContent className="p-3 text-center">
+                        <div className="flex items-center justify-center mb-1">
+                          <TrendingUp className="h-4 w-4 text-amber-700" />
                         </div>
-                        <div className="text-2xl font-bold text-amber-900 mb-1">
+                        <div className="text-lg font-bold text-amber-900 mb-1">
                           {results.executive.confidence}
                         </div>
-                        <div className="text-sm text-amber-700">Confidence Level</div>
-                        <div className="text-xs text-amber-600 mt-1">Risk Assessment</div>
+                        <div className="text-xs text-amber-700">Confidence Level</div>
+                        <div className="text-xs text-amber-600">Risk Assessment</div>
                       </CardContent>
                     </Card>
                   </div>
 
-                  {/* Investment Recommendation */}
-                  <Card className={`border-2 ${getRecommendationColor(results.executive.color)}`}>
-                    <CardContent className="p-6">
-                      <div className="flex items-start space-x-4">
+                  {/* COMPACT Investment Recommendation */}
+                  <Card className={`border ${getRecommendationColor(results.executive.color)}`}>
+                    <CardContent className="p-4">
+                      <div className="flex items-start space-x-3">
                         {getRecommendationIcon(results.executive.color)}
                         <div className="flex-1">
-                          <h3 className="text-lg font-bold mb-2">
+                          <h3 className="text-sm font-bold mb-1">
                             Investment Recommendation
                           </h3>
-                          <p className="text-base font-medium mb-3">
+                          <p className="text-sm font-medium mb-2">
                             {results.executive.recommendation}
                           </p>
-                          <p className="text-sm opacity-90">
+                          <p className="text-xs opacity-90">
                             Based on conservative P10 estimate of {results.statistics.percentiles.p10.toFixed(1)} MW 
                             with {results.executive.confidence.toLowerCase()} confidence level. 
-                            Risk category: {results.executive.riskLevel.replace('_', ' ').toLowerCase()}.
+                            Risk: {results.executive.riskLevel.replace('_', ' ').toLowerCase()}.
                           </p>
                         </div>
                       </div>
