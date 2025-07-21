@@ -48,15 +48,28 @@ export default function ScientificTables({ results }: ScientificTablesProps) {
   const createCumulativeDistribution = () => {
     const sortedData = [...results.monteCarloResults].sort((a, b) => a - b);
     const n = sortedData.length;
+    const min = sortedData[0];
+    const max = sortedData[n - 1];
+    const numPoints = 100; // Use fewer points for proper curve visualization
     
-    // Create stepped cumulative data points
     const labels = [];
     const cumulativeValues = [];
     
-    // Add points for step function
-    for (let i = 0; i < n; i++) {
-      labels.push(sortedData[i].toFixed(1));
-      cumulativeValues.push((i + 1) / n);
+    // Create evenly spaced points across the range for proper S-curve
+    for (let i = 0; i <= numPoints; i++) {
+      const x = min + (max - min) * i / numPoints;
+      
+      // Find how many data points are <= x (cumulative count)
+      let count = 0;
+      for (let j = 0; j < n; j++) {
+        if (sortedData[j] <= x) count++;
+        else break;
+      }
+      
+      const cumulativeProb = count / n;
+      
+      labels.push(x.toFixed(1));
+      cumulativeValues.push(cumulativeProb);
     }
 
     return {
@@ -67,7 +80,7 @@ export default function ScientificTables({ results }: ScientificTablesProps) {
         borderColor: '#ff0000', // Pure red like matplotlib
         backgroundColor: 'transparent',
         borderWidth: 2,
-        stepped: true,
+        stepped: false, // Smooth S-curve, not stepped
         pointRadius: 0,
         tension: 0,
         fill: false
@@ -118,15 +131,27 @@ export default function ScientificTables({ results }: ScientificTablesProps) {
   const createHigherCumulative = () => {
     const sortedData = [...results.monteCarloResults].sort((a, b) => a - b);
     const n = sortedData.length;
+    const min = sortedData[0];
+    const max = sortedData[n - 1];
+    const numPoints = 100; // Use fewer points for proper curve visualization
     
-    // Create stepped cumulative data points (1 - cumulative)
     const labels = [];
     const cumulativeValues = [];
     
-    // Add points for step function (higher than)
-    for (let i = 0; i < n; i++) {
-      labels.push(sortedData[i].toFixed(1));
-      cumulativeValues.push(1 - (i + 1) / n);
+    // Create evenly spaced points across the range for "higher than" curve
+    for (let i = 0; i <= numPoints; i++) {
+      const x = min + (max - min) * i / numPoints;
+      
+      // Find how many data points are > x (higher than count)
+      let count = 0;
+      for (let j = 0; j < n; j++) {
+        if (sortedData[j] > x) count++;
+      }
+      
+      const higherProb = count / n;
+      
+      labels.push(x.toFixed(1));
+      cumulativeValues.push(higherProb);
     }
 
     return {
@@ -137,7 +162,7 @@ export default function ScientificTables({ results }: ScientificTablesProps) {
         borderColor: '#ff0000', // Pure red like matplotlib
         backgroundColor: 'transparent',
         borderWidth: 2,
-        stepped: true,
+        stepped: false, // Smooth curve, not stepped
         pointRadius: 0,
         tension: 0,
         fill: false
