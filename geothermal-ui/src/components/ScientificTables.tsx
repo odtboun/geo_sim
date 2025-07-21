@@ -513,8 +513,8 @@ export default function ScientificTables({ results }: ScientificTablesProps) {
             </div>
             <div className="mt-4 text-sm text-gray-700 font-mono bg-gray-50 p-3 rounded border">
               <p><strong>Figure 1:</strong> Frequency distribution of Monte Carlo simulation results</p>
-                              <p>• Gray bars: probability density histogram (25 bins)</p>
-              <p>• Normalized using density=True (matching Python matplotlib)</p>
+              <p>• Gray bars: probability density histogram (25 bins)</p>
+              <p>• Shows relative frequency of different power generation outcomes</p>
             </div>
           </div>
 
@@ -526,7 +526,8 @@ export default function ScientificTables({ results }: ScientificTablesProps) {
             <div className="mt-4 text-sm text-gray-700 font-mono bg-gray-50 p-3 rounded border">
               <p><strong>Figure 2:</strong> Cumulative distribution function</p>
               <p>• P5={formatNumber(results.statistics.percentiles.p5)}MW, P50={formatNumber(results.statistics.percentiles.p50)}MW, P95={formatNumber(results.statistics.percentiles.p95)}MW</p>
-              <p>• Red stepped line shows cumulative probability (lower than)</p>
+              <p>• Dark line shows cumulative probability (lower than)</p>
+              <p>• Vertical lines mark key percentiles: P5 (red), P50 (blue), P95 (orange)</p>
             </div>
           </div>
         </div>
