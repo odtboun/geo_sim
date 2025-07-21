@@ -2,7 +2,7 @@ import { type GeothermalResults } from '@/lib/geothermal-calculations';
 import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, LineElement, PointElement, Title, Tooltip, Legend, ChartOptions } from 'chart.js';
 import { Line, Bar } from 'react-chartjs-2';
 import annotationPlugin from 'chartjs-plugin-annotation';
-import { BarChart3, TrendingUp, PieChart, FileText, Settings, Target } from 'lucide-react';
+import { BarChart3, TrendingUp, PieChart, Settings, Target } from 'lucide-react';
 
 ChartJS.register(
   CategoryScale,
