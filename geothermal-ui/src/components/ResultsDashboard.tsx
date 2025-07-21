@@ -1,11 +1,15 @@
 'use client';
 
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, LineElement, PointElement, Title, Tooltip, Legend, ChartOptions } from 'chart.js';
 import { Bar } from 'react-chartjs-2';
 import { type GeothermalResults } from '@/lib/geothermal-calculations';
 import ScientificTables from './ScientificTables';
+import { Tooltip as UITooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
+import { useIsMobile } from "@/hooks/use-mobile";
 import { ChartBarIcon, TableCellsIcon } from '@heroicons/react/24/solid';
+import { Info } from 'lucide-react';
 
 ChartJS.register(
   CategoryScale,
@@ -20,6 +24,51 @@ ChartJS.register(
 
 interface ResultsDashboardProps {
   results: GeothermalResults;
+}
+
+// Mobile-friendly info component for chart explanations
+function ChartInfoHelp({ children, title }: { children: React.ReactNode; title: string }) {
+  const isMobile = useIsMobile();
+
+  const content = (
+    <div className="text-sm max-w-xs">
+      <p className="font-semibold mb-2">{title}:</p>
+      {children}
+    </div>
+  );
+
+  if (isMobile) {
+    return (
+      <Popover>
+        <PopoverTrigger asChild>
+          <button className="p-1 rounded hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500 active:bg-gray-200">
+            <Info className="h-4 w-4 text-gray-500 hover:text-gray-700" />
+          </button>
+        </PopoverTrigger>
+        <PopoverContent 
+          side="top" 
+          align="end"
+          className="w-80 max-w-[calc(100vw-2rem)] mx-2"
+          sideOffset={10}
+        >
+          {content}
+        </PopoverContent>
+      </Popover>
+    );
+  }
+
+  return (
+    <UITooltip delayDuration={0}>
+      <TooltipTrigger asChild>
+        <button className="p-1 rounded hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500">
+          <Info className="h-4 w-4 text-gray-500 hover:text-gray-700" />
+        </button>
+      </TooltipTrigger>
+      <TooltipContent side="top" className="max-w-xs">
+        {content}
+      </TooltipContent>
+    </UITooltip>
+  );
 }
 
 export default function ResultsDashboard({ results }: ResultsDashboardProps) {
@@ -105,9 +154,7 @@ export default function ResultsDashboard({ results }: ResultsDashboardProps) {
         }
       },
       title: {
-        display: true,
-        text: 'Monte Carlo Results Distribution',
-        color: '#1F2937'
+        display: false
       },
       tooltip: {
         backgroundColor: 'rgba(0, 0, 0, 0.8)',
@@ -164,9 +211,7 @@ export default function ResultsDashboard({ results }: ResultsDashboardProps) {
         display: false
       },
       title: {
-        display: true,
-        text: 'Risk Assessment - Percentile Analysis',
-        color: '#1F2937'
+        display: false
       },
       tooltip: {
         backgroundColor: 'rgba(0, 0, 0, 0.8)',
@@ -260,6 +305,7 @@ export default function ResultsDashboard({ results }: ResultsDashboardProps) {
       </div>
 
       {activeTab === 'charts' && (
+        <TooltipProvider>
         <div className="space-y-6">
           {/* Key Metrics Cards */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
@@ -296,6 +342,22 @@ export default function ResultsDashboard({ results }: ResultsDashboardProps) {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* Histogram */}
         <div className="bg-white rounded-xl border border-gray-200 shadow-sm p-6">
+          <div className="flex items-center justify-between mb-4">
+            <h3 className="text-lg font-semibold text-gray-900">Monte Carlo Results Distribution</h3>
+            <ChartInfoHelp title="Monte Carlo Histogram">
+              <div className="space-y-2">
+                <p>This histogram shows all possible power generation outcomes from the Monte Carlo simulation.</p>
+                <p><strong>How to read:</strong></p>
+                <ul className="list-disc list-inside space-y-1 text-xs">
+                  <li>X-axis: Power generation in megawatts (MW)</li>
+                  <li>Y-axis: How often each outcome occurred</li>
+                  <li>Taller bars = more likely outcomes</li>
+                  <li>Spread shows project uncertainty</li>
+                </ul>
+                <p className="text-xs"><strong>Decision use:</strong> Peak shows most likely power output range for planning.</p>
+              </div>
+            </ChartInfoHelp>
+          </div>
           <div className="h-64">
             <Bar data={createHistogram()} options={chartOptions} />
           </div>
@@ -303,6 +365,21 @@ export default function ResultsDashboard({ results }: ResultsDashboardProps) {
 
         {/* Percentile Chart */}
         <div className="bg-white rounded-xl border border-gray-200 shadow-sm p-6">
+          <div className="flex items-center justify-between mb-4">
+            <h3 className="text-lg font-semibold text-gray-900">Risk Assessment - Percentile Analysis</h3>
+            <ChartInfoHelp title="Percentile Risk Analysis">
+              <div className="space-y-2">
+                <p>This chart shows different confidence levels for power generation outcomes.</p>
+                <p><strong>Percentile meanings:</strong></p>
+                <ul className="list-disc list-inside space-y-1 text-xs">
+                  <li>P10: Only 10% chance of getting less (conservative)</li>
+                  <li>P50: 50% chance above/below (most likely)</li>
+                  <li>P90: Only 10% chance of getting more (optimistic)</li>
+                </ul>
+                <p className="text-xs"><strong>Decision use:</strong> P10 for financing, P50 for planning, P90 for best-case scenarios.</p>
+              </div>
+            </ChartInfoHelp>
+          </div>
           <div className="h-64">
             <Bar data={percentileData} options={percentileOptions} />
           </div>
@@ -397,6 +474,7 @@ export default function ResultsDashboard({ results }: ResultsDashboardProps) {
         </div>
       </div>
         </div>
+        </TooltipProvider>
       )}
 
       {activeTab === 'tables' && (
