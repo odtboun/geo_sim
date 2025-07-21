@@ -126,20 +126,22 @@ export default function Home() {
         {/* Main Content Area */}
         <div className="flex-1 flex flex-col">
           {/* Header */}
-          <div className="bg-white border-b border-gray-200 px-6 py-4">
-            <div className="flex items-center justify-between">
+          <div className="bg-white border-b border-gray-200 px-4 md:px-6 py-4">
+            {/* Mobile: Stack vertically, Desktop: Side by side */}
+            <div className="flex flex-col space-y-3 md:space-y-0 md:flex-row md:items-center md:justify-between">
               <div className="flex items-center space-x-4">
                 <SidebarTrigger />
-                <div className="flex-1">
-                  <h1 className="text-2xl font-bold text-gray-900">Geothermal Power Assessment</h1>
-                  <p className="text-gray-600">Professional Investment Analysis Platform</p>
+                <div className="flex-1 min-w-0">
+                  <h1 className="text-xl md:text-2xl font-bold text-gray-900 truncate">Geothermal Power Assessment</h1>
+                  <p className="text-sm md:text-base text-gray-600">Professional Investment Analysis Platform</p>
                 </div>
               </div>
               
-              {/* Editable Price - Top Right */}
-              <div className="flex items-center space-x-2">
-                <span className="text-sm text-gray-500">Electricity Price Assumption:</span>
-                <span className="text-sm text-gray-500">$</span>
+              {/* Editable Price - Responsive */}
+              <div className="flex items-center space-x-2 md:flex-shrink-0">
+                <span className="text-xs md:text-sm text-gray-500 hidden sm:inline">Electricity Price Assumption:</span>
+                <span className="text-xs md:text-sm text-gray-500 sm:hidden">Price:</span>
+                <span className="text-xs md:text-sm text-gray-500">$</span>
                 <input
                   type="number"
                   step="0.001"
@@ -149,9 +151,9 @@ export default function Home() {
                     newParams.powerPlant.electricityPrice = parseFloat(e.target.value) || 0.08;
                     setParameters(newParams);
                   }}
-                  className="w-20 text-right text-sm font-semibold text-gray-900 bg-white border border-gray-200 rounded px-2 py-1 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  className="w-16 md:w-20 text-right text-xs md:text-sm font-semibold text-gray-900 bg-white border border-gray-200 rounded px-1 md:px-2 py-1 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                 />
-                <span className="text-sm text-gray-500">/kWh</span>
+                <span className="text-xs md:text-sm text-gray-500">/kWh</span>
               </div>
             </div>
           </div>

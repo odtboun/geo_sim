@@ -42,9 +42,11 @@ export default function ParameterForm({
         <div className="space-y-3">
           <div className="flex items-center space-x-2">
             <h3 className="text-sm font-semibold text-gray-900 border-b border-gray-200 pb-1 flex-1">Reservoir Properties</h3>
-            <Tooltip>
+            <Tooltip delayDuration={0}>
               <TooltipTrigger asChild>
-                <Info className="h-4 w-4 text-gray-500 hover:text-gray-700 cursor-help" />
+                <button className="p-1 rounded hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                  <Info className="h-4 w-4 text-gray-500 hover:text-gray-700" />
+                </button>
               </TooltipTrigger>
               <TooltipContent side="left" className="max-w-xs">
                 <div className="text-sm">
@@ -207,9 +209,11 @@ export default function ParameterForm({
       <div className="space-y-3">
         <div className="flex items-center space-x-2">
           <h3 className="text-sm font-semibold text-gray-900 border-b border-gray-200 pb-1 flex-1">Power Plant</h3>
-          <Tooltip>
+          <Tooltip delayDuration={0}>
             <TooltipTrigger asChild>
-              <Info className="h-4 w-4 text-gray-500 hover:text-gray-700 cursor-help" />
+              <button className="p-1 rounded hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                <Info className="h-4 w-4 text-gray-500 hover:text-gray-700" />
+              </button>
             </TooltipTrigger>
             <TooltipContent side="left" className="max-w-xs">
               <div className="text-sm">
@@ -296,9 +300,11 @@ export default function ParameterForm({
       <div className="space-y-3">
         <div className="flex items-center space-x-2">
           <h3 className="text-sm font-semibold text-gray-900 border-b border-gray-200 pb-1 flex-1">Simulation</h3>
-          <Tooltip>
+          <Tooltip delayDuration={0}>
             <TooltipTrigger asChild>
-              <Info className="h-4 w-4 text-gray-500 hover:text-gray-700 cursor-help" />
+              <button className="p-1 rounded hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                <Info className="h-4 w-4 text-gray-500 hover:text-gray-700" />
+              </button>
             </TooltipTrigger>
             <TooltipContent side="left" className="max-w-xs">
               <div className="text-sm">
