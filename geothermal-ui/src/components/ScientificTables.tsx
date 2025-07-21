@@ -532,8 +532,8 @@ export default function ScientificTables({ results }: ScientificTablesProps) {
               {/* Conservative */}
               <div className="bg-red-50 border-l-4 border-red-500 p-4 rounded-r-lg">
                 <div className="text-xs font-semibold text-red-700 uppercase tracking-wide mb-1">Conservative</div>
-                <div className="text-2xl font-bold text-red-900">{results.statistics.percentiles.p90.toFixed(1)} MW</div>
-                <div className="text-xs text-red-600">P90 - 90% confidence</div>
+                <div className="text-2xl font-bold text-red-900">{results.statistics.percentiles.p10.toFixed(1)} MW</div>
+                <div className="text-xs text-red-600">P10 - 90% confidence</div>
               </div>
 
               {/* Most Likely */}
@@ -546,25 +546,25 @@ export default function ScientificTables({ results }: ScientificTablesProps) {
               {/* Optimistic */}
               <div className="bg-green-50 border-l-4 border-green-500 p-4 rounded-r-lg">
                 <div className="text-xs font-semibold text-green-700 uppercase tracking-wide mb-1">Optimistic</div>
-                <div className="text-2xl font-bold text-green-900">{results.statistics.percentiles.p10.toFixed(1)} MW</div>
-                <div className="text-xs text-green-600">P10 - Upside potential</div>
+                <div className="text-2xl font-bold text-green-900">{results.statistics.percentiles.p90.toFixed(1)} MW</div>
+                <div className="text-xs text-green-600">P90 - Upside potential</div>
               </div>
 
               {/* Maximum */}
               <div className="bg-purple-50 border-l-4 border-purple-500 p-4 rounded-r-lg">
                 <div className="text-xs font-semibold text-purple-700 uppercase tracking-wide mb-1">Maximum</div>
-                <div className="text-2xl font-bold text-purple-900">{results.statistics.percentiles.p5.toFixed(1)} MW</div>
-                <div className="text-xs text-purple-600">P5 - Best case</div>
+                <div className="text-2xl font-bold text-purple-900">{results.statistics.percentiles.p95.toFixed(1)} MW</div>
+                <div className="text-xs text-purple-600">P95 - Best case</div>
               </div>
             </div>
 
             <div className="bg-gray-50 p-4 rounded border">
               <p className="text-sm text-gray-700 font-mono mb-2"><strong>Investment Decision Framework:</strong></p>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-2 text-xs text-gray-600">
-                <p>• <strong>Conservative (P90):</strong> Use for financing and risk assessment</p>
+                <p>• <strong>Conservative (P10):</strong> Use for financing and risk assessment</p>
                 <p>• <strong>Most Likely (P50):</strong> Use for project planning and NPV calculations</p>
-                <p>• <strong>Optimistic (P10):</strong> Use for upside revenue projections</p>
-                <p>• <strong>Maximum (P5):</strong> Theoretical maximum under ideal conditions</p>
+                <p>• <strong>Optimistic (P90):</strong> Use for upside revenue projections</p>
+                <p>• <strong>Maximum (P95):</strong> Theoretical maximum under ideal conditions</p>
               </div>
             </div>
           </div>
