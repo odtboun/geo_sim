@@ -31,7 +31,12 @@ function InfoHelp({ children, title }: { children: React.ReactNode; title: strin
             <Info className="h-4 w-4 text-gray-500 hover:text-gray-700" />
           </button>
         </PopoverTrigger>
-        <PopoverContent side="left" className="max-w-xs">
+        <PopoverContent 
+          side="top" 
+          align="end"
+          className="w-80 max-w-[calc(100vw-2rem)] mx-2"
+          sideOffset={10}
+        >
           {content}
         </PopoverContent>
       </Popover>

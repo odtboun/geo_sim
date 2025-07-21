@@ -185,14 +185,16 @@ export default function Home() {
                                      {/* TOP: Investment Recommendation Banner (Ultra Compact) */}
                    <Card className={`border ${getRecommendationColor(results.executive.color)}`}>
                      <CardContent className="px-3 py-2">
-                       <div className="flex items-center space-x-3">
-                         {getRecommendationIcon(results.executive.color)}
-                         <div className="flex-1 min-w-0">
-                           <div className="flex items-baseline space-x-2 mb-1">
-                             <h3 className="text-sm font-bold">Investment Recommendation:</h3>
-                             <span className="text-sm font-medium">{results.executive.recommendation}</span>
+                       <div className="flex items-start space-x-3 w-full overflow-hidden">
+                         <div className="flex-shrink-0">
+                           {getRecommendationIcon(results.executive.color)}
+                         </div>
+                         <div className="flex-1 min-w-0 overflow-hidden">
+                           <div className="mb-1">
+                             <h3 className="text-sm font-bold mb-1">Investment Recommendation:</h3>
+                             <span className="text-sm font-medium break-words">{results.executive.recommendation}</span>
                            </div>
-                           <p className="text-xs opacity-90 leading-tight">
+                           <p className="text-xs opacity-90 leading-tight break-words">
                              Conservative P10: {results.statistics.percentiles.p10.toFixed(1)} MW • 
                              Confidence: {results.executive.confidence} • 
                              Risk: {results.executive.riskLevel.replace('_', ' ')}
