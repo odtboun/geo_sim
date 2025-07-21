@@ -1,0 +1,6 @@
+{
+  "buildCommand": "cd geothermal-ui && npm run build",
+  "outputDirectory": "geothermal-ui/.next",
+  "installCommand": "cd geothermal-ui && npm install",
+  "framework": "nextjs"
+} 
