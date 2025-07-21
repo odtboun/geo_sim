@@ -18,11 +18,13 @@ export default function ParameterForm({
   onRunSimulation,
   isCalculating,
 }: ParameterFormProps) {
-  const updateParameter = (section: keyof GeothermalInput, field: string, value: any) => {
+  const updateParameter = (section: keyof GeothermalInput, field: string, value: unknown) => {
     const newParameters = { ...parameters };
     if (typeof newParameters[section] === 'object' && newParameters[section] !== null) {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       (newParameters[section] as any)[field] = value;
     } else {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       (newParameters as any)[section] = value;
     }
     onParametersChange(newParameters);
