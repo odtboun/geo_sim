@@ -1,8 +1,6 @@
 {
-  "name": "geothermal-power-evaluation",
   "version": 2,
   "framework": "nextjs",
-  "regions": ["iad1", "sfo1"],
   "env": {
     "NODE_ENV": "production"
   },
