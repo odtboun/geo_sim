@@ -35,7 +35,7 @@ export default function Home() {
     if (!hasRun) {
       runSimulation();
     }
-  }, [hasRun]);
+  }, [hasRun, runSimulation]);
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900">
@@ -82,7 +82,7 @@ export default function Home() {
                 <FireIcon className="h-16 w-16 text-orange-400 mx-auto mb-4" />
                 <h3 className="text-xl font-semibold text-white mb-2">Ready to Evaluate</h3>
                 <p className="text-blue-200">
-                  Adjust parameters and click "Run Evaluation" to analyze geothermal potential.
+                                     Adjust parameters and click &quot;Run Evaluation&quot; to analyze geothermal potential.
                 </p>
               </div>
             )}

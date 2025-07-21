@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { type GeothermalInput } from '@/lib/geothermal-calculations';
 import { PlayIcon } from '@heroicons/react/24/solid';
 
@@ -15,7 +14,7 @@ export default function ParameterForm({
   onRunSimulation,
   isCalculating
 }: ParameterFormProps) {
-  const updateParameter = (section: keyof GeothermalInput, field: string, value: any) => {
+  const updateParameter = (section: keyof GeothermalInput, field: string, value: unknown) => {
     const updated = {
       ...parameters,
       [section]: {
