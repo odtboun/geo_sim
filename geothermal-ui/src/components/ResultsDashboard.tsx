@@ -1,8 +1,11 @@
 'use client';
 
+import { useState } from 'react';
 import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, LineElement, PointElement, Title, Tooltip, Legend, ChartOptions } from 'chart.js';
 import { Bar } from 'react-chartjs-2';
 import { type GeothermalResults } from '@/lib/geothermal-calculations';
+import ScientificTables from './ScientificTables';
+import { ChartBarIcon, TableCellsIcon } from '@heroicons/react/24/solid';
 
 ChartJS.register(
   CategoryScale,
@@ -20,6 +23,8 @@ interface ResultsDashboardProps {
 }
 
 export default function ResultsDashboard({ results }: ResultsDashboardProps) {
+  const [activeTab, setActiveTab] = useState<'charts' | 'tables'>('charts');
+
   // Prepare histogram data
   const createHistogram = () => {
     const data = results.monteCarloResults;
@@ -187,7 +192,37 @@ export default function ResultsDashboard({ results }: ResultsDashboardProps) {
 
   return (
     <div className="space-y-6">
-      {/* Key Metrics Cards */}
+      {/* Tab Navigation */}
+      <div className="bg-white/10 backdrop-blur-sm rounded-xl border border-white/20 p-2">
+        <div className="flex space-x-2">
+          <button
+            onClick={() => setActiveTab('charts')}
+            className={`flex items-center space-x-2 px-4 py-2 rounded-lg font-medium transition-all ${
+              activeTab === 'charts'
+                ? 'bg-blue-600 text-white shadow-lg'
+                : 'text-blue-200 hover:bg-white/10 hover:text-white'
+            }`}
+          >
+            <ChartBarIcon className="h-5 w-5" />
+            <span>Executive Dashboard</span>
+          </button>
+          <button
+            onClick={() => setActiveTab('tables')}
+            className={`flex items-center space-x-2 px-4 py-2 rounded-lg font-medium transition-all ${
+              activeTab === 'tables'
+                ? 'bg-blue-600 text-white shadow-lg'
+                : 'text-blue-200 hover:bg-white/10 hover:text-white'
+            }`}
+          >
+            <TableCellsIcon className="h-5 w-5" />
+            <span>Scientific Data Tables</span>
+          </button>
+        </div>
+      </div>
+
+      {activeTab === 'charts' && (
+        <div className="space-y-6">
+          {/* Key Metrics Cards */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
         <div className="bg-white/10 backdrop-blur-sm rounded-lg border border-white/20 p-4">
           <div className="text-2xl font-bold text-blue-400">
@@ -322,6 +357,12 @@ export default function ResultsDashboard({ results }: ResultsDashboardProps) {
           </div>
         </div>
       </div>
+        </div>
+      )}
+
+      {activeTab === 'tables' && (
+        <ScientificTables results={results} />
+      )}
     </div>
   );
 } 
