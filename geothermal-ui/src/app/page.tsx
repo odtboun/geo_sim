@@ -11,7 +11,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Sidebar, SidebarContent, SidebarHeader, SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
-import { BarChart3, Settings, TrendingUp, Building2, DollarSign, Zap, AlertTriangle, CheckCircle, Calculator, Play } from 'lucide-react';
+import { BarChart3, Settings, TrendingUp, DollarSign, Zap, AlertTriangle, CheckCircle, Calculator, Play } from 'lucide-react';
 
 export default function Home() {
   const [parameters, setParameters] = useState<GeothermalInput>(defaultParameters);
