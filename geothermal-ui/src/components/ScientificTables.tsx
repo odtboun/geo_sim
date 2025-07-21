@@ -238,44 +238,7 @@ export default function ScientificTables({ results }: ScientificTablesProps) {
     };
   };
 
-  // Create linear summary (reserve categories)
-  const createLinearSummary = () => {
-    return {
-      labels: ['Reserve Categories'],
-      datasets: [
-        {
-          label: 'Proven (P95-P90)',
-          data: [5],
-          backgroundColor: '#059669', // Professional emerald
-          barThickness: 40,
-        },
-        {
-          label: 'Probable (P90-Base)',
-          data: [5],
-          backgroundColor: '#0D9488', // Professional teal
-          barThickness: 40,
-        },
-        {
-          label: 'Most Likely',
-          data: [30],
-          backgroundColor: '#1E40AF', // Professional blue
-          barThickness: 40,
-        },
-        {
-          label: 'Optimistic',
-          data: [55],
-          backgroundColor: '#7C2D12', // Professional brown
-          barThickness: 40,
-        },
-        {
-          label: 'Maximum (P5)',
-          data: [5],
-          backgroundColor: '#991B1B', // Professional dark red
-          barThickness: 40,
-        }
-      ]
-    };
-  };
+  // Removed createLinearSummary - replaced with investment-focused metric cards
 
   // Scientific chart options (matplotlib white background style)
   const scientificChartOptions: ChartOptions<'bar' | 'line'> = {
@@ -504,71 +467,7 @@ export default function ScientificTables({ results }: ScientificTablesProps) {
     }
   };
 
-  // Linear summary options (matplotlib linear plot style)
-  const linearSummaryOptions: ChartOptions<'bar'> = {
-    ...scientificChartOptions,
-    indexAxis: 'y' as const,
-    plugins: {
-      ...scientificChartOptions.plugins,
-      title: {
-        ...scientificChartOptions.plugins?.title,
-        text: `Geothermal Resource Assessment - Reserve Categories\n${results.input.project.name || 'Feasibility Study 1'}`
-      },
-      legend: {
-        display: false
-      }
-    },
-    scales: {
-      x: {
-        stacked: true,
-        ticks: {
-          color: '#000000',
-          font: {
-            size: 10,
-            family: 'Arial, sans-serif'
-          },
-          callback: (value) => `${value}%`,
-          maxTicksLimit: 6
-        },
-        title: {
-          display: true,
-          text: 'Power Generation [MWe]',
-          color: '#000000',
-          font: {
-            size: 12,
-            family: 'Arial, sans-serif'
-          }
-        },
-        grid: {
-          color: '#d0d0d0',
-          lineWidth: 0.5
-        },
-        border: {
-          color: '#000000',
-          width: 1
-        },
-        min: 0,
-        max: 100
-      },
-      y: {
-        stacked: true,
-        ticks: {
-          color: '#000000',
-          font: {
-            size: 10,
-            family: 'Arial, sans-serif'
-          }
-        },
-        grid: {
-          display: false
-        },
-        border: {
-          color: '#000000',
-          width: 1
-        }
-      }
-    }
-  };
+  // Removed linearSummaryOptions - no longer needed with metric card visualization
 
   return (
     <div className="space-y-8">
@@ -622,16 +521,51 @@ export default function ScientificTables({ results }: ScientificTablesProps) {
             </div>
           </div>
 
-          {/* Linear Reserve Summary (like Python 'linear' option) */}
+          {/* Investment-Focused Reserve Analysis */}
           <div className="bg-white rounded-xl border-2 border-gray-300 p-6 shadow-lg">
-            <div className="h-80 bg-white">
-              <Bar data={createLinearSummary()} options={linearSummaryOptions} />
+            <div className="mb-4">
+              <h4 className="text-lg font-semibold text-gray-900 mb-2">Key Investment Scenarios</h4>
+              <p className="text-sm text-gray-600">Actual power generation capacity by confidence level</p>
             </div>
-            <div className="mt-4 text-sm text-gray-700 font-mono bg-gray-50 p-3 rounded border">
-              <p><strong>Figure 4:</strong> Geothermal reserve classification</p>
-              <p>• <span style={{color: '#059669'}}>■</span> Proven reserves (P90-P95): Conservative estimates</p>
-              <p>• <span style={{color: '#1E40AF'}}>■</span> Most likely reserves: Expected scenario</p>
-              <p>• <span style={{color: '#991B1B'}}>■</span> Maximum reserves (P5-P10): Optimistic potential</p>
+            
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+              {/* Conservative */}
+              <div className="bg-red-50 border-l-4 border-red-500 p-4 rounded-r-lg">
+                <div className="text-xs font-semibold text-red-700 uppercase tracking-wide mb-1">Conservative</div>
+                <div className="text-2xl font-bold text-red-900">{results.statistics.percentiles.p90.toFixed(1)} MW</div>
+                <div className="text-xs text-red-600">P90 - 90% confidence</div>
+              </div>
+
+              {/* Most Likely */}
+              <div className="bg-blue-50 border-l-4 border-blue-500 p-4 rounded-r-lg">
+                <div className="text-xs font-semibold text-blue-700 uppercase tracking-wide mb-1">Most Likely</div>
+                <div className="text-2xl font-bold text-blue-900">{results.statistics.percentiles.p50.toFixed(1)} MW</div>
+                <div className="text-xs text-blue-600">P50 - Best estimate</div>
+              </div>
+
+              {/* Optimistic */}
+              <div className="bg-green-50 border-l-4 border-green-500 p-4 rounded-r-lg">
+                <div className="text-xs font-semibold text-green-700 uppercase tracking-wide mb-1">Optimistic</div>
+                <div className="text-2xl font-bold text-green-900">{results.statistics.percentiles.p10.toFixed(1)} MW</div>
+                <div className="text-xs text-green-600">P10 - Upside potential</div>
+              </div>
+
+              {/* Maximum */}
+              <div className="bg-purple-50 border-l-4 border-purple-500 p-4 rounded-r-lg">
+                <div className="text-xs font-semibold text-purple-700 uppercase tracking-wide mb-1">Maximum</div>
+                <div className="text-2xl font-bold text-purple-900">{results.statistics.percentiles.p5.toFixed(1)} MW</div>
+                <div className="text-xs text-purple-600">P5 - Best case</div>
+              </div>
+            </div>
+
+            <div className="bg-gray-50 p-4 rounded border">
+              <p className="text-sm text-gray-700 font-mono mb-2"><strong>Investment Decision Framework:</strong></p>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-2 text-xs text-gray-600">
+                <p>• <strong>Conservative (P90):</strong> Use for financing and risk assessment</p>
+                <p>• <strong>Most Likely (P50):</strong> Use for project planning and NPV calculations</p>
+                <p>• <strong>Optimistic (P10):</strong> Use for upside revenue projections</p>
+                <p>• <strong>Maximum (P5):</strong> Theoretical maximum under ideal conditions</p>
+              </div>
             </div>
           </div>
         </div>
