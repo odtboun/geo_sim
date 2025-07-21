@@ -524,48 +524,59 @@ export default function ScientificTables({ results }: ScientificTablesProps) {
           {/* Investment-Focused Reserve Analysis */}
           <div className="bg-white rounded-xl border-2 border-gray-300 p-6 shadow-lg">
             <div className="mb-4">
-              <h4 className="text-lg font-semibold text-gray-900 mb-2">Key Investment Scenarios</h4>
-              <p className="text-sm text-gray-600">Actual power generation capacity by confidence level</p>
+              <h4 className="text-lg font-semibold text-gray-900 mb-2">Investment Risk Spectrum</h4>
+              <p className="text-sm text-gray-600">Power generation scenarios from conservative to maximum potential</p>
             </div>
             
-            <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+            <div className="space-y-3 mb-6">
               {/* Conservative */}
-              <div className="bg-red-50 border-l-4 border-red-500 p-4 rounded-r-lg">
-                <div className="text-xs font-semibold text-red-700 uppercase tracking-wide mb-1">Conservative</div>
-                <div className="text-2xl font-bold text-red-900">{results.statistics.percentiles.p10.toFixed(1)} MW</div>
-                <div className="text-xs text-red-600">P10 - 90% confidence</div>
+              <div className="bg-red-50 border-l-4 border-red-500 p-4 rounded-r-lg flex items-center justify-between">
+                <div>
+                  <div className="text-sm font-semibold text-red-700 uppercase tracking-wide mb-1">Conservative</div>
+                  <div className="text-xs text-red-600">P10 - 90% confidence • Use for financing and risk assessment</div>
+                </div>
+                <div className="text-right">
+                  <div className="text-3xl font-bold text-red-900">{results.statistics.percentiles.p10.toFixed(1)} MW</div>
+                </div>
               </div>
 
               {/* Most Likely */}
-              <div className="bg-blue-50 border-l-4 border-blue-500 p-4 rounded-r-lg">
-                <div className="text-xs font-semibold text-blue-700 uppercase tracking-wide mb-1">Most Likely</div>
-                <div className="text-2xl font-bold text-blue-900">{results.statistics.percentiles.p50.toFixed(1)} MW</div>
-                <div className="text-xs text-blue-600">P50 - Best estimate</div>
+              <div className="bg-blue-50 border-l-4 border-blue-500 p-4 rounded-r-lg flex items-center justify-between">
+                <div>
+                  <div className="text-sm font-semibold text-blue-700 uppercase tracking-wide mb-1">Most Likely</div>
+                  <div className="text-xs text-blue-600">P50 - Best estimate • Use for project planning and NPV calculations</div>
+                </div>
+                <div className="text-right">
+                  <div className="text-3xl font-bold text-blue-900">{results.statistics.percentiles.p50.toFixed(1)} MW</div>
+                </div>
               </div>
 
               {/* Optimistic */}
-              <div className="bg-green-50 border-l-4 border-green-500 p-4 rounded-r-lg">
-                <div className="text-xs font-semibold text-green-700 uppercase tracking-wide mb-1">Optimistic</div>
-                <div className="text-2xl font-bold text-green-900">{results.statistics.percentiles.p90.toFixed(1)} MW</div>
-                <div className="text-xs text-green-600">P90 - Upside potential</div>
+              <div className="bg-green-50 border-l-4 border-green-500 p-4 rounded-r-lg flex items-center justify-between">
+                <div>
+                  <div className="text-sm font-semibold text-green-700 uppercase tracking-wide mb-1">Optimistic</div>
+                  <div className="text-xs text-green-600">P90 - Upside potential • Use for upside revenue projections</div>
+                </div>
+                <div className="text-right">
+                  <div className="text-3xl font-bold text-green-900">{results.statistics.percentiles.p90.toFixed(1)} MW</div>
+                </div>
               </div>
 
               {/* Maximum */}
-              <div className="bg-purple-50 border-l-4 border-purple-500 p-4 rounded-r-lg">
-                <div className="text-xs font-semibold text-purple-700 uppercase tracking-wide mb-1">Maximum</div>
-                <div className="text-2xl font-bold text-purple-900">{results.statistics.percentiles.p95.toFixed(1)} MW</div>
-                <div className="text-xs text-purple-600">P95 - Best case</div>
+              <div className="bg-purple-50 border-l-4 border-purple-500 p-4 rounded-r-lg flex items-center justify-between">
+                <div>
+                  <div className="text-sm font-semibold text-purple-700 uppercase tracking-wide mb-1">Maximum</div>
+                  <div className="text-xs text-purple-600">P95 - Best case • Theoretical maximum under ideal conditions</div>
+                </div>
+                <div className="text-right">
+                  <div className="text-3xl font-bold text-purple-900">{results.statistics.percentiles.p95.toFixed(1)} MW</div>
+                </div>
               </div>
             </div>
 
-            <div className="bg-gray-50 p-4 rounded border">
-              <p className="text-sm text-gray-700 font-mono mb-2"><strong>Investment Decision Framework:</strong></p>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-2 text-xs text-gray-600">
-                <p>• <strong>Conservative (P10):</strong> Use for financing and risk assessment</p>
-                <p>• <strong>Most Likely (P50):</strong> Use for project planning and NPV calculations</p>
-                <p>• <strong>Optimistic (P90):</strong> Use for upside revenue projections</p>
-                <p>• <strong>Maximum (P95):</strong> Theoretical maximum under ideal conditions</p>
-              </div>
+            <div className="bg-gray-50 p-4 rounded border text-center">
+              <p className="text-sm text-gray-700 font-mono"><strong>Risk Progression:</strong> Conservative → Most Likely → Optimistic → Maximum</p>
+              <p className="text-xs text-gray-600 mt-1">Each scenario represents increasing levels of project performance and risk tolerance</p>
             </div>
           </div>
         </div>
