@@ -118,7 +118,7 @@ export default function ResultsDashboard({ results }: ResultsDashboardProps) {
     scales: {
       x: {
         ticks: {
-          color: 'rgba(255, 255, 255, 0.7)'
+          color: 'rgba(255, 255, 255, 0.9)'
         },
         grid: {
           color: 'rgba(255, 255, 255, 0.1)'
@@ -126,7 +126,7 @@ export default function ResultsDashboard({ results }: ResultsDashboardProps) {
       },
       y: {
         ticks: {
-          color: 'rgba(255, 255, 255, 0.7)'
+          color: 'rgba(255, 255, 255, 0.9)'
         },
         grid: {
           color: 'rgba(255, 255, 255, 0.1)'
@@ -159,7 +159,7 @@ export default function ResultsDashboard({ results }: ResultsDashboardProps) {
     scales: {
       x: {
         ticks: {
-          color: 'rgba(255, 255, 255, 0.7)'
+          color: 'rgba(255, 255, 255, 0.9)'
         },
         grid: {
           color: 'rgba(255, 255, 255, 0.1)'
@@ -167,7 +167,7 @@ export default function ResultsDashboard({ results }: ResultsDashboardProps) {
       },
       y: {
         ticks: {
-          color: 'rgba(255, 255, 255, 0.7)',
+          color: 'rgba(255, 255, 255, 0.9)',
           callback: (value) => `${value} MW`
         },
         grid: {
@@ -200,7 +200,7 @@ export default function ResultsDashboard({ results }: ResultsDashboardProps) {
             className={`flex items-center space-x-2 px-4 py-2 rounded-lg font-medium transition-all ${
               activeTab === 'charts'
                 ? 'bg-blue-600 text-white shadow-lg'
-                : 'text-blue-200 hover:bg-white/10 hover:text-white'
+                : 'text-gray-200 hover:bg-white/10 hover:text-white'
             }`}
           >
             <ChartBarIcon className="h-5 w-5" />
@@ -211,7 +211,7 @@ export default function ResultsDashboard({ results }: ResultsDashboardProps) {
             className={`flex items-center space-x-2 px-4 py-2 rounded-lg font-medium transition-all ${
               activeTab === 'tables'
                 ? 'bg-blue-600 text-white shadow-lg'
-                : 'text-blue-200 hover:bg-white/10 hover:text-white'
+                : 'text-gray-200 hover:bg-white/10 hover:text-white'
             }`}
           >
             <TableCellsIcon className="h-5 w-5" />
@@ -225,31 +225,31 @@ export default function ResultsDashboard({ results }: ResultsDashboardProps) {
           {/* Key Metrics Cards */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
         <div className="bg-white/10 backdrop-blur-sm rounded-lg border border-white/20 p-4">
-          <div className="text-2xl font-bold text-gray-300">
+          <div className="text-2xl font-bold text-white">
             {results.baseCase.powerMWe.toFixed(1)} MW
           </div>
-          <div className="text-sm text-gray-400">Base Case</div>
+          <div className="text-sm text-gray-200">Base Case</div>
         </div>
         
         <div className="bg-white/10 backdrop-blur-sm rounded-lg border border-white/20 p-4">
-          <div className="text-2xl font-bold text-slate-300">
+          <div className="text-2xl font-bold text-white">
             {results.statistics.percentiles.p50.toFixed(1)} MW
           </div>
-          <div className="text-sm text-slate-400">P50 (Probable)</div>
+          <div className="text-sm text-gray-200">P50 (Probable)</div>
         </div>
         
         <div className="bg-white/10 backdrop-blur-sm rounded-lg border border-white/20 p-4">
-          <div className="text-2xl font-bold text-stone-300">
+          <div className="text-2xl font-bold text-white">
             {results.statistics.percentiles.p10.toFixed(1)} MW
           </div>
-          <div className="text-sm text-stone-400">P10 (Conservative)</div>
+          <div className="text-sm text-gray-200">P10 (Conservative)</div>
         </div>
         
         <div className="bg-white/10 backdrop-blur-sm rounded-lg border border-white/20 p-4">
-          <div className="text-2xl font-bold text-zinc-300">
+          <div className="text-2xl font-bold text-white">
             {(results.statistics.std / results.statistics.mean * 100).toFixed(0)}%
           </div>
-          <div className="text-sm text-zinc-400">Uncertainty</div>
+          <div className="text-sm text-gray-200">Uncertainty</div>
         </div>
       </div>
 
@@ -277,23 +277,23 @@ export default function ResultsDashboard({ results }: ResultsDashboardProps) {
           <h3 className="text-lg font-semibold text-white mb-4">Technical Analysis</h3>
           <div className="space-y-3">
             <div className="flex justify-between">
-              <span className="text-gray-300">Mean Power Output:</span>
+              <span className="text-gray-100">Mean Power Output:</span>
               <span className="text-white font-semibold">{results.statistics.mean.toFixed(1)} MW</span>
             </div>
             <div className="flex justify-between">
-              <span className="text-gray-300">Standard Deviation:</span>
+              <span className="text-gray-100">Standard Deviation:</span>
               <span className="text-white font-semibold">{results.statistics.std.toFixed(1)} MW</span>
             </div>
             <div className="flex justify-between">
-              <span className="text-gray-300">Minimum:</span>
+              <span className="text-gray-100">Minimum:</span>
               <span className="text-white font-semibold">{results.statistics.min.toFixed(1)} MW</span>
             </div>
             <div className="flex justify-between">
-              <span className="text-gray-300">Maximum:</span>
+              <span className="text-gray-100">Maximum:</span>
               <span className="text-white font-semibold">{results.statistics.max.toFixed(1)} MW</span>
             </div>
             <div className="flex justify-between">
-              <span className="text-gray-300">Coefficient of Variation:</span>
+              <span className="text-gray-100">Coefficient of Variation:</span>
               <span className="text-white font-semibold">{(results.statistics.std / results.statistics.mean * 100).toFixed(1)}%</span>
             </div>
           </div>
@@ -304,24 +304,24 @@ export default function ResultsDashboard({ results }: ResultsDashboardProps) {
           <h3 className="text-lg font-semibold text-white mb-4">Economic Analysis</h3>
           <div className="space-y-3">
             <div className="flex justify-between">
-              <span className="text-gray-300">Annual Generation:</span>
+              <span className="text-gray-100">Annual Generation:</span>
               <span className="text-white font-semibold">{formatNumber(results.economics.annualGeneration)} MWh</span>
             </div>
             <div className="flex justify-between">
-              <span className="text-gray-300">Annual Revenue:</span>
+              <span className="text-gray-100">Annual Revenue:</span>
               <span className="text-green-400 font-semibold">{formatCurrency(results.economics.annualRevenue)}</span>
             </div>
             <div className="flex justify-between">
-              <span className="text-gray-300">Lifetime Generation:</span>
+              <span className="text-gray-100">Lifetime Generation:</span>
               <span className="text-white font-semibold">{formatNumber(results.economics.lifetimeGeneration)} MWh</span>
             </div>
             <div className="flex justify-between">
-              <span className="text-gray-300">Lifetime Revenue:</span>
+              <span className="text-gray-100">Lifetime Revenue:</span>
               <span className="text-green-400 font-semibold">{formatCurrency(results.economics.lifetimeRevenue)}</span>
             </div>
             <div className="flex justify-between">
-              <span className="text-gray-300">Price Assumption:</span>
-              <span className="text-gray-400">$0.08/kWh</span>
+              <span className="text-gray-100">Price Assumption:</span>
+              <span className="text-gray-200">$0.08/kWh</span>
             </div>
           </div>
         </div>
@@ -332,28 +332,28 @@ export default function ResultsDashboard({ results }: ResultsDashboardProps) {
         <h3 className="text-lg font-semibold text-white mb-4">Probability Analysis</h3>
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
           <div className="text-center p-3 bg-black/20 rounded-lg">
-            <div className="text-2xl font-bold text-gray-300 mb-1">
+            <div className="text-2xl font-bold text-white mb-1">
               {(results.statistics.probabilities.aboveBase * 100).toFixed(0)}%
             </div>
-            <div className="text-xs text-gray-300">Above Base Case</div>
+            <div className="text-xs text-gray-200">Above Base Case</div>
           </div>
           <div className="text-center p-3 bg-black/20 rounded-lg">
-            <div className="text-2xl font-bold text-slate-300 mb-1">
+            <div className="text-2xl font-bold text-white mb-1">
               {(results.statistics.probabilities.above10MW * 100).toFixed(0)}%
             </div>
-            <div className="text-xs text-gray-300">Above 10 MW</div>
+            <div className="text-xs text-gray-200">Above 10 MW</div>
           </div>
           <div className="text-center p-3 bg-black/20 rounded-lg">
-            <div className="text-2xl font-bold text-stone-300 mb-1">
+            <div className="text-2xl font-bold text-white mb-1">
               {(results.statistics.probabilities.above25MW * 100).toFixed(0)}%
             </div>
-            <div className="text-xs text-gray-300">Above 25 MW</div>
+            <div className="text-xs text-gray-200">Above 25 MW</div>
           </div>
           <div className="text-center p-3 bg-black/20 rounded-lg">
-            <div className="text-2xl font-bold text-zinc-300 mb-1">
+            <div className="text-2xl font-bold text-white mb-1">
               {(results.statistics.probabilities.above50MW * 100).toFixed(0)}%
             </div>
-            <div className="text-xs text-gray-300">Above 50 MW</div>
+            <div className="text-xs text-gray-200">Above 50 MW</div>
           </div>
         </div>
       </div>
