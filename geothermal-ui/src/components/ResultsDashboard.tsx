@@ -233,7 +233,7 @@ export default function ResultsDashboard({ results }: ResultsDashboardProps) {
     <div className="space-y-6">
       {/* Tab Navigation */}
       <div className="bg-white rounded-xl border border-gray-200 shadow-sm p-2">
-        <div className="flex space-x-2">
+        <div className="flex space-x-2 justify-center">
           <button
             onClick={() => setActiveTab('charts')}
             className={`flex items-center space-x-2 px-4 py-2 rounded-lg font-medium transition-all ${
@@ -254,7 +254,7 @@ export default function ResultsDashboard({ results }: ResultsDashboardProps) {
             }`}
           >
             <TableCellsIcon className="h-5 w-5" />
-            <span>Scientific Data Tables</span>
+            <span>Simulation Details</span>
           </button>
         </div>
       </div>

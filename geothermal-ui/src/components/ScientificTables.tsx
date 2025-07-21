@@ -497,7 +497,7 @@ export default function ScientificTables({ results }: ScientificTablesProps) {
         <div className="flex items-center space-x-3 mb-6">
           <BarChart3 className="h-7 w-7 text-blue-600" />
           <h2 className="text-3xl font-bold text-gray-900" style={{fontFamily: 'Arial, sans-serif'}}>
-            Scientific Visualizations
+            Results Overview
           </h2>
         </div>
         <p className="text-gray-700 mb-8 text-base leading-relaxed" style={{fontFamily: 'Arial, sans-serif'}}>
@@ -513,7 +513,7 @@ export default function ScientificTables({ results }: ScientificTablesProps) {
             </div>
             <div className="mt-4 text-sm text-gray-700 font-mono bg-gray-50 p-3 rounded border">
               <p><strong>Figure 1:</strong> Frequency distribution of Monte Carlo simulation results</p>
-              <p>• Green bars: probability density histogram (25 bins)</p>
+                              <p>• Gray bars: probability density histogram (25 bins)</p>
               <p>• Normalized using density=True (matching Python matplotlib)</p>
             </div>
           </div>
@@ -606,47 +606,7 @@ export default function ScientificTables({ results }: ScientificTablesProps) {
         </div>
       </div>
 
-      {/* Project Information Table */}
-      <div className="bg-white rounded-xl border border-gray-200 shadow-sm p-6">
-        <div className="flex items-center space-x-2 mb-4">
-          <FileText className="h-5 w-5 text-slate-600" />
-          <h3 className="text-xl font-semibold text-gray-900">Project Information</h3>
-        </div>
-        <div className="overflow-x-auto">
-          <table className="w-full text-sm">
-            <thead>
-              <tr className="border-b border-gray-200">
-                <th className="text-gray-700 text-left p-2 font-mono font-semibold">Parameter</th>
-                <th className="text-gray-700 text-left p-2 font-mono font-semibold">Value</th>
-                <th className="text-gray-700 text-left p-2 font-mono font-semibold">Units</th>
-              </tr>
-            </thead>
-            <tbody className="text-gray-900 font-mono">
-                             <tr className="border-b border-gray-100">
-                 <td className="p-2">Project Name</td>
-                 <td className="p-2">{results.input.project.name || 'Feasibility Study 1'}</td>
-                 <td className="p-2">-</td>
-               </tr>
-               <tr className="border-b border-gray-100">
-                 <td className="p-2">Location</td>
-                 <td className="p-2">{`${results.input.project.location.lat}°N, ${results.input.project.location.lon}°E` || 'Not specified'}</td>
-                 <td className="p-2">-</td>
-               </tr>
-              <tr className="border-b border-gray-100">
-                <td className="p-2">Monte Carlo Iterations</td>
-                <td className="p-2">{results.monteCarloResults.length.toLocaleString()}</td>
-                <td className="p-2">iterations</td>
-              </tr>
-              <tr className="border-b border-gray-100">
-                <td className="p-2">Analysis Date</td>
-                <td className="p-2">{new Date().toLocaleDateString()}</td>
-                <td className="p-2">-</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-
+      
       {/* Input Parameters Table */}
       <div className="bg-white rounded-xl border border-gray-200 shadow-sm p-6">
         <div className="flex items-center space-x-2 mb-4">
