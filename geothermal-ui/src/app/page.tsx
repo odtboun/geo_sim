@@ -15,6 +15,7 @@ import { BarChart3, Settings, TrendingUp, Building2, DollarSign, Zap, AlertTrian
 export default function Home() {
   const [parameters, setParameters] = useState<GeothermalInput>(defaultParameters);
   const [results, setResults] = useState<GeothermalResults | null>(null);
+  const [lastSimulationParams, setLastSimulationParams] = useState<GeothermalInput | null>(null);
   const [isCalculating, setIsCalculating] = useState(false);
   const [hasRun, setHasRun] = useState(false);
 
@@ -23,6 +24,10 @@ export default function Home() {
     await new Promise(resolve => setTimeout(resolve, 500));
     
     try {
+      // Store a deep copy of parameters used for this simulation
+      const simulationParams = JSON.parse(JSON.stringify(parameters));
+      setLastSimulationParams(simulationParams);
+      
       const simulationResults = runScientificSimulationWithBasicInput(parameters);
       setResults(simulationResults);
       setHasRun(true);
@@ -133,17 +138,18 @@ export default function Home() {
               
               {/* Editable Price - Top Right */}
               <div className="flex items-center space-x-2">
+                <span className="text-sm text-gray-500">Electricity Price Assumption:</span>
                 <span className="text-sm text-gray-500">$</span>
                 <input
                   type="number"
                   step="0.001"
-                  value={parameters.powerPlant.electricityPrice.toFixed(3)}
+                  value={parameters.powerPlant.electricityPrice}
                   onChange={(e) => {
                     const newParams = { ...parameters };
                     newParams.powerPlant.electricityPrice = parseFloat(e.target.value) || 0.08;
                     setParameters(newParams);
                   }}
-                  className="w-16 text-right text-sm font-semibold text-gray-900 bg-transparent border-none outline-none focus:bg-gray-50 rounded px-1"
+                  className="w-20 text-right text-sm font-semibold text-gray-900 bg-white border border-gray-200 rounded px-2 py-1 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                 />
                 <span className="text-sm text-gray-500">/kWh</span>
               </div>
@@ -216,7 +222,7 @@ export default function Home() {
                          <div className="text-base font-bold text-emerald-900">
                            ${(results.economics.lifetimeRevenue / 1e6).toFixed(0)}M
                          </div>
-                         <div className="text-xs text-emerald-700">Revenue ({results.input.powerPlant.lifespan}yr)</div>
+                         <div className="text-xs text-emerald-700">Revenue ({lastSimulationParams?.powerPlant.lifespan || 25}yr)</div>
                        </CardContent>
                      </Card>
 
