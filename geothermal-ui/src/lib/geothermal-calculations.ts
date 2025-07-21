@@ -31,6 +31,7 @@ export interface PowerPlantParameters {
   conversionEfficiency: number; // decimal (0-1)
   plantCapacityFactor: number; // decimal (0-1)
   lifespan: number; // years
+  electricityPrice: number; // $/kWh
 }
 
 export interface SimulationParameters {
@@ -77,7 +78,7 @@ export interface StatisticalResults {
 export interface EconomicResults {
   annualGeneration: number; // MWh/year
   lifetimeGeneration: number; // MWh
-  annualRevenue: number; // $ (assuming $0.08/kWh)
+  annualRevenue: number; // $ (user configurable $/kWh)
   lifetimeRevenue: number; // $
 }
 
@@ -121,7 +122,8 @@ export const defaultParameters: GeothermalInput = {
     recoveryFactor: 0.07,
     conversionEfficiency: 0.173,
     plantCapacityFactor: 0.9,
-    lifespan: 25
+    lifespan: 25,
+    electricityPrice: 0.08
   },
   simulation: {
     iterations: 1000
@@ -265,7 +267,7 @@ export function runMonteCarloSimulation(input: GeothermalInput): GeothermalResul
   };
   
   // Economic calculations
-  const electricityPrice = 0.08; // $/kWh
+  const electricityPrice = input.powerPlant.electricityPrice; // $/kWh (user configurable)
   const annualGeneration = mean * 8760 * input.powerPlant.plantCapacityFactor;
   const economics: EconomicResults = {
     annualGeneration,

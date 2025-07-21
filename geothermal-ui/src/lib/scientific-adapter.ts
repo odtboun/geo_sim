@@ -133,7 +133,8 @@ export function convertToScientificInput(basic: BasicGeothermalInput): Scientifi
         mean: 0,
         sd: 0,
         pdf: 'C'
-      }
+      },
+      electricityPrice: basic.powerPlant.electricityPrice
     },
     simulation: {
       iterations: basic.simulation.iterations,

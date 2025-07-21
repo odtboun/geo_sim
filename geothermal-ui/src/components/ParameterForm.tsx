@@ -64,58 +64,7 @@ export default function ParameterForm({
         </Button>
       </div>
 
-      {/* Project Information */}
-      <div className="space-y-3">
-        <h3 className="text-sm font-semibold text-gray-900 border-b border-gray-200 pb-1">Project Information</h3>
-        <div className="space-y-2">
-          <div className="space-y-1">
-            <Label htmlFor="project-name" className="text-xs font-medium text-gray-700">
-              Project Name
-            </Label>
-            <Input
-              id="project-name"
-              type="text"
-              value={parameters.project.name}
-              onChange={(e) => updateParameter('project', 'name', e.target.value)}
-              className="h-8 text-xs"
-              placeholder="Enter project name"
-            />
-          </div>
 
-          <div className="grid grid-cols-2 gap-2">
-            <div className="space-y-1">
-              <Label htmlFor="latitude" className="text-xs font-medium text-gray-700">
-                Latitude (°)
-              </Label>
-              <Input
-                id="latitude"
-                type="number"
-                step="0.1"
-                value={formatNumber(parameters.project.location.lat)}
-                onChange={(e) => updateParameter('project', 'location', { ...parameters.project.location, lat: parseNumber(e.target.value) })}
-                className="h-8 text-xs"
-                placeholder="38.5"
-              />
-            </div>
-            <div className="space-y-1">
-              <Label htmlFor="longitude" className="text-xs font-medium text-gray-700">
-                Longitude (°)
-              </Label>
-              <Input
-                id="longitude"
-                type="number"
-                step="0.1"
-                value={formatNumber(parameters.project.location.lon)}
-                onChange={(e) => updateParameter('project', 'location', { ...parameters.project.location, lon: parseNumber(e.target.value) })}
-                className="h-8 text-xs"
-                placeholder="28.1"
-              />
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <Separator />
 
       {/* Reservoir Properties */}
       <div className="space-y-3">
@@ -328,6 +277,21 @@ export default function ParameterForm({
                 placeholder="30"
               />
             </div>
+          </div>
+
+          <div className="space-y-1">
+            <Label htmlFor="electricity-price" className="text-xs font-medium text-gray-700">
+              Electricity Price ($/kWh)
+            </Label>
+            <Input
+              id="electricity-price"
+              type="number"
+              step="0.001"
+              value={formatNumber(parameters.powerPlant.electricityPrice)}
+              onChange={(e) => updateParameter('powerPlant', 'electricityPrice', parseNumber(e.target.value))}
+              className="h-8 text-xs"
+              placeholder="0.080"
+            />
           </div>
 
         </div>

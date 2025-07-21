@@ -135,6 +135,7 @@ export interface PowerPlantData {
     sd: number;
     pdf: 'C' | 'T' | 'U' | 'N' | 'L';
   };
+  electricityPrice: number; // $/kWh - simple value, not a distribution
 }
 
 export interface GeothermalInput {
@@ -179,7 +180,7 @@ export interface GeothermalResults {
   economics: {
     annualGeneration: number; // MWh/year
     lifetimeGeneration: number; // MWh
-    annualRevenue: number; // $ (assuming $0.08/kWh)
+    annualRevenue: number; // $ (user configurable $/kWh)
     lifetimeRevenue: number; // $
   };
   executive: {
@@ -312,7 +313,8 @@ export const defaultScientificParameters: GeothermalInput = {
       mean: 0.0,
       sd: 0.0,
       pdf: 'C'
-    }
+    },
+    electricityPrice: 0.08
   },
   simulation: {
     iterations: 10000,
@@ -602,7 +604,7 @@ export function runScientificMonteCarloSimulation(input: GeothermalInput): Geoth
   };
   
   // Economic calculations
-  const electricityPrice = 0.08; // $/kWh
+  const electricityPrice = input.powerPlant.electricityPrice; // $/kWh (user configurable)
   const annualGeneration = statistics.mean * 8760 * pp.plant_net_capacity_factor.most_likely;
   const economics = {
     annualGeneration,

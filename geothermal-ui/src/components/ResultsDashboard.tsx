@@ -112,11 +112,23 @@ export default function ResultsDashboard({ results }: ResultsDashboardProps) {
       tooltip: {
         backgroundColor: 'rgba(0, 0, 0, 0.8)',
         titleColor: 'white',
-        bodyColor: 'white'
+        bodyColor: 'white',
+        callbacks: {
+          label: (context) => `${context.parsed.y} simulations resulted in ~${context.label} MW`
+        }
       }
     },
     scales: {
       x: {
+        title: {
+          display: true,
+          text: 'Power Generation (MW)',
+          color: '#374151',
+          font: {
+            size: 12,
+            weight: 'bold'
+          }
+        },
         ticks: {
           color: '#4B5563'
         },
@@ -125,6 +137,15 @@ export default function ResultsDashboard({ results }: ResultsDashboardProps) {
         }
       },
       y: {
+        title: {
+          display: true,
+          text: 'Number of Simulations',
+          color: '#374151',
+          font: {
+            size: 12,
+            weight: 'bold'
+          }
+        },
         ticks: {
           color: '#4B5563'
         },
@@ -158,6 +179,15 @@ export default function ResultsDashboard({ results }: ResultsDashboardProps) {
     },
     scales: {
       x: {
+        title: {
+          display: true,
+          text: 'Percentile Level',
+          color: '#374151',
+          font: {
+            size: 12,
+            weight: 'bold'
+          }
+        },
         ticks: {
           color: '#4B5563'
         },
@@ -166,6 +196,15 @@ export default function ResultsDashboard({ results }: ResultsDashboardProps) {
         }
       },
       y: {
+        title: {
+          display: true,
+          text: 'Power Generation (MW)',
+          color: '#374151',
+          font: {
+            size: 12,
+            weight: 'bold'
+          }
+        },
         ticks: {
           color: '#4B5563',
           callback: (value) => `${value} MW`
@@ -321,7 +360,7 @@ export default function ResultsDashboard({ results }: ResultsDashboardProps) {
             </div>
             <div className="flex justify-between">
               <span className="text-gray-600">Price Assumption:</span>
-              <span className="text-gray-500">$0.08/kWh</span>
+              <span className="text-gray-500">${results.input.powerPlant.electricityPrice.toFixed(3)}/kWh</span>
             </div>
           </div>
         </div>
