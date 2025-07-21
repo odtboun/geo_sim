@@ -7,7 +7,7 @@ import { Play, Calculator } from 'lucide-react';
 
 interface ParameterFormProps {
   parameters: GeothermalInput;
-  onParametersChange: (params: GeothermalInput) => void;
+  onParametersChange: (parameters: GeothermalInput) => void;
   onRunSimulation: () => void;
   isCalculating: boolean;
 }
@@ -16,36 +16,36 @@ export default function ParameterForm({
   parameters,
   onParametersChange,
   onRunSimulation,
-  isCalculating
+  isCalculating,
 }: ParameterFormProps) {
-  const updateParameter = (section: keyof GeothermalInput, field: string, value: unknown) => {
-    const updated = {
-      ...parameters,
-      [section]: {
-        ...parameters[section],
-        [field]: value
-      }
-    };
-    onParametersChange(updated);
+  const updateParameter = (section: keyof GeothermalInput, field: string, value: any) => {
+    const newParameters = { ...parameters };
+    if (typeof newParameters[section] === 'object' && newParameters[section] !== null) {
+      (newParameters[section] as any)[field] = value;
+    } else {
+      (newParameters as any)[section] = value;
+    }
+    onParametersChange(newParameters);
   };
 
-  const formatNumber = (value: number): string => {
-    return value.toString();
+  const formatNumber = (num: number): string => {
+    if (Number.isNaN(num)) return '';
+    return num.toString();
   };
 
-  const parseNumber = (value: string): number => {
-    const num = parseFloat(value);
-    return isNaN(num) ? 0 : num;
+  const parseNumber = (str: string): number => {
+    const num = parseFloat(str);
+    return Number.isNaN(num) ? 0 : num;
   };
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-4">
       {/* Project Information */}
-      <div className="space-y-4">
-        <h3 className="text-lg font-semibold text-gray-900 border-b border-gray-200 pb-2">Project Information</h3>
-        <div className="space-y-3">
-          <div className="space-y-2">
-            <Label htmlFor="project-name" className="text-sm font-medium">
+      <div className="space-y-3">
+        <h3 className="text-sm font-semibold text-gray-900 border-b border-gray-200 pb-1">Project Information</h3>
+        <div className="space-y-2">
+          <div className="space-y-1">
+            <Label htmlFor="project-name" className="text-xs font-medium text-gray-700">
               Project Name
             </Label>
             <Input
@@ -53,13 +53,14 @@ export default function ParameterForm({
               type="text"
               value={parameters.project.name}
               onChange={(e) => updateParameter('project', 'name', e.target.value)}
+              className="h-8 text-xs"
               placeholder="Enter project name"
             />
           </div>
-          
-          <div className="grid grid-cols-2 gap-4">
-            <div className="space-y-2">
-              <Label htmlFor="latitude" className="text-sm font-medium">
+
+          <div className="grid grid-cols-2 gap-2">
+            <div className="space-y-1">
+              <Label htmlFor="latitude" className="text-xs font-medium text-gray-700">
                 Latitude (°)
               </Label>
               <Input
@@ -67,15 +68,13 @@ export default function ParameterForm({
                 type="number"
                 step="0.1"
                 value={formatNumber(parameters.project.location.lat)}
-                onChange={(e) => updateParameter('project', 'location', {
-                  ...parameters.project.location,
-                  lat: parseNumber(e.target.value)
-                })}
+                onChange={(e) => updateParameter('project', 'location', { ...parameters.project.location, lat: parseNumber(e.target.value) })}
+                className="h-8 text-xs"
                 placeholder="38.5"
               />
             </div>
-            <div className="space-y-2">
-              <Label htmlFor="longitude" className="text-sm font-medium">
+            <div className="space-y-1">
+              <Label htmlFor="longitude" className="text-xs font-medium text-gray-700">
                 Longitude (°)
               </Label>
               <Input
@@ -83,10 +82,8 @@ export default function ParameterForm({
                 type="number"
                 step="0.1"
                 value={formatNumber(parameters.project.location.lon)}
-                onChange={(e) => updateParameter('project', 'location', {
-                  ...parameters.project.location,
-                  lon: parseNumber(e.target.value)
-                })}
+                onChange={(e) => updateParameter('project', 'location', { ...parameters.project.location, lon: parseNumber(e.target.value) })}
+                className="h-8 text-xs"
                 placeholder="28.1"
               />
             </div>
@@ -97,12 +94,12 @@ export default function ParameterForm({
       <Separator />
 
       {/* Reservoir Properties */}
-      <div className="space-y-4">
-        <h3 className="text-lg font-semibold text-gray-900 border-b border-gray-200 pb-2">Reservoir Properties</h3>
-        <div className="space-y-3">
-          <div className="grid grid-cols-2 gap-4">
-            <div className="space-y-2">
-              <Label htmlFor="area" className="text-sm font-medium">
+      <div className="space-y-3">
+        <h3 className="text-sm font-semibold text-gray-900 border-b border-gray-200 pb-1">Reservoir Properties</h3>
+        <div className="space-y-2">
+          <div className="grid grid-cols-2 gap-2">
+            <div className="space-y-1">
+              <Label htmlFor="area" className="text-xs font-medium text-gray-700">
                 Area (km²)
               </Label>
               <Input
@@ -111,11 +108,12 @@ export default function ParameterForm({
                 step="0.1"
                 value={formatNumber(parameters.reservoir.area)}
                 onChange={(e) => updateParameter('reservoir', 'area', parseNumber(e.target.value))}
+                className="h-8 text-xs"
                 placeholder="33.0"
               />
             </div>
-            <div className="space-y-2">
-              <Label htmlFor="thickness" className="text-sm font-medium">
+            <div className="space-y-1">
+              <Label htmlFor="thickness" className="text-xs font-medium text-gray-700">
                 Thickness (m)
               </Label>
               <Input
@@ -124,159 +122,236 @@ export default function ParameterForm({
                 step="1"
                 value={formatNumber(parameters.reservoir.thickness)}
                 onChange={(e) => updateParameter('reservoir', 'thickness', parseNumber(e.target.value))}
+                className="h-8 text-xs"
                 placeholder="300"
               />
             </div>
           </div>
-          
-          <div className="grid grid-cols-2 gap-3">
-            <div>
-              <label className="block text-sm font-medium text-blue-200 mb-1">
-                Reservoir Temp (°C)
-              </label>
-              <input
+
+          <div className="grid grid-cols-2 gap-2">
+            <div className="space-y-1">
+              <Label htmlFor="reservoir-temp" className="text-xs font-medium text-gray-700">
+                Temp (°C)
+              </Label>
+              <Input
+                id="reservoir-temp"
                 type="number"
                 step="1"
                 value={formatNumber(parameters.reservoir.reservoirTemp)}
                 onChange={(e) => updateParameter('reservoir', 'reservoirTemp', parseNumber(e.target.value))}
-                className="w-full px-3 py-2 bg-black/20 border border-white/20 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-blue-400"
+                className="h-8 text-xs"
+                placeholder="230"
               />
             </div>
-            <div>
-              <label className="block text-sm font-medium text-blue-200 mb-1">
-                Abandon Temp (°C)
-              </label>
-              <input
+            <div className="space-y-1">
+              <Label htmlFor="abandon-temp" className="text-xs font-medium text-gray-700">
+                Abandon (°C)
+              </Label>
+              <Input
+                id="abandon-temp"
                 type="number"
                 step="1"
                 value={formatNumber(parameters.reservoir.abandonTemp)}
                 onChange={(e) => updateParameter('reservoir', 'abandonTemp', parseNumber(e.target.value))}
-                className="w-full px-3 py-2 bg-black/20 border border-white/20 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-blue-400"
+                className="h-8 text-xs"
+                placeholder="100"
               />
             </div>
           </div>
-          
-          <div>
-            <label className="block text-sm font-medium text-blue-200 mb-1">
+
+          <div className="space-y-1">
+            <Label htmlFor="porosity" className="text-xs font-medium text-gray-700">
               Porosity (0-1)
-            </label>
-            <input
+            </Label>
+            <Input
+              id="porosity"
               type="number"
               step="0.01"
-              min="0"
-              max="1"
               value={formatNumber(parameters.reservoir.porosity)}
               onChange={(e) => updateParameter('reservoir', 'porosity', parseNumber(e.target.value))}
-              className="w-full px-3 py-2 bg-black/20 border border-white/20 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-blue-400"
+              className="h-8 text-xs"
+              placeholder="0.04"
             />
+          </div>
+
+          <div className="grid grid-cols-2 gap-2">
+            <div className="space-y-1">
+              <Label htmlFor="rock-density" className="text-xs font-medium text-gray-700">
+                Rock Density
+              </Label>
+              <Input
+                id="rock-density"
+                type="number"
+                step="1"
+                value={formatNumber(parameters.thermodynamic.rockDensity)}
+                onChange={(e) => updateParameter('thermodynamic', 'rockDensity', parseNumber(e.target.value))}
+                className="h-8 text-xs"
+                placeholder="2700"
+              />
+            </div>
+            <div className="space-y-1">
+              <Label htmlFor="fluid-density" className="text-xs font-medium text-gray-700">
+                Fluid Density
+              </Label>
+              <Input
+                id="fluid-density"
+                type="number"
+                step="1"
+                value={formatNumber(parameters.thermodynamic.fluidDensity)}
+                onChange={(e) => updateParameter('thermodynamic', 'fluidDensity', parseNumber(e.target.value))}
+                className="h-8 text-xs"
+                placeholder="1000"
+              />
+            </div>
+          </div>
+
+          <div className="grid grid-cols-2 gap-2">
+            <div className="space-y-1">
+              <Label htmlFor="rock-heat" className="text-xs font-medium text-gray-700">
+                Rock Heat Cap.
+              </Label>
+              <Input
+                id="rock-heat"
+                type="number"
+                step="0.01"
+                value={formatNumber(parameters.thermodynamic.rockSpecificHeat)}
+                onChange={(e) => updateParameter('thermodynamic', 'rockSpecificHeat', parseNumber(e.target.value))}
+                className="h-8 text-xs"
+                placeholder="0.9"
+              />
+            </div>
+            <div className="space-y-1">
+              <Label htmlFor="fluid-heat" className="text-xs font-medium text-gray-700">
+                Fluid Heat Cap.
+              </Label>
+              <Input
+                id="fluid-heat"
+                type="number"
+                step="0.01"
+                value={formatNumber(parameters.thermodynamic.fluidSpecificHeat)}
+                onChange={(e) => updateParameter('thermodynamic', 'fluidSpecificHeat', parseNumber(e.target.value))}
+                className="h-8 text-xs"
+                placeholder="4.18"
+              />
+            </div>
           </div>
         </div>
       </div>
 
-      {/* Power Plant Parameters */}
-      <div>
-        <h3 className="text-lg font-semibold text-white mb-4">Power Plant Configuration</h3>
-        <div className="space-y-3">
-          <div className="grid grid-cols-2 gap-3">
-            <div>
-              <label className="block text-sm font-medium text-blue-200 mb-1">
-                Recovery Factor (0-1)
-              </label>
-              <input
+      <Separator />
+
+      {/* Power Plant Characteristics */}
+      <div className="space-y-3">
+        <h3 className="text-sm font-semibold text-gray-900 border-b border-gray-200 pb-1">Power Plant</h3>
+        <div className="space-y-2">
+          <div className="grid grid-cols-2 gap-2">
+            <div className="space-y-1">
+              <Label htmlFor="recovery-factor" className="text-xs font-medium text-gray-700">
+                Recovery Factor
+              </Label>
+              <Input
+                id="recovery-factor"
                 type="number"
                 step="0.01"
-                min="0"
-                max="1"
                 value={formatNumber(parameters.powerPlant.recoveryFactor)}
                 onChange={(e) => updateParameter('powerPlant', 'recoveryFactor', parseNumber(e.target.value))}
-                className="w-full px-3 py-2 bg-black/20 border border-white/20 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-blue-400"
+                className="h-8 text-xs"
+                placeholder="0.15"
               />
             </div>
-            <div>
-              <label className="block text-sm font-medium text-blue-200 mb-1">
-                Efficiency (0-1)
-              </label>
-              <input
+            <div className="space-y-1">
+              <Label htmlFor="conversion-eff" className="text-xs font-medium text-gray-700">
+                Conversion Eff.
+              </Label>
+              <Input
+                id="conversion-eff"
                 type="number"
                 step="0.01"
-                min="0"
-                max="1"
                 value={formatNumber(parameters.powerPlant.conversionEfficiency)}
                 onChange={(e) => updateParameter('powerPlant', 'conversionEfficiency', parseNumber(e.target.value))}
-                className="w-full px-3 py-2 bg-black/20 border border-white/20 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-blue-400"
+                className="h-8 text-xs"
+                placeholder="0.08"
               />
             </div>
           </div>
-          
-          <div className="grid grid-cols-2 gap-3">
-            <div>
-              <label className="block text-sm font-medium text-blue-200 mb-1">
-                Capacity Factor (0-1)
-              </label>
-              <input
+
+          <div className="grid grid-cols-2 gap-2">
+            <div className="space-y-1">
+              <Label htmlFor="plant-factor" className="text-xs font-medium text-gray-700">
+                Plant Factor
+              </Label>
+              <Input
+                id="plant-factor"
                 type="number"
                 step="0.01"
-                min="0"
-                max="1"
                 value={formatNumber(parameters.powerPlant.plantCapacityFactor)}
                 onChange={(e) => updateParameter('powerPlant', 'plantCapacityFactor', parseNumber(e.target.value))}
-                className="w-full px-3 py-2 bg-black/20 border border-white/20 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-blue-400"
+                className="h-8 text-xs"
+                placeholder="0.85"
               />
             </div>
-            <div>
-              <label className="block text-sm font-medium text-blue-200 mb-1">
+            <div className="space-y-1">
+              <Label htmlFor="lifespan" className="text-xs font-medium text-gray-700">
                 Lifespan (years)
-              </label>
-              <input
+              </Label>
+              <Input
+                id="lifespan"
                 type="number"
                 step="1"
                 value={formatNumber(parameters.powerPlant.lifespan)}
                 onChange={(e) => updateParameter('powerPlant', 'lifespan', parseNumber(e.target.value))}
-                className="w-full px-3 py-2 bg-black/20 border border-white/20 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-blue-400"
+                className="h-8 text-xs"
+                placeholder="30"
               />
             </div>
           </div>
+
+
         </div>
       </div>
 
+      <Separator />
+
       {/* Simulation Settings */}
-      <div>
-        <h3 className="text-lg font-semibold text-white mb-4">Simulation Settings</h3>
-        <div>
-          <label className="block text-sm font-medium text-blue-200 mb-1">
+      <div className="space-y-3">
+        <h3 className="text-sm font-semibold text-gray-900 border-b border-gray-200 pb-1">Simulation</h3>
+        <div className="space-y-1">
+          <Label htmlFor="iterations" className="text-xs font-medium text-gray-700">
             Monte Carlo Iterations
-          </label>
-          <select
-            value={parameters.simulation.iterations}
-            onChange={(e) => updateParameter('simulation', 'iterations', parseInt(e.target.value))}
-            className="w-full px-3 py-2 bg-black/20 border border-white/20 rounded-lg text-white focus:outline-none focus:border-blue-400"
-          >
-            <option value={1000}>1,000 iterations (Fast)</option>
-            <option value={5000}>5,000 iterations (Balanced)</option>
-            <option value={10000}>10,000 iterations (Precise)</option>
-          </select>
+          </Label>
+          <Input
+            id="iterations"
+            type="number"
+            step="100"
+            value={formatNumber(parameters.simulation.iterations)}
+            onChange={(e) => updateParameter('simulation', 'iterations', parseNumber(e.target.value))}
+            className="h-8 text-xs"
+            placeholder="10000"
+          />
         </div>
       </div>
 
       {/* Professional Run Button */}
-      <Button
-        onClick={onRunSimulation}
-        disabled={isCalculating}
-        className="w-full py-6 text-base font-semibold"
-        size="lg"
-      >
-        {isCalculating ? (
-          <>
-            <Calculator className="h-5 w-5 mr-2 animate-spin" />
-            Running Analysis...
-          </>
-        ) : (
-          <>
-            <Play className="h-5 w-5 mr-2" />
-            Run Evaluation
-          </>
-        )}
-      </Button>
+      <div className="pt-2">
+        <Button
+          onClick={onRunSimulation}
+          disabled={isCalculating}
+          className="w-full py-4 text-sm font-semibold bg-slate-900 hover:bg-slate-800 text-white"
+          size="sm"
+        >
+          {isCalculating ? (
+            <>
+              <Calculator className="h-4 w-4 mr-2 animate-spin" />
+              Running Analysis...
+            </>
+          ) : (
+            <>
+              <Play className="h-4 w-4 mr-2" />
+              Run Evaluation
+            </>
+          )}
+        </Button>
+      </div>
     </div>
   );
 } 

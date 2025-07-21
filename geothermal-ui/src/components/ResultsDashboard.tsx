@@ -51,8 +51,8 @@ export default function ResultsDashboard({ results }: ResultsDashboardProps) {
       datasets: [{
         label: 'Frequency',
         data: histogram,
-        backgroundColor: 'rgba(59, 130, 246, 0.6)',
-        borderColor: 'rgba(59, 130, 246, 1)',
+        backgroundColor: 'rgba(75, 85, 99, 0.8)', // Professional gray
+        borderColor: 'rgba(55, 65, 81, 1)', // Darker gray
         borderWidth: 1
       }]
     };
@@ -73,22 +73,22 @@ export default function ResultsDashboard({ results }: ResultsDashboardProps) {
         results.statistics.percentiles.p95
       ],
       backgroundColor: [
-        'rgba(239, 68, 68, 0.6)',   // P5 - red
-        'rgba(245, 158, 11, 0.6)',  // P10 - amber
-        'rgba(251, 191, 36, 0.6)',  // P25 - yellow
-        'rgba(34, 197, 94, 0.6)',   // P50 - green
-        'rgba(251, 191, 36, 0.6)',  // P75 - yellow
-        'rgba(245, 158, 11, 0.6)',  // P90 - amber
-        'rgba(239, 68, 68, 0.6)'    // P95 - red
+        'rgba(153, 27, 27, 0.8)',   // P5 - professional dark red
+        'rgba(180, 83, 9, 0.8)',    // P10 - professional dark amber
+        'rgba(107, 114, 128, 0.8)', // P25 - professional gray
+        'rgba(30, 64, 175, 0.8)',   // P50 - professional navy
+        'rgba(107, 114, 128, 0.8)', // P75 - professional gray
+        'rgba(180, 83, 9, 0.8)',    // P90 - professional dark amber
+        'rgba(153, 27, 27, 0.8)'    // P95 - professional dark red
       ],
       borderColor: [
-        'rgba(239, 68, 68, 1)',
-        'rgba(245, 158, 11, 1)',
-        'rgba(251, 191, 36, 1)',
-        'rgba(34, 197, 94, 1)',
-        'rgba(251, 191, 36, 1)',
-        'rgba(245, 158, 11, 1)',
-        'rgba(239, 68, 68, 1)'
+        'rgba(153, 27, 27, 1)',
+        'rgba(180, 83, 9, 1)',
+        'rgba(107, 114, 128, 1)',
+        'rgba(30, 64, 175, 1)',
+        'rgba(107, 114, 128, 1)',
+        'rgba(180, 83, 9, 1)',
+        'rgba(153, 27, 27, 1)'
       ],
       borderWidth: 2
     }]
@@ -225,31 +225,31 @@ export default function ResultsDashboard({ results }: ResultsDashboardProps) {
           {/* Key Metrics Cards */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
         <div className="bg-white/10 backdrop-blur-sm rounded-lg border border-white/20 p-4">
-          <div className="text-2xl font-bold text-blue-400">
+          <div className="text-2xl font-bold text-gray-300">
             {results.baseCase.powerMWe.toFixed(1)} MW
           </div>
-          <div className="text-sm text-blue-200">Base Case</div>
+          <div className="text-sm text-gray-400">Base Case</div>
         </div>
         
         <div className="bg-white/10 backdrop-blur-sm rounded-lg border border-white/20 p-4">
-          <div className="text-2xl font-bold text-green-400">
+          <div className="text-2xl font-bold text-slate-300">
             {results.statistics.percentiles.p50.toFixed(1)} MW
           </div>
-          <div className="text-sm text-green-200">P50 (Probable)</div>
+          <div className="text-sm text-slate-400">P50 (Probable)</div>
         </div>
         
         <div className="bg-white/10 backdrop-blur-sm rounded-lg border border-white/20 p-4">
-          <div className="text-2xl font-bold text-orange-400">
+          <div className="text-2xl font-bold text-stone-300">
             {results.statistics.percentiles.p10.toFixed(1)} MW
           </div>
-          <div className="text-sm text-orange-200">P10 (Conservative)</div>
+          <div className="text-sm text-stone-400">P10 (Conservative)</div>
         </div>
         
         <div className="bg-white/10 backdrop-blur-sm rounded-lg border border-white/20 p-4">
-          <div className="text-2xl font-bold text-purple-400">
+          <div className="text-2xl font-bold text-zinc-300">
             {(results.statistics.std / results.statistics.mean * 100).toFixed(0)}%
           </div>
-          <div className="text-sm text-purple-200">Uncertainty</div>
+          <div className="text-sm text-zinc-400">Uncertainty</div>
         </div>
       </div>
 
@@ -332,25 +332,25 @@ export default function ResultsDashboard({ results }: ResultsDashboardProps) {
         <h3 className="text-lg font-semibold text-white mb-4">Probability Analysis</h3>
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
           <div className="text-center p-3 bg-black/20 rounded-lg">
-            <div className="text-2xl font-bold text-blue-400 mb-1">
+            <div className="text-2xl font-bold text-gray-300 mb-1">
               {(results.statistics.probabilities.aboveBase * 100).toFixed(0)}%
             </div>
             <div className="text-xs text-gray-300">Above Base Case</div>
           </div>
           <div className="text-center p-3 bg-black/20 rounded-lg">
-            <div className="text-2xl font-bold text-green-400 mb-1">
+            <div className="text-2xl font-bold text-slate-300 mb-1">
               {(results.statistics.probabilities.above10MW * 100).toFixed(0)}%
             </div>
             <div className="text-xs text-gray-300">Above 10 MW</div>
           </div>
           <div className="text-center p-3 bg-black/20 rounded-lg">
-            <div className="text-2xl font-bold text-yellow-400 mb-1">
+            <div className="text-2xl font-bold text-stone-300 mb-1">
               {(results.statistics.probabilities.above25MW * 100).toFixed(0)}%
             </div>
             <div className="text-xs text-gray-300">Above 25 MW</div>
           </div>
           <div className="text-center p-3 bg-black/20 rounded-lg">
-            <div className="text-2xl font-bold text-orange-400 mb-1">
+            <div className="text-2xl font-bold text-zinc-300 mb-1">
               {(results.statistics.probabilities.above50MW * 100).toFixed(0)}%
             </div>
             <div className="text-xs text-gray-300">Above 50 MW</div>

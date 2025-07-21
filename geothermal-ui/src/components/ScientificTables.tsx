@@ -58,21 +58,21 @@ export default function ScientificTables({ results }: ScientificTablesProps) {
 
   const percentiles = calculatePercentiles(results.monteCarloResults);
 
-  // Create vertical line annotations for percentiles (matching original gppeval style)
+  // Create vertical line annotations for percentiles (professional corporate colors)
   const createPercentileAnnotations = () => ({
     annotations: {
       p5Line: {
         type: 'line' as const,
         xMin: percentiles.p5,
         xMax: percentiles.p5,
-        borderColor: '#FFA500', // Orange like original
+        borderColor: '#DC2626', // Professional dark red
         borderWidth: 2,
         borderDash: [5, 5], // Dashed line
         label: {
           content: `P5=${percentiles.p5.toFixed(1)}MW`,
           enabled: true,
           position: '90%' as const,
-          backgroundColor: '#FFA500',
+          backgroundColor: '#DC2626',
           color: 'white',
           font: { size: 10, weight: 'bold' as const }
         }
@@ -81,14 +81,14 @@ export default function ScientificTables({ results }: ScientificTablesProps) {
         type: 'line' as const,
         xMin: percentiles.p50,
         xMax: percentiles.p50,
-        borderColor: '#0000FF', // Blue like original
+        borderColor: '#1E40AF', // Professional navy blue
         borderWidth: 3,
         borderDash: [], // Solid line for median
         label: {
           content: `P50=${percentiles.p50.toFixed(1)}MW`,
           enabled: true,
           position: 'center' as const,
-          backgroundColor: '#0000FF',
+          backgroundColor: '#1E40AF',
           color: 'white',
           font: { size: 10, weight: 'bold' as const }
         }
@@ -97,15 +97,15 @@ export default function ScientificTables({ results }: ScientificTablesProps) {
         type: 'line' as const,
         xMin: percentiles.p95,
         xMax: percentiles.p95,
-        borderColor: '#FFD700', // Yellow like original
+        borderColor: '#B45309', // Professional dark amber
         borderWidth: 2,
         borderDash: [5, 5], // Dashed line
         label: {
           content: `P95=${percentiles.p95.toFixed(1)}MW`,
           enabled: true,
           position: '20%' as const,
-          backgroundColor: '#FFD700',
-          color: 'black',
+          backgroundColor: '#B45309',
+          color: 'white',
           font: { size: 10, weight: 'bold' as const }
         }
       }
@@ -145,7 +145,7 @@ export default function ScientificTables({ results }: ScientificTablesProps) {
       datasets: [{
         label: 'Cumulative Distribution',
         data: cumulativeValues,
-        borderColor: '#ff0000', // Pure red like matplotlib
+        borderColor: '#374151', // Professional dark gray
         backgroundColor: 'transparent',
         borderWidth: 2,
         stepped: false, // Smooth S-curve, not stepped
@@ -188,8 +188,8 @@ export default function ScientificTables({ results }: ScientificTablesProps) {
       datasets: [{
         label: 'Estimated',
         data: density,
-        backgroundColor: '#3cb371', // Exact matplotlib green
-        borderColor: '#228b22',
+        backgroundColor: '#6B7280', // Professional medium gray
+        borderColor: '#374151', // Professional dark gray
         borderWidth: 1
       }]
     };
@@ -227,7 +227,7 @@ export default function ScientificTables({ results }: ScientificTablesProps) {
       datasets: [{
         label: 'Cumulative Distribution (Higher)',
         data: cumulativeValues,
-        borderColor: '#ff0000', // Pure red like matplotlib
+        borderColor: '#1F2937', // Professional very dark gray
         backgroundColor: 'transparent',
         borderWidth: 2,
         stepped: false, // Smooth curve, not stepped
@@ -246,31 +246,31 @@ export default function ScientificTables({ results }: ScientificTablesProps) {
         {
           label: 'Proven (P95-P90)',
           data: [5],
-          backgroundColor: '#228B22', // Dark green
+          backgroundColor: '#059669', // Professional emerald
           barThickness: 40,
         },
         {
           label: 'Probable (P90-Base)',
           data: [5],
-          backgroundColor: '#228B22',
+          backgroundColor: '#0D9488', // Professional teal
           barThickness: 40,
         },
         {
           label: 'Most Likely',
           data: [30],
-          backgroundColor: '#FFA500', // Orange
+          backgroundColor: '#1E40AF', // Professional blue
           barThickness: 40,
         },
         {
           label: 'Optimistic',
           data: [55],
-          backgroundColor: '#FF6347', // Red
+          backgroundColor: '#7C2D12', // Professional brown
           barThickness: 40,
         },
         {
           label: 'Maximum (P5)',
           data: [5],
-          backgroundColor: '#FF6347',
+          backgroundColor: '#991B1B', // Professional dark red
           barThickness: 40,
         }
       ]
@@ -629,9 +629,9 @@ export default function ScientificTables({ results }: ScientificTablesProps) {
             </div>
             <div className="mt-4 text-sm text-gray-700 font-mono bg-gray-50 p-3 rounded border">
               <p><strong>Figure 4:</strong> Geothermal reserve classification</p>
-              <p>• <span style={{color: '#228B22'}}>■</span> Proven reserves (P90-P95): Conservative estimates</p>
-              <p>• <span style={{color: '#FFA500'}}>■</span> Most likely reserves: Expected scenario</p>
-              <p>• <span style={{color: '#FF6347'}}>■</span> Maximum reserves (P5-P10): Optimistic potential</p>
+              <p>• <span style={{color: '#059669'}}>■</span> Proven reserves (P90-P95): Conservative estimates</p>
+              <p>• <span style={{color: '#1E40AF'}}>■</span> Most likely reserves: Expected scenario</p>
+              <p>• <span style={{color: '#991B1B'}}>■</span> Maximum reserves (P5-P10): Optimistic potential</p>
             </div>
           </div>
         </div>
