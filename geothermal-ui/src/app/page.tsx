@@ -66,7 +66,7 @@ export default function Home() {
     <SidebarProvider>
       <div className="min-h-screen flex w-full bg-gray-50">
         {/* Professional Sidebar */}
-        <Sidebar className="border-r border-gray-200 relative">
+        <Sidebar className="border-r border-gray-200">
           <SidebarHeader className="border-b border-gray-200 p-6">
             <div className="flex items-center space-x-3">
               <div className="flex items-center justify-center w-10 h-10 bg-slate-900 rounded-lg">
@@ -81,9 +81,31 @@ export default function Home() {
               <Building2 className="h-3 w-3 mr-1" />
               Enterprise
             </Badge>
+            
+            {/* RUN SIMULATION BUTTON - In Header, Always Visible */}
+            <div className="mt-4 pt-4 border-t border-gray-200">
+              <Button
+                onClick={runSimulation}
+                disabled={isCalculating}
+                className="w-full py-3 text-sm font-semibold bg-slate-900 hover:bg-slate-800 text-white shadow-lg"
+                size="sm"
+              >
+                {isCalculating ? (
+                  <>
+                    <Calculator className="h-4 w-4 mr-2 animate-spin" />
+                    Running Analysis...
+                  </>
+                ) : (
+                  <>
+                    <Play className="h-4 w-4 mr-2" />
+                    Run Simulation
+                  </>
+                )}
+              </Button>
+            </div>
           </SidebarHeader>
           
-          <SidebarContent className="p-6 pb-20">
+          <SidebarContent className="p-6">
             <div className="mb-6">
               <div className="flex items-center space-x-2 mb-4">
                 <Settings className="h-5 w-5 text-gray-700" />
@@ -99,28 +121,6 @@ export default function Home() {
               onParametersChange={setParameters}
             />
           </SidebarContent>
-          
-          {/* FIXED RUN SIMULATION BUTTON - Always Visible */}
-          <div className="absolute bottom-0 left-0 right-0 p-4 bg-white border-t border-gray-200 shadow-lg">
-            <Button
-              onClick={runSimulation}
-              disabled={isCalculating}
-              className="w-full py-3 text-sm font-semibold bg-slate-900 hover:bg-slate-800 text-white shadow-lg"
-              size="sm"
-            >
-              {isCalculating ? (
-                <>
-                  <Calculator className="h-4 w-4 mr-2 animate-spin" />
-                  Running Analysis...
-                </>
-              ) : (
-                <>
-                  <Play className="h-4 w-4 mr-2" />
-                  Run Simulation
-                </>
-              )}
-            </Button>
-          </div>
         </Sidebar>
 
         {/* Main Content Area */}
