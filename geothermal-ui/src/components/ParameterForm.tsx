@@ -1,7 +1,8 @@
 import { type GeothermalInput } from '@/lib/geothermal-calculations';
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Separator } from "@/components/ui/separator";
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
+import { Info } from 'lucide-react';
 
 interface ParameterFormProps {
   parameters: GeothermalInput;
@@ -35,10 +36,31 @@ export default function ParameterForm({
   };
 
   return (
-    <div className="space-y-4">
-      {/* Reservoir Properties */}
-      <div className="space-y-3">
-        <h3 className="text-sm font-semibold text-gray-900 border-b border-gray-200 pb-1">Reservoir Properties</h3>
+    <TooltipProvider>
+      <div className="space-y-4">
+        {/* Reservoir Properties */}
+        <div className="space-y-3">
+          <div className="flex items-center space-x-2">
+            <h3 className="text-sm font-semibold text-gray-900 border-b border-gray-200 pb-1 flex-1">Reservoir Properties</h3>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <Info className="h-4 w-4 text-gray-500 hover:text-gray-700 cursor-help" />
+              </TooltipTrigger>
+              <TooltipContent side="left" className="max-w-xs">
+                <div className="text-sm">
+                  <p className="font-semibold mb-2">Reservoir Parameters:</p>
+                  <ul className="space-y-1">
+                    <li><strong>Area:</strong> Size of the geothermal reservoir</li>
+                    <li><strong>Thickness:</strong> Depth of the productive zone</li>
+                    <li><strong>Porosity:</strong> Rock void space (0-1 scale)</li>
+                    <li><strong>Temperature:</strong> Initial reservoir temperature</li>
+                    <li><strong>Abandon Temp:</strong> Minimum viable temperature</li>
+                    <li><strong>Recovery Factor:</strong> Extractable energy fraction</li>
+                  </ul>
+                </div>
+              </TooltipContent>
+            </Tooltip>
+          </div>
         <div className="space-y-2">
           <div className="grid grid-cols-2 gap-2">
             <div className="space-y-1">
@@ -181,11 +203,27 @@ export default function ParameterForm({
         </div>
       </div>
 
-      <Separator />
-
       {/* Power Plant Characteristics */}
       <div className="space-y-3">
-        <h3 className="text-sm font-semibold text-gray-900 border-b border-gray-200 pb-1">Power Plant</h3>
+        <div className="flex items-center space-x-2">
+          <h3 className="text-sm font-semibold text-gray-900 border-b border-gray-200 pb-1 flex-1">Power Plant</h3>
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <Info className="h-4 w-4 text-gray-500 hover:text-gray-700 cursor-help" />
+            </TooltipTrigger>
+            <TooltipContent side="left" className="max-w-xs">
+              <div className="text-sm">
+                <p className="font-semibold mb-2">Power Plant Parameters:</p>
+                <ul className="space-y-1">
+                  <li><strong>Recovery Factor:</strong> Energy extraction efficiency</li>
+                  <li><strong>Conversion Efficiency:</strong> Heat to electricity conversion rate</li>
+                  <li><strong>Plant Factor:</strong> Operational capacity factor (0-1)</li>
+                  <li><strong>Lifespan:</strong> Project operational lifetime in years</li>
+                </ul>
+              </div>
+            </TooltipContent>
+          </Tooltip>
+        </div>
         <div className="space-y-2">
           <div className="grid grid-cols-2 gap-2">
             <div className="space-y-1">
@@ -254,11 +292,24 @@ export default function ParameterForm({
         </div>
       </div>
 
-      <Separator />
-
       {/* Simulation Settings */}
       <div className="space-y-3">
-        <h3 className="text-sm font-semibold text-gray-900 border-b border-gray-200 pb-1">Simulation</h3>
+        <div className="flex items-center space-x-2">
+          <h3 className="text-sm font-semibold text-gray-900 border-b border-gray-200 pb-1 flex-1">Simulation</h3>
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <Info className="h-4 w-4 text-gray-500 hover:text-gray-700 cursor-help" />
+            </TooltipTrigger>
+            <TooltipContent side="left" className="max-w-xs">
+              <div className="text-sm">
+                <p className="font-semibold mb-2">Simulation Parameters:</p>
+                <ul className="space-y-1">
+                  <li><strong>Monte Carlo Iterations:</strong> Number of simulation runs for uncertainty analysis (higher = more accurate but slower)</li>
+                </ul>
+              </div>
+            </TooltipContent>
+          </Tooltip>
+        </div>
         <div className="space-y-1">
           <Label htmlFor="iterations" className="text-xs font-medium text-gray-700">
             Monte Carlo Iterations
@@ -275,5 +326,6 @@ export default function ParameterForm({
         </div>
       </div>
     </div>
+    </TooltipProvider>
   );
 } 
