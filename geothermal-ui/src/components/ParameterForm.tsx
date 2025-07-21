@@ -249,20 +249,7 @@ export default function ParameterForm({
             </div>
           </div>
 
-          <div className="space-y-1">
-            <Label htmlFor="electricity-price" className="text-xs font-medium text-gray-700">
-              Electricity Price ($/kWh)
-            </Label>
-            <Input
-              id="electricity-price"
-              type="number"
-              step="0.001"
-              value={formatNumber(parameters.powerPlant.electricityPrice)}
-              onChange={(e) => updateParameter('powerPlant', 'electricityPrice', parseNumber(e.target.value))}
-              className="h-8 text-xs"
-              placeholder="0.080"
-            />
-          </div>
+
 
         </div>
       </div>

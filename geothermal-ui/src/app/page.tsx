@@ -131,12 +131,21 @@ export default function Home() {
                 </div>
               </div>
               
-              {/* Price Assumption Display - Top Right */}
-              <div className="text-right">
-                <div className="text-sm text-gray-500">Price Assumption:</div>
-                <div className="text-lg font-semibold text-gray-900">
-                  ${parameters.powerPlant.electricityPrice.toFixed(3)}/kWh
-                </div>
+              {/* Editable Price - Top Right */}
+              <div className="flex items-center space-x-2">
+                <span className="text-sm text-gray-500">$</span>
+                <input
+                  type="number"
+                  step="0.001"
+                  value={parameters.powerPlant.electricityPrice.toFixed(3)}
+                  onChange={(e) => {
+                    const newParams = { ...parameters };
+                    newParams.powerPlant.electricityPrice = parseFloat(e.target.value) || 0.08;
+                    setParameters(newParams);
+                  }}
+                  className="w-16 text-right text-sm font-semibold text-gray-900 bg-transparent border-none outline-none focus:bg-gray-50 rounded px-1"
+                />
+                <span className="text-sm text-gray-500">/kWh</span>
               </div>
             </div>
           </div>
