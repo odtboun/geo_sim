@@ -1,6 +1,7 @@
 import { type GeothermalResults } from '@/lib/geothermal-calculations';
 import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, LineElement, PointElement, Title, Tooltip, Legend, ChartOptions } from 'chart.js';
 import { Line, Bar } from 'react-chartjs-2';
+import annotationPlugin from 'chartjs-plugin-annotation';
 
 ChartJS.register(
   CategoryScale,
@@ -10,7 +11,8 @@ ChartJS.register(
   PointElement,
   Title,
   Tooltip,
-  Legend
+  Legend,
+  annotationPlugin
 );
 
 interface ScientificTablesProps {
@@ -43,6 +45,72 @@ export default function ScientificTables({ results }: ScientificTablesProps) {
   const formatNumber = (num: number, decimals: number = 3): string => {
     return num.toFixed(decimals);
   };
+
+  // Calculate key percentiles for vertical lines (matching original gppeval)
+  const calculatePercentiles = (data: number[]) => {
+    const sortedData = [...data].sort((a, b) => a - b);
+    return {
+      p5: sortedData[Math.floor(0.05 * sortedData.length)],
+      p50: sortedData[Math.floor(0.50 * sortedData.length)],
+      p95: sortedData[Math.floor(0.95 * sortedData.length)]
+    };
+  };
+
+  const percentiles = calculatePercentiles(results.monteCarloResults);
+
+  // Create vertical line annotations for percentiles (matching original gppeval style)
+  const createPercentileAnnotations = () => ({
+    annotations: {
+      p5Line: {
+        type: 'line' as const,
+        xMin: percentiles.p5,
+        xMax: percentiles.p5,
+        borderColor: '#FFA500', // Orange like original
+        borderWidth: 2,
+        borderDash: [5, 5], // Dashed line
+        label: {
+          content: `P5=${percentiles.p5.toFixed(1)}MW`,
+          enabled: true,
+          position: '90%' as const,
+          backgroundColor: '#FFA500',
+          color: 'white',
+          font: { size: 10, weight: 'bold' as const }
+        }
+      },
+      p50Line: {
+        type: 'line' as const,
+        xMin: percentiles.p50,
+        xMax: percentiles.p50,
+        borderColor: '#0000FF', // Blue like original
+        borderWidth: 3,
+        borderDash: [], // Solid line for median
+        label: {
+          content: `P50=${percentiles.p50.toFixed(1)}MW`,
+          enabled: true,
+          position: 'center' as const,
+          backgroundColor: '#0000FF',
+          color: 'white',
+          font: { size: 10, weight: 'bold' as const }
+        }
+      },
+      p95Line: {
+        type: 'line' as const,
+        xMin: percentiles.p95,
+        xMax: percentiles.p95,
+        borderColor: '#FFD700', // Yellow like original
+        borderWidth: 2,
+        borderDash: [5, 5], // Dashed line
+        label: {
+          content: `P95=${percentiles.p95.toFixed(1)}MW`,
+          enabled: true,
+          position: '20%' as const,
+          backgroundColor: '#FFD700',
+          color: 'black',
+          font: { size: 10, weight: 'bold' as const }
+        }
+      }
+    }
+  });
 
   // Create cumulative distribution data (exactly like Python plot)
   const createCumulativeDistribution = () => {
@@ -314,7 +382,8 @@ export default function ScientificTables({ results }: ScientificTablesProps) {
         callbacks: {
           label: (context) => `Cumulative Freq: ${(context.parsed.y * 100).toFixed(1)}%`
         }
-      }
+      },
+      annotation: createPercentileAnnotations()
     },
     scales: {
       ...scientificChartOptions.scales,
@@ -361,7 +430,8 @@ export default function ScientificTables({ results }: ScientificTablesProps) {
         callbacks: {
           label: (context) => `Prob. Higher: ${(context.parsed.y * 100).toFixed(1)}%`
         }
-      }
+      },
+      annotation: createPercentileAnnotations()
     },
     scales: {
       ...scientificChartOptions.scales,
@@ -402,7 +472,8 @@ export default function ScientificTables({ results }: ScientificTablesProps) {
       title: {
         ...scientificChartOptions.plugins?.title,
         text: `Power Energy Available for ${results.input.powerPlant.lifespan} years\n${results.input.project.name || 'Feasibility Study 1'}. Iterations: ${results.monteCarloResults.length}`
-      }
+      },
+      annotation: createPercentileAnnotations()
     },
     scales: {
       ...scientificChartOptions.scales,
