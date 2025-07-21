@@ -2,7 +2,7 @@ import { type GeothermalResults } from '@/lib/geothermal-calculations';
 import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, LineElement, PointElement, Title, Tooltip, Legend, ChartOptions } from 'chart.js';
 import { Line, Bar } from 'react-chartjs-2';
 import annotationPlugin from 'chartjs-plugin-annotation';
-import { BarChart3, TrendingUp, PieChart } from 'lucide-react';
+import { BarChart3, TrendingUp, PieChart, FileText, Settings, Target } from 'lucide-react';
 
 ChartJS.register(
   CategoryScale,
@@ -608,7 +608,10 @@ export default function ScientificTables({ results }: ScientificTablesProps) {
 
       {/* Project Information Table */}
       <div className="bg-white rounded-xl border border-gray-200 shadow-sm p-6">
-        <h3 className="text-xl font-semibold text-gray-900 mb-4">📋 Project Information</h3>
+        <div className="flex items-center space-x-2 mb-4">
+          <FileText className="h-5 w-5 text-slate-600" />
+          <h3 className="text-xl font-semibold text-gray-900">Project Information</h3>
+        </div>
         <div className="overflow-x-auto">
           <table className="w-full text-sm">
             <thead>
@@ -646,7 +649,10 @@ export default function ScientificTables({ results }: ScientificTablesProps) {
 
       {/* Input Parameters Table */}
       <div className="bg-white rounded-xl border border-gray-200 shadow-sm p-6">
-        <h3 className="text-xl font-semibold text-gray-900 mb-4">⚙️ Input Parameters Summary</h3>
+        <div className="flex items-center space-x-2 mb-4">
+          <Settings className="h-5 w-5 text-slate-600" />
+          <h3 className="text-xl font-semibold text-gray-900">Input Parameters Summary</h3>
+        </div>
         <div className="overflow-x-auto">
           <table className="w-full text-sm">
             <thead>
@@ -1030,7 +1036,10 @@ export default function ScientificTables({ results }: ScientificTablesProps) {
 
       {/* Probability Analysis Table */}
       <div className="bg-white rounded-xl border border-gray-200 shadow-sm p-6">
-        <h3 className="text-xl font-semibold text-gray-900 mb-4">🎯 Probability Analysis</h3>
+        <div className="flex items-center space-x-2 mb-4">
+          <Target className="h-5 w-5 text-indigo-600" />
+          <h3 className="text-xl font-semibold text-gray-900">Probability Analysis</h3>
+        </div>
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           {/* Probability of Exceeding Thresholds */}
           <div className="overflow-x-auto">

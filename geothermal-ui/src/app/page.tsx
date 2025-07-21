@@ -155,75 +155,75 @@ export default function Home() {
                 <CardContent className="space-y-4">
                   {/* COMPACT STACKED LAYOUT: Recommendation Banner + Metrics Grid */}
                   
-                  {/* TOP: Investment Recommendation Banner (Compact, Full Width) */}
-                  <Card className={`border ${getRecommendationColor(results.executive.color)}`}>
-                    <CardContent className="p-3">
-                      <div className="flex items-center space-x-3">
-                        {getRecommendationIcon(results.executive.color)}
-                        <div className="flex-1 min-w-0">
-                          <div className="flex items-baseline space-x-2 mb-1">
-                            <h3 className="text-sm font-bold">Investment Recommendation:</h3>
-                            <span className="text-sm font-medium">{results.executive.recommendation}</span>
-                          </div>
-                          <p className="text-xs opacity-90 leading-tight">
-                            Conservative P10: {results.statistics.percentiles.p10.toFixed(1)} MW • 
-                            Confidence: {results.executive.confidence} • 
-                            Risk: {results.executive.riskLevel.replace('_', ' ')}
-                          </p>
-                        </div>
-                      </div>
-                    </CardContent>
-                  </Card>
+                                     {/* TOP: Investment Recommendation Banner (Ultra Compact) */}
+                   <Card className={`border ${getRecommendationColor(results.executive.color)}`}>
+                     <CardContent className="px-3 py-2">
+                       <div className="flex items-center space-x-3">
+                         {getRecommendationIcon(results.executive.color)}
+                         <div className="flex-1 min-w-0">
+                           <div className="flex items-baseline space-x-2 mb-1">
+                             <h3 className="text-sm font-bold">Investment Recommendation:</h3>
+                             <span className="text-sm font-medium">{results.executive.recommendation}</span>
+                           </div>
+                           <p className="text-xs opacity-90 leading-tight">
+                             Conservative P10: {results.statistics.percentiles.p10.toFixed(1)} MW • 
+                             Confidence: {results.executive.confidence} • 
+                             Risk: {results.executive.riskLevel.replace('_', ' ')}
+                           </p>
+                         </div>
+                       </div>
+                     </CardContent>
+                   </Card>
 
                   {/* BOTTOM: Key Metrics in Responsive Grid */}
                   <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
-                    <Card className="border-slate-200">
-                      <CardContent className="p-3 text-center">
-                        <div className="flex items-center justify-center mb-2">
-                          <Zap className="h-4 w-4 text-slate-600" />
-                        </div>
-                        <div className="text-lg font-bold text-slate-900">
-                          {results.statistics.percentiles.p50.toFixed(1)} MW
-                        </div>
-                        <div className="text-xs text-slate-600">Expected (P50)</div>
-                      </CardContent>
-                    </Card>
+                                         <Card className="border-slate-200">
+                       <CardContent className="px-2 py-2 text-center">
+                         <div className="flex items-center justify-center mb-1">
+                           <Zap className="h-3 w-3 text-slate-600" />
+                         </div>
+                         <div className="text-base font-bold text-slate-900">
+                           {results.statistics.percentiles.p50.toFixed(1)} MW
+                         </div>
+                         <div className="text-xs text-slate-600">Expected (P50)</div>
+                       </CardContent>
+                     </Card>
 
-                    <Card className="border-emerald-200">
-                      <CardContent className="p-3 text-center">
-                        <div className="flex items-center justify-center mb-2">
-                          <DollarSign className="h-4 w-4 text-emerald-600" />
-                        </div>
-                        <div className="text-lg font-bold text-emerald-900">
-                          ${(results.economics.lifetimeRevenue / 1e6).toFixed(0)}M
-                        </div>
-                        <div className="text-xs text-emerald-700">Revenue ({results.input.powerPlant.lifespan}yr)</div>
-                      </CardContent>
-                    </Card>
+                     <Card className="border-emerald-200">
+                       <CardContent className="px-2 py-2 text-center">
+                         <div className="flex items-center justify-center mb-1">
+                           <DollarSign className="h-3 w-3 text-emerald-600" />
+                         </div>
+                         <div className="text-base font-bold text-emerald-900">
+                           ${(results.economics.lifetimeRevenue / 1e6).toFixed(0)}M
+                         </div>
+                         <div className="text-xs text-emerald-700">Revenue ({results.input.powerPlant.lifespan}yr)</div>
+                       </CardContent>
+                     </Card>
 
-                    <Card className="border-blue-200">
-                      <CardContent className="p-3 text-center">
-                        <div className="flex items-center justify-center mb-2">
-                          <BarChart3 className="h-4 w-4 text-blue-600" />
-                        </div>
-                        <div className="text-lg font-bold text-blue-900">
-                          {results.statistics.percentiles.p10.toFixed(1)} MW
-                        </div>
-                        <div className="text-xs text-blue-700">Conservative (P10)</div>
-                      </CardContent>
-                    </Card>
+                     <Card className="border-blue-200">
+                       <CardContent className="px-2 py-2 text-center">
+                         <div className="flex items-center justify-center mb-1">
+                           <BarChart3 className="h-3 w-3 text-blue-600" />
+                         </div>
+                         <div className="text-base font-bold text-blue-900">
+                           {results.statistics.percentiles.p10.toFixed(1)} MW
+                         </div>
+                         <div className="text-xs text-blue-700">Conservative (P10)</div>
+                       </CardContent>
+                     </Card>
 
-                    <Card className="border-amber-200">
-                      <CardContent className="p-3 text-center">
-                        <div className="flex items-center justify-center mb-2">
-                          <TrendingUp className="h-4 w-4 text-amber-600" />
-                        </div>
-                        <div className="text-lg font-bold text-amber-900">
-                          {results.executive.confidence}
-                        </div>
-                        <div className="text-xs text-amber-700">Confidence Level</div>
-                      </CardContent>
-                    </Card>
+                     <Card className="border-amber-200">
+                       <CardContent className="px-2 py-2 text-center">
+                         <div className="flex items-center justify-center mb-1">
+                           <TrendingUp className="h-3 w-3 text-amber-600" />
+                         </div>
+                         <div className="text-base font-bold text-amber-900">
+                           {results.executive.confidence}
+                         </div>
+                         <div className="text-xs text-amber-700">Confidence Level</div>
+                       </CardContent>
+                     </Card>
                   </div>
                 </CardContent>
               </Card>
