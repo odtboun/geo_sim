@@ -6,6 +6,7 @@ import { runScientificSimulationWithBasicInput } from '@/lib/scientific-adapter'
 import ParameterForm from '@/components/ParameterForm';
 import ResultsDashboard from '@/components/ResultsDashboard';
 import LoadingSpinner from '@/components/LoadingSpinner';
+import WelcomeScreen from '@/components/WelcomeScreen';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -62,6 +63,18 @@ export default function Home() {
     }
   };
 
+  // Show welcome screen if no results yet (including during initial calculation)
+  if (!results) {
+    return (
+      <WelcomeScreen
+        parameters={parameters}
+        onParametersChange={setParameters}
+        onRunSimulation={runSimulation}
+        isCalculating={isCalculating}
+      />
+    );
+  }
+
   return (
     <SidebarProvider>
       <div className="min-h-screen flex w-full bg-gray-50">
@@ -82,8 +95,8 @@ export default function Home() {
               Enterprise
             </Badge>
             
-            {/* RUN SIMULATION BUTTON - In Header, Always Visible */}
-            <div className="mt-4 pt-4 border-t border-gray-200">
+            {/* BUTTONS - In Header, Always Visible */}
+            <div className="mt-4 pt-4 border-t border-gray-200 space-y-2">
               <Button
                 onClick={runSimulation}
                 disabled={isCalculating}
@@ -101,6 +114,19 @@ export default function Home() {
                     Run Simulation
                   </>
                 )}
+              </Button>
+              
+              <Button
+                onClick={() => {
+                  setResults(null);
+                  setLastSimulationParams(null);
+                }}
+                variant="outline"
+                className="w-full py-2 text-xs"
+                size="sm"
+              >
+                <Building2 className="h-3 w-3 mr-2" />
+                New Assessment
               </Button>
             </div>
           </SidebarHeader>
