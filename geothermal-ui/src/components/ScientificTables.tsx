@@ -501,8 +501,8 @@ export default function ScientificTables({ results }: ScientificTablesProps) {
           </h2>
         </div>
         <p className="text-gray-700 mb-8 text-base leading-relaxed" style={{fontFamily: 'Arial, sans-serif'}}>
-          Professional matplotlib-style plots matching the original Python geothermal evaluation script. 
-          All figures use standardized scientific formatting with white backgrounds suitable for publication.
+          Visual analysis of geothermal power generation potential using Monte Carlo simulation. 
+          These charts help assess investment risk and identify the most likely power output scenarios for your project.
         </p>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
