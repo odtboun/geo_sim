@@ -1,12 +1,55 @@
+import React from 'react';
 import { type GeothermalInput } from '@/lib/geothermal-calculations';
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
+import { useIsMobile } from "@/hooks/use-mobile";
 import { Info } from 'lucide-react';
 
 interface ParameterFormProps {
   parameters: GeothermalInput;
   onParametersChange: (parameters: GeothermalInput) => void;
+}
+
+// Mobile-friendly info component that uses tooltip on desktop, popover on mobile
+function InfoHelp({ children, title }: { children: React.ReactNode; title: string }) {
+  const isMobile = useIsMobile();
+
+  const content = (
+    <div className="text-sm">
+      <p className="font-semibold mb-2">{title}:</p>
+      {children}
+    </div>
+  );
+
+  if (isMobile) {
+    return (
+      <Popover>
+        <PopoverTrigger asChild>
+          <button className="p-1 rounded hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500 active:bg-gray-200">
+            <Info className="h-4 w-4 text-gray-500 hover:text-gray-700" />
+          </button>
+        </PopoverTrigger>
+        <PopoverContent side="left" className="max-w-xs">
+          {content}
+        </PopoverContent>
+      </Popover>
+    );
+  }
+
+  return (
+    <Tooltip delayDuration={0}>
+      <TooltipTrigger asChild>
+        <button className="p-1 rounded hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500">
+          <Info className="h-4 w-4 text-gray-500 hover:text-gray-700" />
+        </button>
+      </TooltipTrigger>
+      <TooltipContent side="left" className="max-w-xs">
+        {content}
+      </TooltipContent>
+    </Tooltip>
+  );
 }
 
 export default function ParameterForm({
@@ -42,26 +85,16 @@ export default function ParameterForm({
         <div className="space-y-3">
           <div className="flex items-center space-x-2">
             <h3 className="text-sm font-semibold text-gray-900 border-b border-gray-200 pb-1 flex-1">Reservoir Properties</h3>
-            <Tooltip delayDuration={0}>
-              <TooltipTrigger asChild>
-                <button className="p-1 rounded hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500">
-                  <Info className="h-4 w-4 text-gray-500 hover:text-gray-700" />
-                </button>
-              </TooltipTrigger>
-              <TooltipContent side="left" className="max-w-xs">
-                <div className="text-sm">
-                  <p className="font-semibold mb-2">Reservoir Parameters:</p>
-                  <ul className="space-y-1">
-                    <li><strong>Area:</strong> Size of the geothermal reservoir</li>
-                    <li><strong>Thickness:</strong> Depth of the productive zone</li>
-                    <li><strong>Porosity:</strong> Rock void space (0-1 scale)</li>
-                    <li><strong>Temperature:</strong> Initial reservoir temperature</li>
-                    <li><strong>Abandon Temp:</strong> Minimum viable temperature</li>
-                    <li><strong>Recovery Factor:</strong> Extractable energy fraction</li>
-                  </ul>
-                </div>
-              </TooltipContent>
-            </Tooltip>
+            <InfoHelp title="Reservoir Parameters">
+              <ul className="space-y-1">
+                <li><strong>Area:</strong> Size of the geothermal reservoir</li>
+                <li><strong>Thickness:</strong> Depth of the productive zone</li>
+                <li><strong>Porosity:</strong> Rock void space (0-1 scale)</li>
+                <li><strong>Temperature:</strong> Initial reservoir temperature</li>
+                <li><strong>Abandon Temp:</strong> Minimum viable temperature</li>
+                <li><strong>Recovery Factor:</strong> Extractable energy fraction</li>
+              </ul>
+            </InfoHelp>
           </div>
         <div className="space-y-2">
           <div className="grid grid-cols-2 gap-2">
@@ -209,24 +242,14 @@ export default function ParameterForm({
       <div className="space-y-3">
         <div className="flex items-center space-x-2">
           <h3 className="text-sm font-semibold text-gray-900 border-b border-gray-200 pb-1 flex-1">Power Plant</h3>
-          <Tooltip delayDuration={0}>
-            <TooltipTrigger asChild>
-              <button className="p-1 rounded hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500">
-                <Info className="h-4 w-4 text-gray-500 hover:text-gray-700" />
-              </button>
-            </TooltipTrigger>
-            <TooltipContent side="left" className="max-w-xs">
-              <div className="text-sm">
-                <p className="font-semibold mb-2">Power Plant Parameters:</p>
-                <ul className="space-y-1">
-                  <li><strong>Recovery Factor:</strong> Energy extraction efficiency</li>
-                  <li><strong>Conversion Efficiency:</strong> Heat to electricity conversion rate</li>
-                  <li><strong>Plant Factor:</strong> Operational capacity factor (0-1)</li>
-                  <li><strong>Lifespan:</strong> Project operational lifetime in years</li>
-                </ul>
-              </div>
-            </TooltipContent>
-          </Tooltip>
+          <InfoHelp title="Power Plant Parameters">
+            <ul className="space-y-1">
+              <li><strong>Recovery Factor:</strong> Energy extraction efficiency</li>
+              <li><strong>Conversion Efficiency:</strong> Heat to electricity conversion rate</li>
+              <li><strong>Plant Factor:</strong> Operational capacity factor (0-1)</li>
+              <li><strong>Lifespan:</strong> Project operational lifetime in years</li>
+            </ul>
+          </InfoHelp>
         </div>
         <div className="space-y-2">
           <div className="grid grid-cols-2 gap-2">
@@ -300,21 +323,11 @@ export default function ParameterForm({
       <div className="space-y-3">
         <div className="flex items-center space-x-2">
           <h3 className="text-sm font-semibold text-gray-900 border-b border-gray-200 pb-1 flex-1">Simulation</h3>
-          <Tooltip delayDuration={0}>
-            <TooltipTrigger asChild>
-              <button className="p-1 rounded hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500">
-                <Info className="h-4 w-4 text-gray-500 hover:text-gray-700" />
-              </button>
-            </TooltipTrigger>
-            <TooltipContent side="left" className="max-w-xs">
-              <div className="text-sm">
-                <p className="font-semibold mb-2">Simulation Parameters:</p>
-                <ul className="space-y-1">
-                  <li><strong>Monte Carlo Iterations:</strong> Number of simulation runs for uncertainty analysis (higher = more accurate but slower)</li>
-                </ul>
-              </div>
-            </TooltipContent>
-          </Tooltip>
+          <InfoHelp title="Simulation Parameters">
+            <ul className="space-y-1">
+              <li><strong>Monte Carlo Iterations:</strong> Number of simulation runs for uncertainty analysis (higher = more accurate but slower)</li>
+            </ul>
+          </InfoHelp>
         </div>
         <div className="space-y-1">
           <Label htmlFor="iterations" className="text-xs font-medium text-gray-700">
