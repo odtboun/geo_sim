@@ -392,10 +392,10 @@ export default function ScientificTables({ results }: ScientificTablesProps) {
         title: {
           display: true,
           text: 'Power Generation [MWe]',
-          color: 'white',
+          color: '#000000',
           font: {
             size: 12,
-            family: 'monospace'
+            family: 'Arial, sans-serif'
           }
         }
       },
@@ -404,10 +404,10 @@ export default function ScientificTables({ results }: ScientificTablesProps) {
         title: {
           display: true,
           text: 'Cumulative Relative Frequency [lower than]',
-          color: 'white',
+          color: '#000000',
           font: {
             size: 12,
-            family: 'monospace'
+            family: 'Arial, sans-serif'
           }
         },
         min: 0,
@@ -482,10 +482,10 @@ export default function ScientificTables({ results }: ScientificTablesProps) {
         title: {
           display: true,
           text: 'Power Generation [MWe]',
-          color: 'white',
+          color: '#000000',
           font: {
             size: 12,
-            family: 'monospace'
+            family: 'Arial, sans-serif'
           }
         }
       },
@@ -494,10 +494,10 @@ export default function ScientificTables({ results }: ScientificTablesProps) {
         title: {
           display: true,
           text: 'F(x)=100ΔxFreq',
-          color: 'white',
+          color: '#000000',
           font: {
             size: 12,
-            family: 'monospace'
+            family: 'Arial, sans-serif'
           }
         }
       }

@@ -111,7 +111,7 @@ export default function Home() {
           </div>
 
           <div className="flex-1 p-6 space-y-6 overflow-auto">
-            {/* COMPACT Executive Summary - TOP PRIORITY */}
+            {/* COMPACT Executive Summary - INVESTMENT RECOMMENDATION FIRST */}
             {results && (
               <Card className="border-l-4 border-l-slate-900">
                 <CardHeader className="pb-3">
@@ -132,62 +132,7 @@ export default function Home() {
                 </CardHeader>
                 
                 <CardContent className="space-y-4">
-                  {/* COMPACT Key Investment Metrics */}
-                  <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
-                    <Card className="bg-slate-50 border-slate-200">
-                      <CardContent className="p-3 text-center">
-                        <div className="flex items-center justify-center mb-1">
-                          <Zap className="h-4 w-4 text-slate-700" />
-                        </div>
-                        <div className="text-lg font-bold text-slate-900 mb-1">
-                          {results.statistics.percentiles.p50.toFixed(1)} MW
-                        </div>
-                        <div className="text-xs text-slate-600">Expected Capacity</div>
-                        <div className="text-xs text-slate-500">P50 Most Likely</div>
-                      </CardContent>
-                    </Card>
-
-                    <Card className="bg-emerald-50 border-emerald-200">
-                      <CardContent className="p-3 text-center">
-                        <div className="flex items-center justify-center mb-1">
-                          <DollarSign className="h-4 w-4 text-emerald-700" />
-                        </div>
-                        <div className="text-lg font-bold text-emerald-900 mb-1">
-                          ${(results.economics.lifetimeRevenue / 1e6).toFixed(0)}M
-                        </div>
-                        <div className="text-xs text-emerald-700">Lifetime Revenue</div>
-                        <div className="text-xs text-emerald-600">{results.input.powerPlant.lifespan} Year Project</div>
-                      </CardContent>
-                    </Card>
-
-                    <Card className="bg-blue-50 border-blue-200">
-                      <CardContent className="p-3 text-center">
-                        <div className="flex items-center justify-center mb-1">
-                          <BarChart3 className="h-4 w-4 text-blue-700" />
-                        </div>
-                        <div className="text-lg font-bold text-blue-900 mb-1">
-                          {results.statistics.percentiles.p10.toFixed(1)} MW
-                        </div>
-                        <div className="text-xs text-blue-700">Conservative Est.</div>
-                        <div className="text-xs text-blue-600">P10 Risk-Adjusted</div>
-                      </CardContent>
-                    </Card>
-
-                    <Card className="bg-amber-50 border-amber-200">
-                      <CardContent className="p-3 text-center">
-                        <div className="flex items-center justify-center mb-1">
-                          <TrendingUp className="h-4 w-4 text-amber-700" />
-                        </div>
-                        <div className="text-lg font-bold text-amber-900 mb-1">
-                          {results.executive.confidence}
-                        </div>
-                        <div className="text-xs text-amber-700">Confidence Level</div>
-                        <div className="text-xs text-amber-600">Risk Assessment</div>
-                      </CardContent>
-                    </Card>
-                  </div>
-
-                  {/* COMPACT Investment Recommendation */}
+                  {/* INVESTMENT RECOMMENDATION FIRST - MOST IMPORTANT */}
                   <Card className={`border ${getRecommendationColor(results.executive.color)}`}>
                     <CardContent className="p-4">
                       <div className="flex items-start space-x-3">
@@ -208,6 +153,56 @@ export default function Home() {
                       </div>
                     </CardContent>
                   </Card>
+
+                  {/* COMPACT Key Metrics - Much Smaller */}
+                  <div className="bg-gray-50 border border-gray-200 rounded-lg p-3">
+                    <h4 className="text-xs font-semibold text-gray-700 mb-2 uppercase tracking-wide">Key Investment Metrics</h4>
+                    <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 text-center">
+                      <div className="bg-white rounded border p-2">
+                        <div className="flex items-center justify-center mb-1">
+                          <Zap className="h-3 w-3 text-slate-600" />
+                        </div>
+                        <div className="text-sm font-bold text-slate-900">
+                          {results.statistics.percentiles.p50.toFixed(1)} MW
+                        </div>
+                        <div className="text-xs text-slate-600">Expected</div>
+                        <div className="text-xs text-slate-500">P50</div>
+                      </div>
+
+                      <div className="bg-white rounded border p-2">
+                        <div className="flex items-center justify-center mb-1">
+                          <DollarSign className="h-3 w-3 text-emerald-600" />
+                        </div>
+                        <div className="text-sm font-bold text-emerald-900">
+                          ${(results.economics.lifetimeRevenue / 1e6).toFixed(0)}M
+                        </div>
+                        <div className="text-xs text-emerald-700">Revenue</div>
+                        <div className="text-xs text-emerald-600">{results.input.powerPlant.lifespan}yr</div>
+                      </div>
+
+                      <div className="bg-white rounded border p-2">
+                        <div className="flex items-center justify-center mb-1">
+                          <BarChart3 className="h-3 w-3 text-blue-600" />
+                        </div>
+                        <div className="text-sm font-bold text-blue-900">
+                          {results.statistics.percentiles.p10.toFixed(1)} MW
+                        </div>
+                        <div className="text-xs text-blue-700">Conservative</div>
+                        <div className="text-xs text-blue-600">P10</div>
+                      </div>
+
+                      <div className="bg-white rounded border p-2">
+                        <div className="flex items-center justify-center mb-1">
+                          <TrendingUp className="h-3 w-3 text-amber-600" />
+                        </div>
+                        <div className="text-sm font-bold text-amber-900">
+                          {results.executive.confidence}
+                        </div>
+                        <div className="text-xs text-amber-700">Confidence</div>
+                        <div className="text-xs text-amber-600">Level</div>
+                      </div>
+                    </div>
+                  </div>
                 </CardContent>
               </Card>
             )}
