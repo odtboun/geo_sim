@@ -1,13 +1,13 @@
 import React from 'react';
 import { type GeothermalInput } from '@/lib/geothermal-calculations';
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { useIsMobile } from "@/hooks/use-mobile";
-import { Zap, BarChart3, Calculator, Info, ExternalLink } from 'lucide-react';
+import { Zap, Calculator, Info, ExternalLink } from 'lucide-react';
 
 interface WelcomeScreenProps {
   parameters: GeothermalInput;
@@ -62,8 +62,10 @@ function InfoHelp({ children, title }: { children: React.ReactNode; title: strin
 }
 
 export default function WelcomeScreen({ parameters, onParametersChange, onRunSimulation, isCalculating }: WelcomeScreenProps) {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const updateParameter = (section: string, field: string, value: any) => {
     const newParams = { ...parameters };
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     (newParams as any)[section][field] = value;
     onParametersChange(newParams);
   };
