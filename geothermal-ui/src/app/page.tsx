@@ -152,77 +152,86 @@ export default function Home() {
                   </div>
                 </CardHeader>
                 
-                <CardContent className="space-y-4">
-                  {/* INVESTMENT RECOMMENDATION FIRST - MOST IMPORTANT */}
-                  <Card className={`border ${getRecommendationColor(results.executive.color)}`}>
-                    <CardContent className="p-4">
-                      <div className="flex items-start space-x-3">
-                        {getRecommendationIcon(results.executive.color)}
-                        <div className="flex-1">
-                          <h3 className="text-sm font-bold mb-1">
-                            Investment Recommendation
-                          </h3>
-                          <p className="text-sm font-medium mb-2">
-                            {results.executive.recommendation}
-                          </p>
-                          <p className="text-xs opacity-90">
-                            Based on conservative P10 estimate of {results.statistics.percentiles.p10.toFixed(1)} MW 
-                            with {results.executive.confidence.toLowerCase()} confidence level. 
-                            Risk: {results.executive.riskLevel.replace('_', ' ').toLowerCase()}.
-                          </p>
-                        </div>
-                      </div>
-                    </CardContent>
-                  </Card>
+                <CardContent>
+                  {/* HORIZONTAL LAYOUT: Investment Recommendation LEFT + Key Metrics RIGHT (2x2 Grid) */}
+                  <div className="grid grid-cols-1 lg:grid-cols-5 gap-6">
+                    
+                    {/* LEFT: Investment Recommendation (3/5 width) */}
+                    <div className="lg:col-span-3">
+                      <Card className={`border ${getRecommendationColor(results.executive.color)} h-full`}>
+                        <CardContent className="p-4">
+                          <div className="flex items-start space-x-3">
+                            {getRecommendationIcon(results.executive.color)}
+                            <div className="flex-1">
+                              <h3 className="text-sm font-bold mb-1">
+                                Investment Recommendation
+                              </h3>
+                              <p className="text-sm font-medium mb-2">
+                                {results.executive.recommendation}
+                              </p>
+                              <p className="text-xs opacity-90">
+                                Based on conservative P10 estimate of {results.statistics.percentiles.p10.toFixed(1)} MW 
+                                with {results.executive.confidence.toLowerCase()} confidence level. 
+                                Risk: {results.executive.riskLevel.replace('_', ' ').toLowerCase()}.
+                              </p>
+                            </div>
+                          </div>
+                        </CardContent>
+                      </Card>
+                    </div>
 
-                  {/* COMPACT Key Metrics - Much Smaller */}
-                  <div className="bg-gray-50 border border-gray-200 rounded-lg p-3">
-                    <h4 className="text-xs font-semibold text-gray-700 mb-2 uppercase tracking-wide">Key Investment Metrics</h4>
-                    <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 text-center">
-                      <div className="bg-white rounded border p-2">
-                        <div className="flex items-center justify-center mb-1">
-                          <Zap className="h-3 w-3 text-slate-600" />
-                        </div>
-                        <div className="text-sm font-bold text-slate-900">
-                          {results.statistics.percentiles.p50.toFixed(1)} MW
-                        </div>
-                        <div className="text-xs text-slate-600">Expected</div>
-                        <div className="text-xs text-slate-500">P50</div>
-                      </div>
+                    {/* RIGHT: Key Metrics in 2x2 Grid (2/5 width) */}
+                    <div className="lg:col-span-2">
+                      <div className="bg-gray-50 border border-gray-200 rounded-lg p-3 h-full">
+                        <h4 className="text-xs font-semibold text-gray-700 mb-3 uppercase tracking-wide">Key Investment Metrics</h4>
+                        <div className="grid grid-cols-2 gap-3 text-center">
+                          <div className="bg-white rounded border p-2">
+                            <div className="flex items-center justify-center mb-1">
+                              <Zap className="h-3 w-3 text-slate-600" />
+                            </div>
+                            <div className="text-sm font-bold text-slate-900">
+                              {results.statistics.percentiles.p50.toFixed(1)} MW
+                            </div>
+                            <div className="text-xs text-slate-600">Expected</div>
+                            <div className="text-xs text-slate-500">P50</div>
+                          </div>
 
-                      <div className="bg-white rounded border p-2">
-                        <div className="flex items-center justify-center mb-1">
-                          <DollarSign className="h-3 w-3 text-emerald-600" />
-                        </div>
-                        <div className="text-sm font-bold text-emerald-900">
-                          ${(results.economics.lifetimeRevenue / 1e6).toFixed(0)}M
-                        </div>
-                        <div className="text-xs text-emerald-700">Revenue</div>
-                        <div className="text-xs text-emerald-600">{results.input.powerPlant.lifespan}yr</div>
-                      </div>
+                          <div className="bg-white rounded border p-2">
+                            <div className="flex items-center justify-center mb-1">
+                              <DollarSign className="h-3 w-3 text-emerald-600" />
+                            </div>
+                            <div className="text-sm font-bold text-emerald-900">
+                              ${(results.economics.lifetimeRevenue / 1e6).toFixed(0)}M
+                            </div>
+                            <div className="text-xs text-emerald-700">Revenue</div>
+                            <div className="text-xs text-emerald-600">{results.input.powerPlant.lifespan}yr</div>
+                          </div>
 
-                      <div className="bg-white rounded border p-2">
-                        <div className="flex items-center justify-center mb-1">
-                          <BarChart3 className="h-3 w-3 text-blue-600" />
-                        </div>
-                        <div className="text-sm font-bold text-blue-900">
-                          {results.statistics.percentiles.p10.toFixed(1)} MW
-                        </div>
-                        <div className="text-xs text-blue-700">Conservative</div>
-                        <div className="text-xs text-blue-600">P10</div>
-                      </div>
+                          <div className="bg-white rounded border p-2">
+                            <div className="flex items-center justify-center mb-1">
+                              <BarChart3 className="h-3 w-3 text-blue-600" />
+                            </div>
+                            <div className="text-sm font-bold text-blue-900">
+                              {results.statistics.percentiles.p10.toFixed(1)} MW
+                            </div>
+                            <div className="text-xs text-blue-700">Conservative</div>
+                            <div className="text-xs text-blue-600">P10</div>
+                          </div>
 
-                      <div className="bg-white rounded border p-2">
-                        <div className="flex items-center justify-center mb-1">
-                          <TrendingUp className="h-3 w-3 text-amber-600" />
+                          <div className="bg-white rounded border p-2">
+                            <div className="flex items-center justify-center mb-1">
+                              <TrendingUp className="h-3 w-3 text-amber-600" />
+                            </div>
+                            <div className="text-sm font-bold text-amber-900">
+                              {results.executive.confidence}
+                            </div>
+                            <div className="text-xs text-amber-700">Confidence</div>
+                            <div className="text-xs text-amber-600">Level</div>
+                          </div>
                         </div>
-                        <div className="text-sm font-bold text-amber-900">
-                          {results.executive.confidence}
-                        </div>
-                        <div className="text-xs text-amber-700">Confidence</div>
-                        <div className="text-xs text-amber-600">Level</div>
                       </div>
                     </div>
+
                   </div>
                 </CardContent>
               </Card>
