@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { runMonteCarloSimulation, defaultParameters, type GeothermalInput, type GeothermalResults } from '@/lib/geothermal-calculations';
 import ParameterForm from '@/components/ParameterForm';
 import ResultsDashboard from '@/components/ResultsDashboard';
@@ -13,7 +13,7 @@ export default function Home() {
   const [isCalculating, setIsCalculating] = useState(false);
   const [hasRun, setHasRun] = useState(false);
 
-  const runSimulation = async () => {
+  const runSimulation = useCallback(async () => {
     setIsCalculating(true);
     
     // Add a small delay to show loading state for better UX
@@ -28,7 +28,7 @@ export default function Home() {
     } finally {
       setIsCalculating(false);
     }
-  };
+  }, [parameters]);
 
   // Run initial calculation with default parameters
   useEffect(() => {
