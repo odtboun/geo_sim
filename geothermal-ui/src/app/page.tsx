@@ -1,7 +1,9 @@
 'use client';
 
 import { useState, useEffect, useCallback } from 'react';
-import { runMonteCarloSimulation, defaultParameters, type GeothermalInput, type GeothermalResults } from '@/lib/geothermal-calculations';
+// Import original UI types and scientific adapter
+import { defaultParameters, type GeothermalInput, type GeothermalResults } from '@/lib/geothermal-calculations';
+import { runScientificSimulationWithBasicInput } from '@/lib/scientific-adapter';
 import ParameterForm from '@/components/ParameterForm';
 import ResultsDashboard from '@/components/ResultsDashboard';
 import LoadingSpinner from '@/components/LoadingSpinner';
@@ -20,7 +22,7 @@ export default function Home() {
     await new Promise(resolve => setTimeout(resolve, 500));
     
     try {
-      const simulationResults = runMonteCarloSimulation(parameters);
+      const simulationResults = runScientificSimulationWithBasicInput(parameters);
       setResults(simulationResults);
       setHasRun(true);
     } catch (error) {
