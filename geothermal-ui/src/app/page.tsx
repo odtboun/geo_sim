@@ -8,8 +8,9 @@ import ResultsDashboard from '@/components/ResultsDashboard';
 import LoadingSpinner from '@/components/LoadingSpinner';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 import { Sidebar, SidebarContent, SidebarHeader, SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
-import { BarChart3, Settings, TrendingUp, Building2, DollarSign, Zap, AlertTriangle, CheckCircle } from 'lucide-react';
+import { BarChart3, Settings, TrendingUp, Building2, DollarSign, Zap, AlertTriangle, CheckCircle, Calculator, Play } from 'lucide-react';
 
 export default function Home() {
   const [parameters, setParameters] = useState<GeothermalInput>(defaultParameters);
@@ -78,6 +79,28 @@ export default function Home() {
           </SidebarHeader>
           
           <SidebarContent className="p-6">
+            {/* PRIMARY ACTION - RUN BUTTON AT TOP */}
+            <div className="pb-4 mb-6 border-b border-gray-200">
+              <Button
+                onClick={runSimulation}
+                disabled={isCalculating}
+                className="w-full py-3 text-sm font-semibold bg-slate-900 hover:bg-slate-800 text-white shadow-lg"
+                size="sm"
+              >
+                {isCalculating ? (
+                  <>
+                    <Calculator className="h-4 w-4 mr-2 animate-spin" />
+                    Running Analysis...
+                  </>
+                ) : (
+                  <>
+                    <Play className="h-4 w-4 mr-2" />
+                    Run Simulation
+                  </>
+                )}
+              </Button>
+            </div>
+
             <div className="mb-6">
               <div className="flex items-center space-x-2 mb-4">
                 <Settings className="h-5 w-5 text-gray-700" />
@@ -91,8 +114,6 @@ export default function Home() {
             <ParameterForm
               parameters={parameters}
               onParametersChange={setParameters}
-              onRunSimulation={runSimulation}
-              isCalculating={isCalculating}
             />
           </SidebarContent>
         </Sidebar>

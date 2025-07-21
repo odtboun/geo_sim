@@ -2,6 +2,7 @@ import { type GeothermalResults } from '@/lib/geothermal-calculations';
 import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, LineElement, PointElement, Title, Tooltip, Legend, ChartOptions } from 'chart.js';
 import { Line, Bar } from 'react-chartjs-2';
 import annotationPlugin from 'chartjs-plugin-annotation';
+import { BarChart3, TrendingUp, PieChart } from 'lucide-react';
 
 ChartJS.register(
   CategoryScale,
@@ -284,6 +285,16 @@ export default function ScientificTables({ results }: ScientificTablesProps) {
     },
     scales: {
       x: {
+        title: {
+          display: true,
+          text: 'Power Generation (MW)',
+          color: '#000000',
+          font: {
+            size: 12,
+            family: 'Arial, sans-serif',
+            weight: 'bold'
+          }
+        },
         ticks: {
           color: '#000000',
           font: {
@@ -304,6 +315,16 @@ export default function ScientificTables({ results }: ScientificTablesProps) {
         }
       },
       y: {
+        title: {
+          display: true,
+          text: 'Frequency / Probability',
+          color: '#000000',
+          font: {
+            size: 12,
+            family: 'Arial, sans-serif',
+            weight: 'bold'
+          }
+        },
         ticks: {
           color: '#000000',
           font: {
@@ -473,9 +494,12 @@ export default function ScientificTables({ results }: ScientificTablesProps) {
     <div className="space-y-8">
       {/* Scientific Plots Section */}
       <div className="bg-white rounded-xl border-2 border-gray-400 p-8 shadow-xl">
-        <h2 className="text-3xl font-bold text-gray-900 mb-6" style={{fontFamily: 'Arial, sans-serif'}}>
-          📊 Scientific Visualizations
-        </h2>
+        <div className="flex items-center space-x-3 mb-6">
+          <BarChart3 className="h-7 w-7 text-blue-600" />
+          <h2 className="text-3xl font-bold text-gray-900" style={{fontFamily: 'Arial, sans-serif'}}>
+            Scientific Visualizations
+          </h2>
+        </div>
         <p className="text-gray-700 mb-8 text-base leading-relaxed" style={{fontFamily: 'Arial, sans-serif'}}>
           Professional matplotlib-style plots matching the original Python geothermal evaluation script. 
           All figures use standardized scientific formatting with white backgrounds suitable for publication.
@@ -747,7 +771,10 @@ export default function ScientificTables({ results }: ScientificTablesProps) {
 
       {/* Statistical Analysis Table */}
       <div className="bg-white rounded-xl border border-gray-200 shadow-sm p-6">
-        <h3 className="text-xl font-semibold text-gray-900 mb-4">📊 Statistical Analysis Results</h3>
+        <div className="flex items-center space-x-2 mb-4">
+          <PieChart className="h-5 w-5 text-green-600" />
+          <h3 className="text-xl font-semibold text-gray-900">Statistical Analysis Results</h3>
+        </div>
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           {/* Main Statistics */}
           <div className="overflow-x-auto">
@@ -858,7 +885,10 @@ export default function ScientificTables({ results }: ScientificTablesProps) {
 
       {/* Complete Percentile Analysis (Like Python Script) */}
       <div className="bg-white rounded-xl border border-gray-200 shadow-sm p-6">
-        <h3 className="text-xl font-semibold text-gray-900 mb-4">📈 Complete Percentile Analysis</h3>
+        <div className="flex items-center space-x-2 mb-4">
+          <TrendingUp className="h-5 w-5 text-purple-600" />
+          <h3 className="text-xl font-semibold text-gray-900">Complete Percentile Analysis</h3>
+        </div>
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
           {/* P5-P25 */}
           <div className="overflow-x-auto">
