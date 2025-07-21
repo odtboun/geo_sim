@@ -7,7 +7,9 @@ import { runScientificSimulationWithBasicInput } from '@/lib/scientific-adapter'
 import ParameterForm from '@/components/ParameterForm';
 import ResultsDashboard from '@/components/ResultsDashboard';
 import LoadingSpinner from '@/components/LoadingSpinner';
-import { FireIcon, ChartBarIcon } from '@heroicons/react/24/solid';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { BarChart3, Settings, TrendingUp, Building2 } from 'lucide-react';
 
 export default function Home() {
   const [parameters, setParameters] = useState<GeothermalInput>(defaultParameters);
@@ -40,16 +42,24 @@ export default function Home() {
   }, [hasRun, runSimulation]);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900">
-      {/* Header */}
-      <div className="bg-white/10 backdrop-blur-sm border-b border-white/20">
-        <div className="max-w-7xl mx-auto px-4 py-6">
-          <div className="flex items-center space-x-3">
-            <FireIcon className="h-10 w-10 text-orange-400" />
-            <div>
-              <h1 className="text-3xl font-bold text-white">Geothermal Power Evaluation</h1>
-              <p className="text-blue-200 mt-1">Executive Investment Analysis Platform</p>
+    <div className="min-h-screen bg-gray-50">
+      {/* Professional Corporate Header */}
+      <div className="bg-white border-b border-gray-200">
+        <div className="max-w-7xl mx-auto px-4 py-8">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center space-x-4">
+              <div className="flex items-center justify-center w-12 h-12 bg-gray-900 rounded-lg">
+                <TrendingUp className="h-6 w-6 text-white" />
+              </div>
+              <div>
+                <h1 className="text-3xl font-bold text-gray-900">Geothermal Power Assessment</h1>
+                <p className="text-gray-600 mt-1">Professional Investment Analysis Platform</p>
+              </div>
             </div>
+            <Badge variant="secondary" className="px-3 py-1">
+              <Building2 className="h-3 w-3 mr-1" />
+              Enterprise Edition
+            </Badge>
           </div>
         </div>
       </div>
@@ -58,19 +68,25 @@ export default function Home() {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           {/* Parameters Panel */}
           <div className="lg:col-span-1">
-            <div className="bg-white/10 backdrop-blur-sm rounded-xl border border-white/20 p-6">
-              <div className="flex items-center space-x-2 mb-6">
-                <ChartBarIcon className="h-6 w-6 text-blue-400" />
-                <h2 className="text-xl font-semibold text-white">Project Parameters</h2>
-              </div>
-              
-              <ParameterForm
-                parameters={parameters}
-                onParametersChange={setParameters}
-                onRunSimulation={runSimulation}
-                isCalculating={isCalculating}
-              />
-            </div>
+            <Card className="h-fit">
+              <CardHeader className="pb-3">
+                <CardTitle className="flex items-center space-x-2 text-lg">
+                  <Settings className="h-5 w-5 text-gray-600" />
+                  <span>Project Parameters</span>
+                </CardTitle>
+                <CardDescription>
+                  Configure reservoir and plant characteristics for analysis
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <ParameterForm
+                  parameters={parameters}
+                  onParametersChange={setParameters}
+                  onRunSimulation={runSimulation}
+                  isCalculating={isCalculating}
+                />
+              </CardContent>
+            </Card>
           </div>
 
           {/* Results Panel */}
@@ -80,13 +96,15 @@ export default function Home() {
             ) : results ? (
               <ResultsDashboard results={results} />
             ) : (
-              <div className="bg-white/10 backdrop-blur-sm rounded-xl border border-white/20 p-12 text-center">
-                <FireIcon className="h-16 w-16 text-orange-400 mx-auto mb-4" />
-                <h3 className="text-xl font-semibold text-white mb-2">Ready to Evaluate</h3>
-                <p className="text-blue-200">
-                                     Adjust parameters and click &quot;Run Evaluation&quot; to analyze geothermal potential.
-                </p>
-              </div>
+              <Card className="p-12 text-center">
+                <CardContent className="pt-6">
+                  <BarChart3 className="h-16 w-16 text-gray-400 mx-auto mb-4" />
+                  <h3 className="text-xl font-semibold text-gray-900 mb-2">Ready for Analysis</h3>
+                  <p className="text-gray-600">
+                    Configure project parameters and run evaluation to generate comprehensive geothermal assessment.
+                  </p>
+                </CardContent>
+              </Card>
             )}
           </div>
         </div>
@@ -94,10 +112,15 @@ export default function Home() {
         {/* Executive Summary */}
         {results && (
           <div className="mt-8">
-            <div className="bg-white/10 backdrop-blur-sm rounded-xl border border-white/20 p-8">
-              <h2 className="text-2xl font-bold text-white mb-6">Executive Summary</h2>
-              
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <Card>
+              <CardHeader>
+                <CardTitle className="text-2xl text-gray-900">Executive Summary</CardTitle>
+                <CardDescription>
+                  Key performance indicators and investment metrics for decision making
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                 {/* Key Metrics */}
                 <div className="text-center">
                   <div className="text-3xl font-bold text-blue-400 mb-1">
@@ -154,12 +177,13 @@ export default function Home() {
                   </div>
                 </div>
               </div>
-            </div>
+              </CardContent>
+            </Card>
           </div>
         )}
 
-        {/* Footer */}
-        <div className="mt-12 text-center text-blue-200 text-sm">
+        {/* Professional Footer */}
+        <div className="mt-12 text-center text-gray-500 text-sm border-t border-gray-200 pt-8">
           <p>
             Professional geothermal power evaluation using volumetric method for liquid-dominated reservoirs.
           </p>

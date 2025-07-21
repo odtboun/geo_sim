@@ -1,5 +1,9 @@
 import { type GeothermalInput } from '@/lib/geothermal-calculations';
-import { PlayIcon } from '@heroicons/react/24/solid';
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Separator } from "@/components/ui/separator";
+import { Play, Calculator } from 'lucide-react';
 
 interface ParameterFormProps {
   parameters: GeothermalInput;
@@ -37,27 +41,29 @@ export default function ParameterForm({
   return (
     <div className="space-y-6">
       {/* Project Information */}
-      <div>
-        <h3 className="text-lg font-semibold text-white mb-4">Project Information</h3>
+      <div className="space-y-4">
+        <h3 className="text-lg font-semibold text-gray-900 border-b border-gray-200 pb-2">Project Information</h3>
         <div className="space-y-3">
-          <div>
-            <label className="block text-sm font-medium text-blue-200 mb-1">
+          <div className="space-y-2">
+            <Label htmlFor="project-name" className="text-sm font-medium">
               Project Name
-            </label>
-            <input
+            </Label>
+            <Input
+              id="project-name"
               type="text"
               value={parameters.project.name}
               onChange={(e) => updateParameter('project', 'name', e.target.value)}
-              className="w-full px-3 py-2 bg-black/20 border border-white/20 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-blue-400"
+              placeholder="Enter project name"
             />
           </div>
           
-          <div className="grid grid-cols-2 gap-3">
-            <div>
-              <label className="block text-sm font-medium text-blue-200 mb-1">
+          <div className="grid grid-cols-2 gap-4">
+            <div className="space-y-2">
+              <Label htmlFor="latitude" className="text-sm font-medium">
                 Latitude (°)
-              </label>
-              <input
+              </Label>
+              <Input
+                id="latitude"
                 type="number"
                 step="0.1"
                 value={formatNumber(parameters.project.location.lat)}
@@ -65,14 +71,15 @@ export default function ParameterForm({
                   ...parameters.project.location,
                   lat: parseNumber(e.target.value)
                 })}
-                className="w-full px-3 py-2 bg-black/20 border border-white/20 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-blue-400"
+                placeholder="38.5"
               />
             </div>
-            <div>
-              <label className="block text-sm font-medium text-blue-200 mb-1">
+            <div className="space-y-2">
+              <Label htmlFor="longitude" className="text-sm font-medium">
                 Longitude (°)
-              </label>
-              <input
+              </Label>
+              <Input
+                id="longitude"
                 type="number"
                 step="0.1"
                 value={formatNumber(parameters.project.location.lon)}
@@ -80,40 +87,44 @@ export default function ParameterForm({
                   ...parameters.project.location,
                   lon: parseNumber(e.target.value)
                 })}
-                className="w-full px-3 py-2 bg-black/20 border border-white/20 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-blue-400"
+                placeholder="28.1"
               />
             </div>
           </div>
         </div>
       </div>
 
+      <Separator />
+
       {/* Reservoir Properties */}
-      <div>
-        <h3 className="text-lg font-semibold text-white mb-4">Reservoir Properties</h3>
+      <div className="space-y-4">
+        <h3 className="text-lg font-semibold text-gray-900 border-b border-gray-200 pb-2">Reservoir Properties</h3>
         <div className="space-y-3">
-          <div className="grid grid-cols-2 gap-3">
-            <div>
-              <label className="block text-sm font-medium text-blue-200 mb-1">
+          <div className="grid grid-cols-2 gap-4">
+            <div className="space-y-2">
+              <Label htmlFor="area" className="text-sm font-medium">
                 Area (km²)
-              </label>
-              <input
+              </Label>
+              <Input
+                id="area"
                 type="number"
                 step="0.1"
                 value={formatNumber(parameters.reservoir.area)}
                 onChange={(e) => updateParameter('reservoir', 'area', parseNumber(e.target.value))}
-                className="w-full px-3 py-2 bg-black/20 border border-white/20 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-blue-400"
+                placeholder="33.0"
               />
             </div>
-            <div>
-              <label className="block text-sm font-medium text-blue-200 mb-1">
+            <div className="space-y-2">
+              <Label htmlFor="thickness" className="text-sm font-medium">
                 Thickness (m)
-              </label>
-              <input
+              </Label>
+              <Input
+                id="thickness"
                 type="number"
                 step="1"
                 value={formatNumber(parameters.reservoir.thickness)}
                 onChange={(e) => updateParameter('reservoir', 'thickness', parseNumber(e.target.value))}
-                className="w-full px-3 py-2 bg-black/20 border border-white/20 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-blue-400"
+                placeholder="300"
               />
             </div>
           </div>
@@ -247,19 +258,25 @@ export default function ParameterForm({
         </div>
       </div>
 
-      {/* Run Button */}
-      <button
+      {/* Professional Run Button */}
+      <Button
         onClick={onRunSimulation}
         disabled={isCalculating}
-        className={`w-full flex items-center justify-center space-x-2 py-3 px-4 rounded-lg font-semibold text-white transition-all ${
-          isCalculating 
-            ? 'bg-gray-600 cursor-not-allowed' 
-            : 'bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 hover:shadow-lg'
-        }`}
+        className="w-full py-6 text-base font-semibold"
+        size="lg"
       >
-        <PlayIcon className="h-5 w-5" />
-        <span>{isCalculating ? 'Running Analysis...' : 'Run Evaluation'}</span>
-      </button>
+        {isCalculating ? (
+          <>
+            <Calculator className="h-5 w-5 mr-2 animate-spin" />
+            Running Analysis...
+          </>
+        ) : (
+          <>
+            <Play className="h-5 w-5 mr-2" />
+            Run Evaluation
+          </>
+        )}
+      </Button>
     </div>
   );
 } 
