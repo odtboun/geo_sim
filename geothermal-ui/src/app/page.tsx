@@ -265,7 +265,7 @@ export default function Home() {
                   </CardDescription>
                 </CardHeader>
                 <CardContent>
-                  <ResultsDashboard results={results} />
+                  <ResultsDashboard results={results} currentParameters={parameters} />
                 </CardContent>
               </Card>
             ) : (

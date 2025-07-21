@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, LineElement, PointElement, Title, Tooltip, Legend, ChartOptions } from 'chart.js';
 import { Bar } from 'react-chartjs-2';
-import { type GeothermalResults } from '@/lib/geothermal-calculations';
+import { type GeothermalResults, type GeothermalInput } from '@/lib/geothermal-calculations';
 import ScientificTables from './ScientificTables';
 import { Tooltip as UITooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
@@ -24,6 +24,7 @@ ChartJS.register(
 
 interface ResultsDashboardProps {
   results: GeothermalResults;
+  currentParameters: GeothermalInput;
 }
 
 // Mobile-friendly info component for chart explanations
@@ -71,7 +72,7 @@ function ChartInfoHelp({ children, title }: { children: React.ReactNode; title: 
   );
 }
 
-export default function ResultsDashboard({ results }: ResultsDashboardProps) {
+export default function ResultsDashboard({ results, currentParameters }: ResultsDashboardProps) {
   const [activeTab, setActiveTab] = useState<'charts' | 'tables'>('charts');
 
   // Prepare histogram data
@@ -437,7 +438,7 @@ export default function ResultsDashboard({ results }: ResultsDashboardProps) {
             </div>
             <div className="flex justify-between">
               <span className="text-gray-600">Price Assumption:</span>
-              <span className="text-gray-500">${results.input.powerPlant.electricityPrice.toFixed(3)}/kWh</span>
+              <span className="text-gray-500">${currentParameters.powerPlant.electricityPrice.toFixed(3)}/kWh</span>
             </div>
           </div>
         </div>
