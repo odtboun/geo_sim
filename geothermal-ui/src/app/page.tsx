@@ -76,43 +76,25 @@ export default function Home() {
         {/* Professional Sidebar */}
         <Sidebar className="border-r border-gray-200">
           <SidebarHeader className="border-b border-gray-200 p-6">
-            <div className="flex items-center space-x-3">
-              <div className="flex items-center justify-center w-10 h-10 bg-slate-900 rounded-lg">
-                <TrendingUp className="h-5 w-5 text-white" />
-              </div>
-              <div>
-                <h1 className="text-lg font-bold text-gray-900">Geothermal Assessment</h1>
-                <p className="text-sm text-gray-600">Professional Analysis</p>
-              </div>
-            </div>
-            <Badge variant="secondary" className="mt-3 w-fit px-2 py-1">
-              <Building2 className="h-3 w-3 mr-1" />
-              Enterprise
-            </Badge>
-            
-            {/* RUN SIMULATION BUTTON - In Header, Always Visible */}
-            <div className="mt-4 pt-4 border-t border-gray-200">
-              <Button
-                onClick={runSimulation}
-                disabled={isCalculating}
-                className="w-full py-3 text-sm font-semibold bg-slate-900 hover:bg-slate-800 text-white shadow-lg"
-                size="sm"
-              >
-                {isCalculating ? (
-                  <>
-                    <Calculator className="h-4 w-4 mr-2 animate-spin" />
-                    Running Analysis...
-                  </>
-                ) : (
-                  <>
-                    <Play className="h-4 w-4 mr-2" />
-                    Run Simulation
-                  </>
-                )}
-              </Button>
-              
-
-            </div>
+            {/* RUN SIMULATION BUTTON */}
+            <Button
+              onClick={runSimulation}
+              disabled={isCalculating}
+              className="w-full py-3 text-sm font-semibold bg-slate-900 hover:bg-slate-800 text-white shadow-lg"
+              size="sm"
+            >
+              {isCalculating ? (
+                <>
+                  <Calculator className="h-4 w-4 mr-2 animate-spin" />
+                  Running Analysis...
+                </>
+              ) : (
+                <>
+                  <Play className="h-4 w-4 mr-2" />
+                  Run Simulation
+                </>
+              )}
+            </Button>
           </SidebarHeader>
           
           <SidebarContent className="p-6">
